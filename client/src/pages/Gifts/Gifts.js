@@ -9,29 +9,41 @@ import API from "../../utils/API";
 class Gifts extends Component {
 
   state = {
-    books: [{msg:"Gift1"},{msg:"Gift2"},{msg:"Gift3"}]
+    gifts: [{msg:"Gift1"},{msg:"Gift2"},{msg:"Gift3"}],
+    userGifts: false
     // title: "",
     // author: "",
     // synopsis: ""
   };
 
   componentDidMount() {
-    // this.loadBooks();
+    this.state.userGifts === true ?
+    this.loadUserGifts() : 
+    this.loadOtherGifts()
   }
 
-  loadBooks = () => {
-    API.getBooks()
+  loadUserGifts = () => {
+    API.getUserGifts(this.props.user)
       .then(res =>
-        this.setState({ books: res.data, title: "", author: "", synopsis: "" })
+        this.setState({ gifts: res.data})
+      )
+      .catch(err => console.log(err));
+  };  
+
+  loadOtherGifts = () => {
+    API.getOtherGifts()
+      .then(res =>
+        this.setState({gifts: res.data}, () => 
+        console.log(this.state.gifts))
       )
       .catch(err => console.log(err));
   };
 
-  deleteBook = id => {
-    API.deleteBook(id)
-      .then(res => this.loadBooks())
-      .catch(err => console.log(err));
-  };
+  // deletegift = id => {
+  //   API.deletegift(id)
+  //     .then(res => this.loadgifts())
+  //     .catch(err => console.log(err));
+  // };
 
   handleInputChange = event => {
     const { name, value } = event.target;
@@ -52,11 +64,11 @@ class Gifts extends Component {
         </Row>
         <Row>
           <Col size="m8" style={{margin: "0 auto",flexGrow: 0,flexBasis: "auto"}}>
-          <List>
-                {this.state.books.map(book => (
-                    <ListItem>
+          <List> {
+                this.state.gifts.map(gift => (
+                    <ListItem key={gift._id} id={gift._id}>
                       <strong>
-                       <Link to={"/giftdetail/"}>{book.msg}</Link>
+                       <Link to={"/giftdetail/"}>{gift.name}</Link>
                       </strong>
                     </ListItem>
                   ))
