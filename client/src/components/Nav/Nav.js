@@ -17,22 +17,31 @@ const Nav = (props) => {
 	} else if (props.user.username) {
 		greeting = (
 			<Fragment>
-				Welcome back, <strong>{props.user.username} </strong>
+				Welcome back, <strong>{props.user.username}</strong>
 			</Fragment>
 		)
   }
   
+
+
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
-      <Col size="md-2">
-        <Link to="/" className="navbar-brand">React Reading List</Link>
-      </Col>
-      <Col size="md-7"></Col>
-      <Col size="md-3">
-        <div className="float-right">
-        {greeting} - <Link to="#" className="logout" onClick={props.logout}>Logout</Link>
-        </div>
-      </Col>
+    <nav style={{height: "120px",padding: "25px 20px 0 20px"}}>
+      <div className="nav-wrapper" style={StyleSheet.header}>
+          <ul className="left">
+              <li style={{display: "grid",paddingRight:"10px"}}>
+              <Link to="/">Home</Link>
+              </li>
+          </ul>
+          <p className="brand-logo center" style={{fontSize: "4rem"}}>{props.children}</p>
+          <ul className="right" style={{display: "grid",lineHeight: "35px"}}>
+            <li>
+              {greeting}
+            </li>
+            <li>
+              <Link to="#" className="logout" onClick={props.logout}>Logout</Link>
+            </li>
+          </ul>
+      </div>
     </nav>
   )
 };
