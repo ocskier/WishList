@@ -38,8 +38,8 @@ class LoginForm extends Component {
 			return (
 				<Container>
           <Row>
-            <Col size="md-3"></Col>
-            <Col size="md-6">
+            <Col size="m3"></Col>
+            <Col size="m6">
               <Card title="Login to React Reading List">
                 <form style={{marginTop: 10}}>
                   <label htmlFor="username">Username: </label>
@@ -61,7 +61,7 @@ class LoginForm extends Component {
                 </form>
               </Card>
             </Col>
-            <Col size="md-3"></Col>
+            <Col size="m3"></Col>
           </Row>
 				</Container>
 			)

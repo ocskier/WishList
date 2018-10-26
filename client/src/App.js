@@ -3,10 +3,14 @@ import { Route, Switch } from 'react-router-dom';
 import LoginForm from './pages/Auth/LoginForm';
 import SignupForm from './pages/Auth/SignupForm';
 import Nav from "./components/Nav";
-import Books from './pages/Books';
-import Detail from "./pages/Detail";
+import Home from "./pages/Home"
+import Lists from './pages/Lists';
+import GiftDetail from './pages/GiftDetail';
+import Gifts from "./pages/Gifts";
 import NoMatch from "./pages/NoMatch";
 import AUTH from './utils/AUTH';
+
+import "./App.css";
 
 class App extends Component {
   
@@ -68,12 +72,13 @@ class App extends Component {
 			<div className="App">
         { this.state.loggedIn && (
           <div>
-            <Nav user={this.state.user} logout={this.logout}/>
+            <Nav user={this.state.user} logout={this.logout}>Wish List</Nav>
             <div className="main-view">
               <Switch>
-                <Route exact path="/" component={() => <Books user={this.state.user}/>} />
-                <Route exact path="/books" component={() => <Books user={this.state.user}/>} />
-                <Route exact path="/books/:id" component={Detail} />
+                <Route exact path="/" component={() => <Home user={this.state.user}/>} />
+                <Route exact path="/gifts" component={() => <Gifts user={this.state.user}/>} />
+								<Route exact path="/lists" component={() => <Lists user={this.state.user}/>} />
+								<Route exact path="/giftdetail" component={() => <GiftDetail user={this.state.user}/>} />
                 <Route component={NoMatch} />
               </Switch>
             </div>
@@ -82,7 +87,9 @@ class App extends Component {
         { !this.state.loggedIn && (
           <div className="auth-wrapper" style={{paddingTop:40}}>
             <Route exact path="/" component={() => <LoginForm login={this.login}/>} />
-            <Route exact path="/books" component={() => <LoginForm user={this.login}/>} />
+            <Route exact path="/gifts" component={() => <LoginForm user={this.login}/>} />
+						<Route exact path="/lists" component={() => <LoginForm user={this.login}/>} />
+						<Route exact path="/giftdetail" component={() => <LoginForm user={this.login}/>} />
             <Route exact path="/signup" component={SignupForm} />
           </div>
         )}

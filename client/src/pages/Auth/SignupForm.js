@@ -55,8 +55,8 @@ class SignupForm extends Component {
 		return (
       <Container>
         <Row>
-          <Col size="md-3"></Col>
-          <Col size="md-6">
+          <Col size="m3"></Col>
+          <Col size="m6">
             <Card title="Register for React Reading List">
               <form style={{marginTop: 10}}>
                 <label htmlFor="username">First name: </label>
@@ -99,7 +99,7 @@ class SignupForm extends Component {
               </form>
             </Card>
           </Col>
-          <Col size="md-3"></Col>
+          <Col size="m3"></Col>
         </Row>
       </Container>
 		)
