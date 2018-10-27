@@ -9,25 +9,26 @@ import API from "../../utils/API";
 class Gifts extends Component {
 
   state = {
-    gifts: [{msg:"Gift1"},{msg:"Gift2"},{msg:"Gift3"}],
-    userGifts: false
+    gifts: [{name:"Gift1"},{name:"Gift2"},{name:"Gift3"}],
+    listId: false
     // title: "",
     // author: "",
     // synopsis: ""
   };
 
-  componentDidMount() {
-    this.state.userGifts === true ?
+  componentDidMount() { 
+    !this.props.id ?
+    // this.state.listId ?
     this.loadUserGifts() : 
     this.loadOtherGifts()
   }
 
   loadUserGifts = () => {
-    API.getUserGifts(this.props.user)
-      .then(res =>
-        this.setState({ gifts: res.data})
-      )
-      .catch(err => console.log(err));
+    // API.getUserGifts(this.props.user)
+    //   .then(res =>
+    //     this.setState({ gifts: res.data})
+    //   )
+    //   .catch(err => console.log(err));
   };  
 
   loadOtherGifts = () => {

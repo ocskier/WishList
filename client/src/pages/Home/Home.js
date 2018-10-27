@@ -4,6 +4,9 @@ import {Card} from "../../components/Card";
 import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../../components/Grid";
 
+const still1 = "./santa-claus-2927962_640.png";
+const still2 = "./rawpixel-1084229-unsplash.jpg";
+
 class Home extends Component {
   state = {
     books: [],
@@ -21,7 +24,7 @@ class Home extends Component {
           <Row>
           <Col size="m3 s12"></Col>
           <Col size="m6 s12">
-          <Card link={
+          <Card image={still1} link={
             <Link to={"/gifts/"}>
                 <strong>
                     Gifts
@@ -40,7 +43,7 @@ class Home extends Component {
             {/* <Jumbotron>
               <h1>Books On My List</h1>
             </Jumbotron> */}
-            <Card link={
+            <Card image={still2} link={
             <Link to={"/lists/"}>
               <strong>
                   Lists

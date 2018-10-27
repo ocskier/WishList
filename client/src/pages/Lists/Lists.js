@@ -92,6 +92,7 @@ class Lists extends Component {
             <List>
                 {this.state.lists.map(list => (
                     <ListItem key={list._id} id={list._id}>
+                      <i className="material-icons left">redeem</i>
                       <Link to={"/gifts/"+list._id}>
                       <strong>
                         {list.user}<br></br>{list.name}
