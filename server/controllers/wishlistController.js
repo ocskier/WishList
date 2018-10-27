@@ -17,8 +17,10 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   create: function(req, res) {
+    const wish = req.body;
+    wish.user = req.body.User;
     db.Wishlist
-      .create(req.body)
+      .create(wish)
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },

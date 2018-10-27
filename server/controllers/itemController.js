@@ -22,8 +22,10 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   update: function(req, res) {
+    const contribution = req.body;
+    contribution.user = req.body.User;
     db.Item
-      .findOneAndUpdate({ _id: req.params.id }, req.body)
+      .findOneAndUpdate({ _id: req.params.id }, { $push: { contributions: contribution } })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
