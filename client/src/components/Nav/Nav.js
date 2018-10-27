@@ -11,7 +11,7 @@ const Nav = (props) => {
 	} else if (props.user.firstName) {
 		greeting = (
 			<Fragment>
-				Welcome back, <strong>{props.user.firstName}</strong>
+				<button className="btn-floating btn-medium green"><strong>{props.user.firstName}</strong></button>
 			</Fragment>
 		)
 	} else if (props.user.username) {
@@ -34,7 +34,7 @@ const Nav = (props) => {
           </ul>
           <p className="brand-logo center" style={{fontSize: "4rem"}}>{props.children}</p>
           <ul className="right" style={{display: "grid",lineHeight: "35px"}}>
-            <li>
+            <li className="center">
               {greeting}
             </li>
             <li>

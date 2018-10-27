@@ -25,8 +25,8 @@ class Home extends Component {
           <Col size="m3 s12"></Col>
           <Col size="m6 s12">
           <Card image={still1} link={
-            <Link to={"/gifts/"}>
-                <strong>
+            <Link style={{margin: "0 auto"}} to={"/gifts/"}>
+                <strong style={{color: "green"}}>
                     Gifts
                 </strong>
             </Link>}
@@ -44,8 +44,8 @@ class Home extends Component {
               <h1>Books On My List</h1>
             </Jumbotron> */}
             <Card image={still2} link={
-            <Link to={"/lists/"}>
-              <strong>
+            <Link style= {{margin: "0 auto"}} to={"/lists/"}>
+              <strong style={{color: "green"}}>
                   Lists
               </strong>
             </Link>}

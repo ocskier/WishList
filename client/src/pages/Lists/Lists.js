@@ -63,13 +63,13 @@ class Lists extends Component {
           {/* <!-- profile-page-content --> */}
               {/* <!-- Profile About  --> */}
             <Card title="About Me!">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <p className="center">Wanting a lot of electronics this season!</p>
                 <List>
                   <ListItem>
                     <div className="row">
                       <div className="col s5">
-                        <i className="material-icons left">poll</i> Skills</div>
-                      <div className="col s7 right-align">Super awesome teaching powers</div>
+                        <i className="material-icons left">poll</i> Name: </div>
+                      <div className="col s7 right-align">{this.props.user.firstName + " " + this.props.user.lastName}</div>
                     </div>
                   </ListItem>
                   <ListItem>
