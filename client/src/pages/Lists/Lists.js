@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 import {Card} from "../../components/Card";
-import DeleteBtn from "../../components/DeleteBtn";
+// import DeleteBtn from "../../components/DeleteBtn";
 import Jumbotron from "../../components/Jumbotron";
 import API from "../../utils/API";
 import { Link } from "react-router-dom";
@@ -10,27 +10,27 @@ import { List, ListItem } from "../../components/List";
 
 class Lists extends Component {
   state = {
-    books: [{msg:"List1"},{msg:"List2"},{msg:"List3"}]
+    lists: [{msg:"List1"},{msg:"List2"},{msg:"List3"}]
     // title: "",
     // author: "",
     // synopsis: ""
   };
 
   componentDidMount() {
-    // this.loadBooks();
+    this.loadLists();
   }
 
-  loadBooks = () => {
-    API.getBooks()
+  loadLists = () => {
+    API.getLists()
       .then(res =>
-        this.setState({ books: res.data, title: "", author: "", synopsis: "" })
+        this.setState({ lists: res.data})
       )
       .catch(err => console.log(err));
   };
 
-  deleteBook = id => {
-    API.deleteBook(id)
-      .then(res => this.loadBooks())
+  deleteList = id => {
+    API.deleteList(id)
+      .then(res => this.loadLists())
       .catch(err => console.log(err));
   };
 
@@ -63,13 +63,13 @@ class Lists extends Component {
           {/* <!-- profile-page-content --> */}
               {/* <!-- Profile About  --> */}
             <Card title="About Me!">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <p className="center">Wanting a lot of electronics this season!</p>
                 <List>
                   <ListItem>
                     <div className="row">
                       <div className="col s5">
-                        <i className="material-icons left">poll</i> Skills</div>
-                      <div className="col s7 right-align">Super awesome teaching powers</div>
+                        <i className="material-icons left">poll</i> Name: </div>
+                      <div className="col s7 right-align">{this.props.user.firstName + " " + this.props.user.lastName}</div>
                     </div>
                   </ListItem>
                   <ListItem>
@@ -90,11 +90,14 @@ class Lists extends Component {
               <h4>Gift Lists</h4>
             </Jumbotron>
             <List>
-                {this.state.books.map(book => (
-                    <ListItem>
+                {this.state.lists.map(list => (
+                    <ListItem key={list._id} id={list._id}>
+                      <i className="material-icons left">redeem</i>
+                      <Link to={"/gifts/"+list._id}>
                       <strong>
-                       {book.msg}
+                        {list.user}<br></br>{list.name}
                       </strong>
+                      </Link>
                     </ListItem>
                   ))
                 }

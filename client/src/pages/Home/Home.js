@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 
 import {Card} from "../../components/Card";
-import API from "../../utils/API";
 import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../../components/Grid";
+
+const still1 = "./santa-claus-2927962_640.png";
+const still2 = "./rawpixel-1084229-unsplash.jpg";
 
 class Home extends Component {
   state = {
@@ -22,9 +24,9 @@ class Home extends Component {
           <Row>
           <Col size="m3 s12"></Col>
           <Col size="m6 s12">
-          <Card link={
-            <Link to={"/gifts/"}>
-                <strong>
+          <Card image={still1} link={
+            <Link style={{margin: "0 auto"}} to={"/gifts/"}>
+                <strong style={{color: "green"}}>
                     Gifts
                 </strong>
             </Link>}
@@ -41,9 +43,9 @@ class Home extends Component {
             {/* <Jumbotron>
               <h1>Books On My List</h1>
             </Jumbotron> */}
-            <Card link={
-            <Link to={"/lists/"}>
-              <strong>
+            <Card image={still2} link={
+            <Link style= {{margin: "0 auto"}} to={"/lists/"}>
+              <strong style={{color: "green"}}>
                   Lists
               </strong>
             </Link>}
