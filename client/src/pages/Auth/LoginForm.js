@@ -3,6 +3,9 @@ import { Redirect, Link } from 'react-router-dom';
 import { Container, Row, Col } from '../../components/Grid';
 import { Card } from '../../components/Card';
 import { Input, FormBtn } from '../../components/Form';
+import './LoginForm.css'
+
+const image = './Images/login.jpg'
 
 class LoginForm extends Component {
   
@@ -36,6 +39,7 @@ class LoginForm extends Component {
 			return <Redirect to={{ pathname: this.state.redirectTo }} />
 		} else {
 			return (
+				<div className="login valign-wrapper" style={{backgroundImage: `url(${image})`}}>
 				<Container>
           <Row>
             <Col size="m3"></Col>
@@ -64,6 +68,7 @@ class LoginForm extends Component {
             <Col size="m3"></Col>
           </Row>
 				</Container>
+				</div>
 			)
 		}
 	}
