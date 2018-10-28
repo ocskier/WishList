@@ -9,8 +9,7 @@ router.route("/")
 // Matches with "/api/gifts/:id"
 router
   .route("/:id")
-  .get(giftsController.findByListId)
-  // .get(giftsController.findById)
+  .get(giftsController.findById)
   .put(giftsController.update)
   .delete(giftsController.remove);
 
