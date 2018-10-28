@@ -7,6 +7,7 @@ import API from "../../utils/API";
 import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../../components/Grid";
 import { List, ListItem } from "../../components/List";
+import './Lists.css';
 
 class Lists extends Component {
   state = {
@@ -62,7 +63,8 @@ class Lists extends Component {
           {/* <!--/ profile-page-header --> */}
           {/* <!-- profile-page-content --> */}
               {/* <!-- Profile About  --> */}
-            <Card title="About Me!">
+            <div className="about-me">
+            <Card className="about-me" title="About Me!">
                 <p className="center">Wanting a lot of electronics this season!</p>
                 <List>
                   <ListItem>
@@ -81,14 +83,18 @@ class Lists extends Component {
                   </ListItem>
                 </List>
             </Card>
+            </div>
             {/* <!-- Profile About  --> */}
             {/* <!-- Profile About Details  --> */}
             
           </Col>
           <Col size="m6 s12">
+            <div className="list-gifts">
             <Jumbotron>
               <h4>Gift Lists</h4>
             </Jumbotron>
+            </div>            
+            <div className="gifts">
             <List>
                 {this.state.lists.map(list => (
                     <ListItem key={list._id} id={list._id}>
@@ -102,7 +108,8 @@ class Lists extends Component {
                   ))
                 }
               </List>
-              <h3 className="center">No Results to Display</h3>
+            </div>
+            
             {/* )} */}
           </Col>
         </Row>
