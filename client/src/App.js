@@ -75,7 +75,7 @@ class App extends Component {
         { this.state.loggedIn && (
           <div>
             <Nav user={this.state.user} logout={this.logout}>Wish List</Nav>
-            <div className="main-view" style={{backgroundImage: `url(${image})`, marginTop: "40px"}}>
+            <div className="main-view valign-wrapper" style={{backgroundImage: `url(${image})`}}>
               <Switch>
                 <Route exact path="/" component={() => <Home user={this.state.user}/>} />
                 <Route exact path="/gifts/:id" component={({match}) => <Gifts user={this.state.user} id={match.params.id} />} />
