@@ -83,7 +83,7 @@ class Gifts extends Component {
           <Col size="m12">
           <div className="gift-jumbo container">
           <Jumbotron>
-              <h3>Gifts on my List </h3>
+              <h3>🎁 Gifts on my List 🎁 </h3>
             </Jumbotron>
           </div>            
           </Col>
