@@ -4,6 +4,7 @@ import { Container, Row, Col } from '../../components/Grid';
 import { Card } from '../../components/Card';
 import { Input, FormBtn } from '../../components/Form';
 import AUTH from '../../utils/AUTH';
+import API from '../../utils/API';
 
 class SignupForm extends Component {
 
@@ -36,6 +37,15 @@ class SignupForm extends Component {
       password: this.state.password
     }).then(response => {
       console.log(response);
+      API.makeList({
+        user: response.data.username,
+        userId: response.data._id, 
+        name: response.data.firstName + "'s List"
+      })
+      .then(response => {
+        console.log(response)
+      })
+      .catch((err) => {console.log(err)});
       if (!response.data.errmsg) {
         console.log('youre good');
         this.setState({
