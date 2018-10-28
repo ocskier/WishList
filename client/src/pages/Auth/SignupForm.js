@@ -4,7 +4,9 @@ import { Container, Row, Col } from '../../components/Grid';
 import { Card } from '../../components/Card';
 import { Input, FormBtn } from '../../components/Form';
 import AUTH from '../../utils/AUTH';
+import './LoginForm.css'
 
+const image = './Images/login.jpg'
 class SignupForm extends Component {
 
 	constructor() {
@@ -53,6 +55,7 @@ class SignupForm extends Component {
     }
     
 		return (
+      <div className="login valign-wrapper" style={{backgroundImage: `url(${image})`}}>
       <Container>
         <Row>
           <Col size="m3"></Col>
@@ -102,6 +105,7 @@ class SignupForm extends Component {
           <Col size="m3"></Col>
         </Row>
       </Container>
+      </div>
 		)
 	}
 }

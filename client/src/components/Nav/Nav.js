@@ -25,20 +25,20 @@ const Nav = (props) => {
 
 
   return (
-    <nav style={{height: "120px",padding: "25px 20px 0 20px"}}>
+    <nav style={{height: "120px",padding: "25px 20px 0 20px", backgroundColor: 'red'}}>
       <div className="nav-wrapper" style={StyleSheet.header}>
           <ul className="left">
               <li style={{display: "grid",paddingRight:"10px"}}>
-              <Link to="/">Home</Link>
+              <Link to="/" style={{fontSize: "2rem", textShadow: "2px 2px #000000"}}>Home</Link>
               </li>
           </ul>
-          <p className="brand-logo center" style={{fontSize: "4rem"}}>{props.children}</p>
+          <p className="brand-logo center" style={{fontSize: "6rem", textShadow: "3px 3px #000000"}}>{props.children}</p>
           <ul className="right" style={{display: "grid",lineHeight: "35px"}}>
             <li className="center">
               {greeting}
             </li>
             <li>
-              <Link to="#" className="logout" onClick={props.logout}>Logout</Link>
+              <Link to="#" className="logout" onClick={props.logout} style={{fontSize: "2rem", textShadow: "2px 2px #000000"}}>Logout</Link>
             </li>
           </ul>
       </div>
