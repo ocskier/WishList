@@ -76,7 +76,7 @@ class Lists extends Component {
                     <div className="row">
                       <div className="col s5">
                         <i className="material-icons left">domain</i> Lives in</div>
-                      <div className="col s7 right-align">Durham, NC, USA</div>
+                      <div className="col s7 right-align">Raleigh-Durham, NC, USA</div>
                     </div>
                   </ListItem>
                 </List>
@@ -93,9 +93,9 @@ class Lists extends Component {
                 {this.state.lists.map(list => (
                     <ListItem key={list._id} id={list._id}>
                       <i className="material-icons left">redeem</i>
-                      <Link to={"/gifts/"+list._id}>
+                      <Link to={"/gifts/"+list.userId}>
                       <strong>
-                        {list.user}<br></br>{list.name}
+                        {list.name}<br></br>{list.date}
                       </strong>
                       </Link>
                     </ListItem>

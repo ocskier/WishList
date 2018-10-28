@@ -5,9 +5,9 @@ export default {
   getUserGifts: function(user_id) {
     return axios.get("/api/gifts/"+user_id);
   },
-  getOtherGifts: function() {
-    return axios.get("/api/gifts");
-  },
+  // getOtherGifts: function() {
+  //   return axios.get("/api/gifts");
+  // },
   // Gets the book with the given id
   getGift: function(id) {
     return axios.get("/api/gifts/" + id);
@@ -17,8 +17,7 @@ export default {
     return axios.delete("/api/gifts/" + id);
   },
   // Saves a book to the database
-  saveGift: function(giftData) {
-    return axios.post("/api/gifts", giftData);
-  },
-  getLists: () => {return axios.get("/api/lists")}
+  saveGift: (giftData) => {return axios.post("/api/gifts", giftData)},
+  getLists: () => {return axios.get("/api/lists")},
+  makeList: (user) => {return axios.post('/api/lists',user)}
 };

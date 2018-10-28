@@ -1,5 +1,5 @@
 module.exports = {
   Wishlist: require("./wishlist"),
-  Item: require("./item"),
+  Gift: require("./gift"),
   User: require("./user")
 };
