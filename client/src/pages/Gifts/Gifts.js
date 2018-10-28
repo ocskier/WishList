@@ -6,7 +6,7 @@ import { Col, Row, Container } from "../../components/Grid";
 import Jumbotron from "../../components/Jumbotron";
 import {List,ListItem} from "../../components/List";
 import {Card} from "../../components/Card";
-
+import './Gifts.css'
 import API from "../../utils/API";
 import { inherits } from "util";
 
@@ -94,9 +94,11 @@ class Gifts extends Component {
       <Container fluid>
         <Row>
           <Col size="m12">
-            <Jumbotron>
-              <strong style={{fontSize:"2rem"}}> Gifts on the List </strong>
+          <div className="gift-jumbo container">
+          <Jumbotron>
+              <h3>🎁 Gifts on my List 🎁 </h3>
             </Jumbotron>
+          </div>            
           </Col>
         </Row>
         <Row>
