@@ -9,13 +9,6 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
-  findByListId: function(req,res){
-    db.Gift
-      .find({wishlistId: req.params.id})
-      .sort({ price: -1 })
-      .then(dbModel => res.json(dbModel))
-      .catch(err => res.status(422).json(err));
-  },
   findById: function(req, res) {
     db.Gift
       .findById(req.params.id)

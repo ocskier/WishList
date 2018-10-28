@@ -5,7 +5,7 @@ const wishlistSchema = new Schema({
   user: { type: String, required: true },
   userId: { type: String, required: true },
   wtype: { type:String, default:"Wishlist"},
-  item: { type: String, required: false },
+  gifts: [{ type: mongoose.Schema.Types.ObjectId,ref:'Gift',required: false}],
   name: { type: String, default: "MyWishlist" },
   date: { type: Date, default: Date.now }
 });

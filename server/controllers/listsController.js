@@ -9,10 +9,14 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
-  findById: function(req, res) {
+  findByUserId: function(req, res) {
     db.Wishlist
-      .findById(req.params.id)
-      .then(dbModel => res.json(dbModel))
+      .find({userId: req.params.id})
+      .populate('gifts')
+      .then(dbModel => {
+        res.json(dbModel);
+        console.log(dbModel)
+      })
       .catch(err => res.status(422).json(err));
   },
   create: function(req, res) {

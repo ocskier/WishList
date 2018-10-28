@@ -31,6 +31,9 @@ const Nav = (props) => {
               <li style={{display: "grid",paddingRight:"10px"}}>
               <Link to="/" style={{fontSize: "2rem", textShadow: "2px 2px 5px #000000"}}>Home</Link>
               </li>
+              <li style={{display: "grid",paddingRight:"10px"}}>
+              <Link to="/lists" style={{fontSize: "2rem", textShadow: "2px 2px #000000"}}>Lists</Link>
+              </li>
           </ul>
           <p className="brand-logo center" style={{fontSize: "6rem", textShadow: "3px 3px 5px #000000"}}>{props.children}</p>
           <ul className="right" style={{display: "grid",lineHeight: "35px"}}>
