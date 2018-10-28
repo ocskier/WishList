@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import {Collapsible,CollapsibleItem,Input,Row as MatRow} from 'react-materialize';
+import Quagga from 'quagga';
 
 import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../../components/Grid";
@@ -19,6 +20,7 @@ class Gifts extends Component {
     price: "",
     descr:"",
     listid:"",
+    code:""
   };
 
   componentDidMount() { 
@@ -89,6 +91,31 @@ class Gifts extends Component {
     }).catch((err) => console.log(err));
   }
 
+  scanner = () => {
+    Quagga.init({
+    inputStream : {
+      name : "Live",
+      type : "LiveStream",
+      target: document.querySelector('#scanner')    // Or '#yourElement' (optional)
+    },
+    decoder : {
+      readers : ["code_128_reader"]
+    }
+    }, function(err) {
+      if (err) {
+          console.log(err);
+          return
+      }
+      console.log("Initialization finished. Ready to start");
+      Quagga.start();
+      Quagga.onDetected((data) => {
+        this.setState({
+          code: data.codeResult.code
+        })
+      })
+    });
+  }
+
   render() {
     return (
       <Container fluid>
@@ -112,7 +139,7 @@ class Gifts extends Component {
                     <Input onChange={this.handleInputChange} style={{fontWeight:"bold"}} s={6} label="Gift Name" value={this.state.gift} name="gift" />
                     <Input onChange={this.handleInputChange} s={6} label="Price" value={this.state.price} name="price" />
                     <Input onChange={this.handleInputChange} s={12} label="Description" value={this.state.descr} name="descr" />
-                    <Input s={12} label="UPC" />
+                    <Input onClick={this.scanner} id="scanner" s={12} label="UPC" />
                   </MatRow>
                 </Card>
               </CollapsibleItem>
@@ -124,10 +151,13 @@ class Gifts extends Component {
                 this.state.gifts.map(gift => (
                     <ListItem key={gift._id} id={gift._id}>
                       <strong>
-                       <Link to={"/giftdetail/"}>{gift.giftName}</Link><br />
+                      {gift.giftName}<br />
                        {gift.description}<br />
                        {gift.price}<br />
-                       {gift.status}
+                       {!this.state.userId ?
+                       <Link to={"/giftdetail/"}>{gift.status ==="Open" ? "Available to Buy!" : "Purchased"}</Link>
+                       : <div><p>{gift.status ==="Open" ? "Not Purchased!" : "Purchased"}</p><button>Delete Item</button></div>
+                       }
                       </strong>
                     </ListItem>
                   ))

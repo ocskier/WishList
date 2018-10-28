@@ -91,6 +91,7 @@ class App extends Component {
           <div className="auth-wrapper" style={{paddingTop:40}}>
             <Route exact path="/" component={() => <LoginForm login={this.login}/>} />
             <Route exact path="/gifts" component={() => <LoginForm user={this.login}/>} />
+						<Route exact path="/gifts/:id" component={() => <LoginForm user={this.login}/>} />
 						<Route exact path="/lists" component={() => <LoginForm user={this.login}/>} />
 						<Route exact path="/giftdetail" component={() => <LoginForm user={this.login}/>} />
             <Route exact path="/signup" component={SignupForm} />
