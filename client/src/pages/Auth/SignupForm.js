@@ -6,6 +6,10 @@ import { Input, FormBtn } from '../../components/Form';
 import AUTH from '../../utils/AUTH';
 import API from '../../utils/API';
 
+import './LoginForm.css'
+
+
+const image = './Images/login.jpg'
 class SignupForm extends Component {
 
 	constructor() {
@@ -63,6 +67,7 @@ class SignupForm extends Component {
     }
     
 		return (
+      <div className="login valign-wrapper" style={{backgroundImage: `url(${image})`}}>
       <Container>
         <Row>
           <Col size="m3"></Col>
@@ -112,6 +117,7 @@ class SignupForm extends Component {
           <Col size="m3"></Col>
         </Row>
       </Container>
+      </div>
 		)
 	}
 }
