@@ -41,7 +41,7 @@ class LoginForm extends Component {
 			return (
 				<div className="login valign-wrapper" style={{backgroundImage: `url(${image})`}}>
 				<Container>
-          <Row>
+          <Row style={{display: "-webkit-box"}}>
             <Col size="m3"></Col>
             <Col size="m6">
               <Card title="Login to React Reading List">
