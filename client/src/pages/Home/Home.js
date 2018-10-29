@@ -18,10 +18,10 @@ class Home extends Component {
 
   render() {
     return (
-      <Container fluid>
+      <Container style={{paddingTop:"6rem"}} fluid>
         <Row>
           <Col size="m6 s12">
-          <Row>
+          <Row style={{display:"block"}}>
           <Col size="m3 s12"></Col>
           <Col size="m6 s12">
           <Card image={still1} link={
@@ -37,7 +37,7 @@ class Home extends Component {
           </Row>
           </Col>
           <Col size="m6 s12">
-          <Row>
+          <Row style={{display:"block"}}>
           <Col size="m3 s12"></Col>
           <Col size="m6 s12">
             {/* <Jumbotron>
