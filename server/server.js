@@ -14,6 +14,7 @@ const routes = require("./routes");
 const passport = require('./passport');
 const app = express();
 const PORT = process.env.PORT || 3001;
+const request = require('request');
 
 // Middlewares
 app.use(morgan('dev'));
@@ -53,4 +54,10 @@ app.use(function(err, req, res, next) {
 // Starting Server
 app.listen(PORT, () => {
   console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
+});
+
+request('https://openapi.etsy.com/v2/listings/active?api_key=7v10hami64ep73tmfkowpyny', function (error, response, body) {
+  console.log('error:', error); // Print the error if one occurred
+  console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
+  console.log('body:', body); // Print the HTML for the Google homepage.
 });

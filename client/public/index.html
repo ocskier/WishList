@@ -21,6 +21,17 @@
     You need to enable JavaScript to run this app.
   </noscript>
   <div id="root"></div>
+  <div id="suggestions">
+    <script>
+        suggestions =[];
+
+        $.get("https://openapi.etsy.com/v2/listings/active?api_key=7v10hami64ep73tmfkowpyny", function(data, status){
+          suggestions = data;
+          console.log(status);
+          });
+        
+      </script>
+  </div>
 </body>
 
 </html>
