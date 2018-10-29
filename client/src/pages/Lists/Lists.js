@@ -9,13 +9,12 @@ import { Col, Row, Container } from "../../components/Grid";
 import { List, ListItem } from "../../components/List";
 import './Lists.css';
 import AddList from "../../components/AddList";
+import {Collapsible,CollapsibleItem,Input,Row as MatRow} from 'react-materialize';
 
 class Lists extends Component {
   state = {
-    lists: [{msg:"List1"},{msg:"List2"},{msg:"List3"}]
-    // title: "",
-    // author: "",
-    // synopsis: ""
+    lists: [{msg:"List1"},{msg:"List2"},{msg:"List3"}],
+    newlistname: ""
   };
 
   componentDidMount() {
@@ -42,6 +41,22 @@ class Lists extends Component {
       [name]: value
     });
   };
+
+  addList = (e) => {
+    e.preventDefault();
+    API.makeList({
+      user: this.props.user.username,
+      userId: this.props.user._id, 
+      name: this.state.newlistname
+    }).then((res) => {
+        console.log(res);
+        this.setState({
+          newlistname: ""
+        });
+        this.loadLists();
+      })
+      .catch((err) => console.log(err));
+  }
 
   // handleFormSubmit = event => {
   //   event.preventDefault();
@@ -110,7 +125,16 @@ class Lists extends Component {
                 }
               </List>
             </div>
-            <AddList></AddList>
+            <Collapsible popout defaultActiveKey={1}>
+              <CollapsibleItem header='Add A List' icon='filter_drama'>
+                <Card link={<button onClick={this.addList} className="btn green waves-effect waves-light" type="submit" name="action">
+                  <i style={{marginLeft:0}} className="material-icons right">add</i></button>}>
+                  <MatRow style={{flex:"none",display: "block"}}>
+                    <Input onChange={this.handleInputChange} style={{fontWeight:"bold"}} s={6} label="List Name" value={this.state.newlistname} name="newlistname" />
+                  </MatRow>
+                </Card>
+              </CollapsibleItem>
+            </Collapsible>
             
             {/* )} */}
           </Col>
