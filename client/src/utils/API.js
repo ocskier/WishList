@@ -26,10 +26,6 @@ export default {
   getUser: function(id) {
     return axios.get("/api/users/" + id);
   },
-
-  getUserGifts: function(user_id) {
-    return axios.get("/api/lists/"+user_id);
-  },
   // getOtherGifts: function() {
   //   return axios.get("/api/gifts");
   // },
@@ -38,6 +34,7 @@ export default {
   // Saves a book to the database
   saveGift: (giftData) => {return axios.post("/api/gifts", giftData)},
   updateList: (id,listData) => {return axios.put("/api/lists/"+id,listData)},
+  getUserList: (id) => {return axios.get("/api/lists/user/"+id)},
   getLists: () => {return axios.get("/api/lists")},
   makeList: (user) => {return axios.post('/api/lists',user)}
 };

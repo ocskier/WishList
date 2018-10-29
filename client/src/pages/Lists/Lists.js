@@ -100,7 +100,7 @@ class Lists extends Component {
                 {this.state.lists.map(list => (
                     <ListItem key={list._id} id={list._id}>
                       <i className="material-icons left">redeem</i>
-                      <Link to={"/gifts/"+list.userId}>
+                      <Link to={"/gifts/"+list._id}>
                       <strong>
                         {list.name}<br></br>{list.date}
                       </strong>
