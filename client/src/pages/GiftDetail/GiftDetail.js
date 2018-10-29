@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import Postscribe from "postscribe";
+
 // import DeleteBtn from "../../components/DeleteBtn";
 import Jumbotron from "../../components/Jumbotron";
 import API from "../../utils/API";
@@ -7,6 +9,9 @@ import { Col, Row, Container } from "../../components/Grid";
 // import { List, ListItem } from "../../components/List";
 import {Card} from "../../components/Card";
 import {MediaBox} from "react-materialize";
+
+// import "./GiftDetail.css";
+const AmznImg ="//ws-na.amazon-adsystem.com/widgets/q?ServiceVersion=20070822&OneJS=1&Operation=GetAdHtml&MarketPlace=US&source=ac&ref=tf_til&ad_type=product_link&tracking_id=proj3team6-20&marketplace=amazon&region=US&placement=B07BKPV27P&asins=B07BKPV27P&linkId=2b7ce484dcf176ace03bd6f1763811e6&show_border=false&link_opens_in_new_window=false&price_color=333333&title_color=0066c0&bg_color=ffffff"
 
 class GiftDetail extends Component {
   state = {
@@ -20,6 +25,7 @@ class GiftDetail extends Component {
 
   componentDidMount() {
     // this.loadBooks();
+    Postscribe('#adDiv', '<div style="text-align: -webkit-center" className="aligncenter"><script type="text/javascript">amzn_assoc_ad_type = "banner";amzn_assoc_marketplace = "amazon";amzn_assoc_region = "US";amzn_assoc_placement = "assoc_banner_placement_default";amzn_assoc_campaigns = "gift_certificates";amzn_assoc_banner_type = "category";amzn_assoc_isresponsive = "true";amzn_assoc_banner_id = "1G274HKHXM7QERC7YAG2";amzn_assoc_tracking_id = "proj3team6-20";amzn_assoc_linkid = "00082d8280273b37a749e37f6b30f4c6";</script><script src="//z-na.amazon-adsystem.com/widgets/q?ServiceVersion=20070822&Operation=GetScript&ID=OneJS&WS=1"></script></div>');
   }
 
   loadBooks = () => {
@@ -52,18 +58,24 @@ class GiftDetail extends Component {
               <h3>Buy the Gift</h3>
             </Jumbotron>
             <Row>
-            <Col size="s12">
-              {
-                this.state.books.map(book => (
-                <Card title={book.giftName}>
-                {book.pic}
-                {book.link}
-                </Card>
-                ))
-              }
-            </Col>
+              <Col size="s12">
+                {
+                  this.state.books.map(book => (
+                  <Card title={book.giftName}>
+                  {book.pic}
+                  {book.link}
+                  </Card>
+                  ))
+                }
+                {/* <iframe style={{width:120,height:240,marginWidth:0,marginHeight:0,scrolling:"no",frameBorder:0}} src={AmznImg}></iframe> */}
+              </Col>
             </Row>
           </Col>
+        </Row>
+        <Row>
+            <Col size="s12">
+              <div id="adDiv"></div>
+            </Col>
         </Row>
       </Container>
     );
