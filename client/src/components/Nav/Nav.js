@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import { Link } from 'react-router-dom';
-import { Col } from '../Grid';
+
 import './Nav.css';
 
 const Nav = (props) => {
@@ -11,28 +11,40 @@ const Nav = (props) => {
 	} else if (props.user.firstName) {
 		greeting = (
 			<Fragment>
-				Welcome back, <strong>{props.user.firstName}</strong>
+				<button className="btn-floating btn-medium green"><strong>{props.user.firstName}</strong></button>
 			</Fragment>
 		)
 	} else if (props.user.username) {
 		greeting = (
 			<Fragment>
-				Welcome back, <strong>{props.user.username} </strong>
+				Welcome back, <strong>{props.user.username}</strong>
 			</Fragment>
 		)
   }
   
+
+
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
-      <Col size="md-2">
-        <Link to="/" className="navbar-brand">React Reading List</Link>
-      </Col>
-      <Col size="md-7"></Col>
-      <Col size="md-3">
-        <div className="float-right">
-        {greeting} - <Link to="#" className="logout" onClick={props.logout}>Logout</Link>
-        </div>
-      </Col>
+    <nav style={{height: "120px",padding: "25px 20px 0 20px", backgroundColor: 'red'}}>
+      <div className="nav-wrapper" style={StyleSheet.header}>
+          <ul className="left">
+              <li style={{display: "grid",paddingRight:"10px"}}>
+              <Link to="/" style={{fontSize: "2rem", textShadow: "2px 2px 5px #000000"}}>Home</Link>
+              </li>
+              <li style={{display: "grid",paddingRight:"10px"}}>
+              <Link to="/lists" style={{fontSize: "2rem", textShadow: "2px 2px #000000"}}>Lists</Link>
+              </li>
+          </ul>
+          <p className="brand-logo center" style={{fontSize: "6rem", textShadow: "3px 3px 5px #000000"}}>{props.children}</p>
+          <ul className="right" style={{display: "grid",lineHeight: "35px"}}>
+            <li className="center">
+              {greeting}
+            </li>
+            <li>
+              <Link to="#" className="logout" onClick={props.logout} style={{fontSize: "2rem", textShadow: "2px 2px 5px #000000"}}>Logout</Link>
+            </li>
+          </ul>
+      </div>
     </nav>
   )
 };

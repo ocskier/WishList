@@ -2,39 +2,42 @@ import axios from "axios";
 
 export default {
   // Gets all books
-  getItems: function() {
-    return axios.get("/api/items");
+  getGifts: function() {
+    return axios.get("/api/Gifts");
   },
-  // Gets the Item with the given id
-  getItem: function(id) {
-    return axios.get("/api/items/" + id);
+  // Gets the Gift with the given id
+  getGift: function(id) {
+    return axios.get("/api/Gifts/" + id);
   },
-  // Deletes the Item with the given id
-  deleteItem: function(id) {
-    return axios.delete("/api/items/" + id);
-  },
-  // Saves a Item to the database
-  saveItem: function(ItemData) {
-    return axios.post("/api/items", ItemData);
-  },
-
-  getWishlists: function() {
-    return axios.get("/api/wishlists");
+  // Deletes the Gift with the given id
+  deleteGift: function(id) {
+    return axios.delete("/api/Gifts/" + id);
   },
   // Gets the Wishlist with the given id
-  getWishlist: function(id) {
-    return axios.get("/api/wishlists/" + id);
+  getList: function(id) {
+    return axios.get("/api/lists/" + id);
   },
   // Deletes the Wishlist with the given id
-  deleteWishlist: function(id) {
-    return axios.delete("/api/wishlists/" + id);
+  deleteList: function(id) {
+    return axios.delete("/api/lists/" + id);
   },
   // Saves a Wishlist to the database
-  saveWishlist: function(WishlistData) {
-    return axios.post("/api/wishlists", WishlistData);
-  },
+  
   getUser: function(id) {
     return axios.get("/api/users/" + id);
   },
 
+  getUserGifts: function(user_id) {
+    return axios.get("/api/lists/"+user_id);
+  },
+  // getOtherGifts: function() {
+  //   return axios.get("/api/gifts");
+  // },
+  // Gets the book with the given id
+
+  // Saves a book to the database
+  saveGift: (giftData) => {return axios.post("/api/gifts", giftData)},
+  updateList: (id,listData) => {return axios.put("/api/lists/"+id,listData)},
+  getLists: () => {return axios.get("/api/lists")},
+  makeList: (user) => {return axios.post('/api/lists',user)}
 };
