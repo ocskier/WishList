@@ -11,6 +11,20 @@ module.exports = {
       return res.json({ user: null });
     }
   },
+  findAll: function(req, res) {
+    db.User
+      .find(req.query)
+      .sort({ date: -1 })
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
+  findById: function(req, res) {
+    db.User
+      .findById(req.params.id)
+      .populate('wishlists')
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
   register: (req, res) => {
     const { firstName, lastName, username, password } = req.body;
     // ADD VALIDATION

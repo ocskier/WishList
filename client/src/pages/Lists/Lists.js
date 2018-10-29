@@ -7,13 +7,14 @@ import API from "../../utils/API";
 import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../../components/Grid";
 import { List, ListItem } from "../../components/List";
+import './Lists.css';
+import AddList from "../../components/AddList";
+import {Collapsible,CollapsibleItem,Input,Row as MatRow} from 'react-materialize';
 
 class Lists extends Component {
   state = {
-    lists: [{msg:"List1"},{msg:"List2"},{msg:"List3"}]
-    // title: "",
-    // author: "",
-    // synopsis: ""
+    lists: [{msg:"List1"},{msg:"List2"},{msg:"List3"}],
+    newlistname: ""
   };
 
   componentDidMount() {
@@ -41,6 +42,22 @@ class Lists extends Component {
     });
   };
 
+  addList = (e) => {
+    e.preventDefault();
+    API.makeList({
+      user: this.props.user.username,
+      userId: this.props.user._id, 
+      name: this.state.newlistname
+    }).then((res) => {
+        console.log(res);
+        this.setState({
+          newlistname: ""
+        });
+        this.loadLists();
+      })
+      .catch((err) => console.log(err));
+  }
+
   // handleFormSubmit = event => {
   //   event.preventDefault();
   //   if (this.state.title && this.state.author) {
@@ -56,13 +73,14 @@ class Lists extends Component {
 
   render() {
     return (
-      <Container fluid>
+      <Container style={{paddingTop:"6rem"}} fluid>
         <Row>
           <Col size="m6">
           {/* <!--/ profile-page-header --> */}
           {/* <!-- profile-page-content --> */}
               {/* <!-- Profile About  --> */}
-            <Card title="About Me!">
+            <div className="about-me">
+            <Card className="about-me" title="About Me!">
                 <p className="center">Wanting a lot of electronics this season!</p>
                 <List>
                   <ListItem>
@@ -76,33 +94,48 @@ class Lists extends Component {
                     <div className="row">
                       <div className="col s5">
                         <i className="material-icons left">domain</i> Lives in</div>
-                      <div className="col s7 right-align">Durham, NC, USA</div>
+                      <div className="col s7 right-align">Raleigh-Durham, NC, USA</div>
                     </div>
                   </ListItem>
                 </List>
             </Card>
+            </div>
             {/* <!-- Profile About  --> */}
             {/* <!-- Profile About Details  --> */}
             
           </Col>
           <Col size="m6 s12">
+            <div className="list-gifts">
             <Jumbotron>
               <h4>Gift Lists</h4>
             </Jumbotron>
+            </div>            
+            <div className="gifts">
             <List>
                 {this.state.lists.map(list => (
                     <ListItem key={list._id} id={list._id}>
                       <i className="material-icons left">redeem</i>
                       <Link to={"/gifts/"+list._id}>
                       <strong>
-                        {list.user}<br></br>{list.name}
+                        {list.name}<br></br>{list.date}
                       </strong>
                       </Link>
                     </ListItem>
                   ))
                 }
               </List>
-              <h3 className="center">No Results to Display</h3>
+            </div>
+            <Collapsible popout defaultActiveKey={1}>
+              <CollapsibleItem header='Add A List' icon='filter_drama'>
+                <Card link={<button onClick={this.addList} className="btn green waves-effect waves-light" type="submit" name="action">
+                  <i style={{marginLeft:0}} className="material-icons right">add</i></button>}>
+                  <MatRow style={{flex:"none",display: "block"}}>
+                    <Input onChange={this.handleInputChange} style={{fontWeight:"bold"}} s={6} label="List Name" value={this.state.newlistname} name="newlistname" />
+                  </MatRow>
+                </Card>
+              </CollapsibleItem>
+            </Collapsible>
+            
             {/* )} */}
           </Col>
         </Row>

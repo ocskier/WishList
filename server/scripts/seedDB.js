@@ -5,50 +5,50 @@ const db = require("../models");
 
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/reactreadinglist-auth");
 
-const itemSeed = [
+const giftSeed = [
   {
     name: "The Dead Zone",
-    // date: new Date(Date.now())
+    date: new Date(Date.now())
   },
   {
     name: "Lord of the Flies",
-    // date: new Date(Date.now())
+    date: new Date(Date.now())
   },
   {
     name: "The Catcher in the Rye",
-    // date: new Date(Date.now())
+    date: new Date(Date.now())
   },
   {
     name: "The Punch Escrow",
-    // date: new Date(Date.now())
+    date: new Date(Date.now())
   },
   {
     name: "Harry Potter and the Sorcerer's Stone",
-    // date: new Date(Date.now())
+    date: new Date(Date.now())
   },
   {
     name: "Coraline",
-    // date: new Date(Date.now())
+    date: new Date(Date.now())
   },
   {
     name: "Code: The Hidden Language of Computer Hardware and Software",
-    // date: new Date(Date.now())
+    date: new Date(Date.now())
   },
   {
     name: "The Everything Store: Jeff Bezos and the Age of Amazon",
-    // date: new Date(Date.now())
+    date: new Date(Date.now())
   },
   {
     name: "Total Recall: My Unbelievably True Life Story",
-    // date: new Date(Date.now())
+    date: new Date(Date.now())
   },
   {
     name: "Elon Musk: Tesla, SpaceX, and the Quest for a Fantastic Future",
-    // date: new Date(Date.now())
+    date: new Date(Date.now())
   },
   {
     name: "Steve Jobs",
-    // date: new Date(Date.now())
+    date: new Date(Date.now())
   }
 ];
 
@@ -56,19 +56,19 @@ const listSeed = [
   {
     user: "ocskier",
     // date: new Date(Date.now())
-    item: "Scooter"
+    gift: "Scooter"
   },
   {
     user: "Steve Jobs",
     // date: new Date(Date.now())
-    item: "Lamborghini"
+    gift: "Lamborghini"
   }
 ];
 
-db.Item
+db.Gift
   .remove({})
   .then(() =>
-    db.Item.collection.insertMany(itemSeed)
+    db.Gift.collection.insertMany(giftSeed)
   )
   .then(data => {
     console.log(data.result.n + " records inserted!");

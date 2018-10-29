@@ -12,6 +12,8 @@ import AUTH from './utils/AUTH';
 
 import "./App.css";
 
+const image = './Images/home.jpg'
+
 class App extends Component {
   
   constructor() {
@@ -73,7 +75,7 @@ class App extends Component {
         { this.state.loggedIn && (
           <div>
             <Nav user={this.state.user} logout={this.logout}>Wish List</Nav>
-            <div className="main-view">
+            <div className="main-view" style={{backgroundImage: `url(${image})`}}>
               <Switch>
                 <Route exact path="/" component={() => <Home user={this.state.user}/>} />
                 <Route exact path="/gifts/:id" component={({match}) => <Gifts user={this.state.user} id={match.params.id} />} />
@@ -86,9 +88,10 @@ class App extends Component {
           </div>
         )}
         { !this.state.loggedIn && (
-          <div className="auth-wrapper" style={{paddingTop:40}}>
+          <div className="auth-wrapper">
             <Route exact path="/" component={() => <LoginForm login={this.login}/>} />
             <Route exact path="/gifts" component={() => <LoginForm user={this.login}/>} />
+						<Route exact path="/gifts/:id" component={() => <LoginForm user={this.login}/>} />
 						<Route exact path="/lists" component={() => <LoginForm user={this.login}/>} />
 						<Route exact path="/giftdetail" component={() => <LoginForm user={this.login}/>} />
             <Route exact path="/signup" component={SignupForm} />

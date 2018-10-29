@@ -4,7 +4,12 @@ import { Container, Row, Col } from '../../components/Grid';
 import { Card } from '../../components/Card';
 import { Input, FormBtn } from '../../components/Form';
 import AUTH from '../../utils/AUTH';
+import API from '../../utils/API';
 
+import './LoginForm.css'
+
+
+const image = './Images/login.jpg'
 class SignupForm extends Component {
 
 	constructor() {
@@ -36,6 +41,15 @@ class SignupForm extends Component {
       password: this.state.password
     }).then(response => {
       console.log(response);
+      API.makeList({
+        user: response.data.username,
+        userId: response.data._id, 
+        name: response.data.firstName + "'s List"
+      })
+      .then(response => {
+        console.log(response)
+      })
+      .catch((err) => {console.log(err)});
       if (!response.data.errmsg) {
         console.log('youre good');
         this.setState({
@@ -53,10 +67,11 @@ class SignupForm extends Component {
     }
     
 		return (
+      <div className="login valign-wrapper" style={{backgroundImage: `url(${image})`}}>
       <Container>
-        <Row>
-          <Col size="m3"></Col>
-          <Col size="m6">
+        <Row style={{display: "-webkit-box"}}>
+          <Col size="s12 m3"></Col>
+          <Col size="s12 m6">
             <Card title="Register for React Reading List">
               <form style={{marginTop: 10}}>
                 <label htmlFor="username">First name: </label>
@@ -99,9 +114,10 @@ class SignupForm extends Component {
               </form>
             </Card>
           </Col>
-          <Col size="m3"></Col>
+          <Col size="s12 m3"></Col>
         </Row>
       </Container>
+      </div>
 		)
 	}
 }

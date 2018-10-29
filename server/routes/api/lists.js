@@ -13,4 +13,8 @@ router
   .put(listsController.update)
   .delete(listsController.remove);
 
+router
+  .route("/user/:id")
+  .get(listsController.findByUser);
+
 module.exports = router;
