@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const giftRoutes = require("./gifts");
 const listRoutes = require("./lists");
-const listRoutes = require("./users");
+const userRoutes = require("./users");
 
 // Book routes
 router.use("/gifts", giftRoutes);
