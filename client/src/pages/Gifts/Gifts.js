@@ -25,28 +25,30 @@ class Gifts extends Component {
 
   componentDidMount() { 
     console.log(this.props.user._id,this.props.id);
-    (this.props.user._id === this.props.id) || !this.props.id ?
-    // this.state.listId ?
-    this.setState({userId: true},this.loadUserGifts()) : 
-    this.loadOtherGifts()
+    !(this.props.id) ? 
+    this.setState({userId: true},this.getUserGifts()) :
+    API.getList(this.props.id)
+    .then((res) => {
+      console.log(res);
+      this.props.user._id === res.data[0].userId ?
+      this.setState({userId: true},this.getUserGifts()) : 
+      this.setState({gifts: res.data[0].gifts,listid:res.data[0]._id},
+        () => 
+       console.log(this.state.gifts))
+    })
+    .catch(err => console.log(err))
   }
 
-  loadUserGifts = () => {
-    this.getGifts(this.props.user._id);
-  };  
-
-  loadOtherGifts = () => {
-    this.getGifts(this.props.id);
-  };
-
-  getGifts = (id) => {
-    API.getUserGifts(id)
-      .then(res =>
-        this.setState({gifts: res.data[0].gifts,listid:res.data[0]._id},
-         () => 
-        console.log(this.state.gifts))
-      )
-      .catch(err => console.log(err));
+  getUserGifts = () => {
+    API.getUserList(this.props.user._id)
+    .then(res => {
+      console.log(res);
+      this.setState({gifts: res.data[0].gifts,listid:res.data[0]._id},
+       () => 
+      console.log(this.state.gifts));
+    }
+    )
+    .catch(err => console.log(err))
   }
 
   addGift = (e) => {
@@ -82,12 +84,11 @@ class Gifts extends Component {
         gifts: res.data._id
       }
     }).then((res) => {
-      this.loadUserGifts();
       this.setState({
         gift: "",
         price: "",
         descr: ""
-      });
+      },()=>this.getUserGifts());
     }).catch((err) => console.log(err));
   }
 
