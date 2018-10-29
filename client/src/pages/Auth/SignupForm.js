@@ -69,9 +69,9 @@ class SignupForm extends Component {
 		return (
       <div className="login valign-wrapper" style={{backgroundImage: `url(${image})`}}>
       <Container>
-        <Row>
-          <Col size="m3"></Col>
-          <Col size="m6">
+        <Row style={{display: "-webkit-box"}}>
+          <Col size="s12 m3"></Col>
+          <Col size="s12 m6">
             <Card title="Register for React Reading List">
               <form style={{marginTop: 10}}>
                 <label htmlFor="username">First name: </label>
@@ -114,7 +114,7 @@ class SignupForm extends Component {
               </form>
             </Card>
           </Col>
-          <Col size="m3"></Col>
+          <Col size="s12 m3"></Col>
         </Row>
       </Container>
       </div>

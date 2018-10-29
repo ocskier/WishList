@@ -45,7 +45,7 @@ class GiftDetail extends Component {
 
   render() {
     return (
-      <Container fluid>
+      <Container style={{paddingTop:"6rem"}} fluid>
         <Row>
           <Col size="m6 s12">
             <Jumbotron>
