@@ -4,9 +4,6 @@
   "description": "Full Stack React App with Authentication",
   "main": "server/server.js",
   "scripts": {
-    "homepage": "https://ocskier.github.io/Wishlist",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -b master -d build",
     "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
     "start:prod": "node server/server.js",
     "start:dev": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",
