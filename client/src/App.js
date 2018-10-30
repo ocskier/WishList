@@ -84,6 +84,7 @@ class App extends Component {
 								<Route exact path="/lists" component={() => <Lists user={this.state.user}/>} />
 								<Route exact path="/search" component={() => <Search user={this.state.user}/>} />
 								<Route exact path="/giftdetail" component={() => <GiftDetail user={this.state.user}/>} />
+								<Route exact path="/giftdetail/:id" component={({match}) => <GiftDetail user={this.state.user} giftid = {match.params.id}/>} />
                 <Route component={NoMatch} />
               </Switch>
             </div>

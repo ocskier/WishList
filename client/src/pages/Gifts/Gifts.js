@@ -158,7 +158,7 @@ class Gifts extends Component {
                        {gift.description}<br />
                        {gift.price}<br />
                        {!this.state.userId ?
-                       <Link to={"/giftdetail/"}>{gift.status ==="Open" ? "Available to Buy!" : "Purchased"}</Link>
+                       <Link to={"/giftdetail/" + gift._id}>{gift.status ==="Open" ? "Available to Buy!" : "Purchased"}</Link>
                        : <div><p>{gift.status ==="Open" ? "Not Purchased!" : "Purchased"}</p><button>Delete Item</button></div>
                        }
                       </strong>

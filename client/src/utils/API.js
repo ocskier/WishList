@@ -3,7 +3,7 @@ import axios from "axios";
 export default {
   // Gets all books
   getGifts: function() {
-    return axios.get("/api/Gifts");
+    return axios.get("/api/gifts");
   },
   // Searches Etsy
   searchAll: function() {
@@ -11,11 +11,11 @@ export default {
     },
   // Gets the Gift with the given id
   getGift: function(id) {
-    return axios.get("/api/Gifts/" + id);
+    return axios.get("/api/gifts/" + id);
   },
   // Deletes the Gift with the given id
   deleteGift: function(id) {
-    return axios.delete("/api/Gifts/" + id);
+    return axios.delete("/api/gifts/" + id);
   },
   // Gets the Wishlist with the given id
   getList: function(id) {
