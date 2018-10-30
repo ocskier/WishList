@@ -77,6 +77,7 @@ class Gifts extends Component {
       [name]: value
     },console.log(this.state));
   };
+  
 
   addToList(res) {
     API.updateList(this.state.listid, {
@@ -113,7 +114,8 @@ class Gifts extends Component {
         this.setState({
           code: data.codeResult.code
         })
-      })
+      }
+      )
     });
   }
 
