@@ -1,6 +1,8 @@
 import React, { Fragment } from "react";
 import { Link } from 'react-router-dom';
 
+import {Chip,Tag} from 'react-materialize';
+
 import './Nav.css';
 
 const Nav = (props) => {
@@ -11,7 +13,10 @@ const Nav = (props) => {
 	} else if (props.user.firstName) {
 		greeting = (
 			<Fragment>
-				<button className="btn-floating btn-medium green"><strong>{props.user.firstName}</strong></button>
+				<Chip>
+        <img src='https://lh3.googleusercontent.com/Vk1RvUzrI2ENTMFYeQ7azq3qXaA1VMbfP1f4iz3u53tXJdfl0q-oMhewPRmKK7hxHUdrng=s85' alt='Contact Person' />
+        <strong style={{fontWeight:900}}>{props.user.firstName}</strong>
+        </Chip>
 			</Fragment>
 		)
 	} else if (props.user.username) {

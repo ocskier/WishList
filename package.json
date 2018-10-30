@@ -34,12 +34,15 @@
     "express-session": "^1.15.6",
     "gh-pages": "^2.0.1",
     "if-env": "^1.0.4",
+    "moment": "^2.22.2",
     "mongoose": "^5.3.4",
     "morgan": "^1.9.1",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "postscribe": "^2.0.8",
     "quagga": "^0.12.1",
-    "react-materialize": "^2.4.7"
+    "react-bootstrap": "^0.32.4",
+    "react-materialize": "^2.4.7",
+    "react-moment": "^0.8.2"
   }
 }
