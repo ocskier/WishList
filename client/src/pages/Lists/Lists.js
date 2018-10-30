@@ -7,9 +7,11 @@ import API from "../../utils/API";
 import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../../components/Grid";
 import { List, ListItem } from "../../components/List";
-import './Lists.css';
 import AddList from "../../components/AddList";
-import {Collapsible,CollapsibleItem,Input,Row as MatRow} from 'react-materialize';
+import {Carousel,Collapsible,CollapsibleItem,Input,Row as MatRow} from 'react-materialize';
+import Moment from 'react-moment';
+
+import './Lists.css';
 
 class Lists extends Component {
   state = {
@@ -97,6 +99,8 @@ class Lists extends Component {
                       <div className="col s7 right-align">Raleigh-Durham, NC, USA</div>
                     </div>
                   </ListItem>
+                  <p className="center" style={{width: "80%",margin:"5px auto 0",border:"2px solid"}}>My Lists</p>
+                  <div style={{height:100}}></div>
                 </List>
             </Card>
             </div>
@@ -117,7 +121,8 @@ class Lists extends Component {
                       <i className="material-icons left">redeem</i>
                       <Link to={"/gifts/"+list._id}>
                       <strong>
-                        {list.name}<br></br>{list.date}
+                        {list.name}<br></br>
+                        <Moment date={list.date} format="MM-DD-YYYY hh:mm" />
                       </strong>
                       </Link>
                     </ListItem>

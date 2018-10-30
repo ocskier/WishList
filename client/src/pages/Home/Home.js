@@ -56,6 +56,9 @@ class Home extends Component {
               <Col size="m3 s12"></Col>
             </Row>
           </Col>
+        </Row>
+        <Row>
+          <Col size="m3" />
           <Col size="m6 s12">
             <Row style={{display:"block"}}>
               <Col size="m3 s12"></Col>
@@ -75,6 +78,7 @@ class Home extends Component {
               <Col size="m3 s12"></Col>
             </Row>
           </Col>
+          <Col size="m3" />
         </Row>
       </Container>
     );

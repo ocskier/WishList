@@ -1,14 +1,11 @@
 import React, { Component } from "react";
-import {Card} from "../../components/Card";
-// import DeleteBtn from "../../components/DeleteBtn";
+
 import Jumbotron from "../../components/Jumbotron";
 import API from "../../utils/API";
-import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../../components/Grid";
 import { Search, SearchItem } from "../../components/Search";
 import './Search.css';
-// import AddList from "../../components/AddList";
-import {Collapsible,CollapsibleItem,Input,Row as MatRow} from 'react-materialize';
+
 
 class Searches extends Component {
   state = {

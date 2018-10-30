@@ -65,11 +65,14 @@ class Gifts extends Component {
       .catch((err) => console.log(err));
   }
 
-  // deletegift = id => {
-  //   API.deletegift(id)
-  //     .then(res => this.loadgifts())
-  //     .catch(err => console.log(err));
-  // };
+  deleteGift = id => {
+    API.deleteGift(id)
+      .then(res => {
+        console.log(res);
+        this.getUserGifts()
+      })
+      .catch(err => console.log(err));
+  };
 
   handleInputChange = event => {
     const { name , value } = event.target;
@@ -158,8 +161,8 @@ class Gifts extends Component {
                        {gift.description}<br />
                        {gift.price}<br />
                        {!this.state.userId ?
-                       <Link to={"/giftdetail/" + gift._id}>{gift.status ==="Open" ? "Available to Buy!" : "Purchased"}</Link>
-                       : <div><p>{gift.status ==="Open" ? "Not Purchased!" : "Purchased"}</p><button>Delete Item</button></div>
+                       <Link to={gift.status==="Open" ? "/giftdetail/" + gift._id : "#"}><button style={{background:"red",borderRadius:"10px",padding:5,marginTop:"10px"}}>{gift.status ==="Open" ? "Available to Buy!" : "Purchased"}</button></Link>
+                       : <div><p>{gift.status ==="Open" ? "Not Purchased!" : "Purchased"}</p><button onClick={() => this.deleteGift(gift._id)} >Delete Item</button></div>
                        }
                       </strong>
                     </ListItem>
