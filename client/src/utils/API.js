@@ -5,6 +5,10 @@ export default {
   getGifts: function() {
     return axios.get("/api/Gifts");
   },
+  // Searches Etsy
+  searchAll: function() {
+      return axios.get("/api/Search");
+    },
   // Gets the Gift with the given id
   getGift: function(id) {
     return axios.get("/api/Gifts/" + id);

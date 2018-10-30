@@ -114,7 +114,8 @@ class Gifts extends Component {
         this.setState({
           code: data.codeResult.code
         })
-      })
+      }
+      )
     });
   }
 
