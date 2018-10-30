@@ -4,6 +4,7 @@ import Jumbotron from "../../components/Jumbotron";
 import API from "../../utils/API";
 import { Col, Row, Container } from "../../components/Grid";
 import { Search, SearchItem } from "../../components/Search";
+import  SaveBtn  from '../../components/SaveBtn/SaveBtn';
 import './Search.css';
 
 
@@ -66,6 +67,10 @@ class Searches extends Component {
   //       .catch(err => console.log(err));
   //   }
   // };
+  saveButtonHandler = () => {
+    console.log('clicked')
+    console.log(this.props.user._id)
+  }
 
   render() {
     return (
@@ -82,9 +87,10 @@ class Searches extends Component {
             {
                 this.state.search.map(search => (
                     <SearchItem key={search.listing_id} id={search.listing_id}>
+                      <SaveBtn onClick={this.saveButtonHandler}>Save</SaveBtn>
+                      <br/>
                       <strong>
-                      {search.title}<br />
-                      
+                      <a target="_blank" href={search.url}>{search.title}</a><br/>
                       </strong>
                     </SearchItem>
                   ))
