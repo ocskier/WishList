@@ -64,7 +64,7 @@ class Home extends Component {
                   <h1>Books On My List</h1>
                   </Jumbotron> */}
                 <Card image={still3} link={
-                  <Link style= {{margin: "0 auto"}} to={"/lists/"}>
+                  <Link style= {{margin: "0 auto"}} to={"/search/"}>
                     <strong style={{color: "green"}}>
                       Search (etsy.com)
                     </strong>
