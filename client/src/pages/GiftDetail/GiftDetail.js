@@ -49,9 +49,12 @@ class GiftDetail extends Component {
   };
 
   buyGift = () => {
-   
-    API.deleteGift(this.props.giftid)
-      .then(window.location.assign('/lists'))
+    console.log(this.props.giftid);
+    API.updateGift(this.props.giftid,{status: "Purchased"})
+      .then(res=> {
+        window.location.assign('/lists');
+        console.log(res);
+      })
       .catch(err => console.log(err));
   };
 
@@ -77,7 +80,7 @@ class GiftDetail extends Component {
                 </Card>
               </Col>
             </Row>
-            <div className = "btn btn-succes" onClick = {this.buyGift}>I Bought It! (Remove the gift)</div>
+            <div className = "btn btn-succes" onClick = {this.buyGift}>I Bought It! (Mark as Bought!)</div>
           </Col>
         </Row>
         <Row>

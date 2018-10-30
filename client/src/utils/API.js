@@ -37,6 +37,7 @@ export default {
 
   // Saves a book to the database
   saveGift: (giftData) => {return axios.post("/api/gifts", giftData)},
+  updateGift: (id,giftData) => {return axios.put("/api/gifts/" + id,giftData)},
   updateList: (id,listData) => {return axios.put("/api/lists/"+id,listData)},
   getUserList: (id) => {return axios.get("/api/lists/user/"+id)},
   getLists: () => {return axios.get("/api/lists")},

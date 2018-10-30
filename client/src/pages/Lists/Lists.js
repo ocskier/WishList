@@ -99,16 +99,8 @@ class Lists extends Component {
                       <div className="col s7 right-align">Raleigh-Durham, NC, USA</div>
                     </div>
                   </ListItem>
-                  <Carousel options={{ fullWidth: true }}>
-                      <div>
-                        <h3>First slide label</h3>
-                        <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-                      </div>
-                      <div>
-                        <h3>First slide label</h3>
-                        <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-                      </div>
-                  </Carousel>
+                  <p className="center" style={{width: "80%",margin:"5px auto 0",border:"2px solid"}}>My Lists</p>
+                  <div style={{height:100}}></div>
                 </List>
             </Card>
             </div>
