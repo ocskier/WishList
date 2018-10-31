@@ -26,7 +26,6 @@ export default {
     return axios.delete("/api/lists/" + id);
   },
   // Saves a Wishlist to the database
-  
   getUser: function(id) {
     return axios.get("/api/users/" + id);
   },
