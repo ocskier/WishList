@@ -93,11 +93,11 @@ class App extends Component {
         { !this.state.loggedIn && (
           <div className="auth-wrapper">
             <Route exact path="/" component={() => <LoginForm login={this.login}/>} />
-            <Route exact path="/gifts" component={() => <LoginForm user={this.login}/>} />
-						<Route exact path="/gifts/:id" component={() => <LoginForm user={this.login}/>} />
-						<Route exact path="/lists" component={() => <LoginForm user={this.login}/>} />
-						<Route exact path="/search" component={() => <LoginForm user={this.login}/>} />
-						<Route exact path="/giftdetail" component={() => <LoginForm user={this.login}/>} />
+            <Route exact path="/gifts" component={() => <LoginForm login={this.login}/>} />
+						<Route exact path="/gifts/:id" component={() => <LoginForm login={this.login}/>} />
+						<Route exact path="/lists" component={() => <LoginForm login={this.login}/>} />
+						<Route exact path="/search" component={() => <LoginForm login={this.login}/>} />
+						<Route exact path="/giftdetail" component={() => <LoginForm login={this.login}/>} />
             <Route exact path="/signup" component={SignupForm} />
           </div>
         )}
