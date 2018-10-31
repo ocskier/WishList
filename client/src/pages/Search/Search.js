@@ -89,7 +89,7 @@ class Searches extends Component {
                 this.state.search.map(search => (
                     <SearchItem key={search.listing_id} id={search.listing_id}>
                       <Modal
-                        header='Please pick a wishlist,'
+                        header="Which wishlist?"
                         trigger={<Button className="float-right" onClick={this.saveButtonHandler}>Save</Button>}>
                         <p>{this.state.user.firstName + ' ' + this.state.user.lastName}</p>
                         </Modal> 
