@@ -4,13 +4,14 @@ import Jumbotron from "../../components/Jumbotron";
 import API from "../../utils/API";
 import { Col, Row, Container } from "../../components/Grid";
 import { Search, SearchItem } from "../../components/Search";
-import  SaveBtn  from '../../components/SaveBtn/SaveBtn';
+import {Modal, Button} from 'react-materialize'
 import './Search.css';
 
 
 class Searches extends Component {
   state = {
     search: [{msg:"Search1"}],
+    user: this.props.user,
     newsearchname: "*"
   };
 
@@ -69,7 +70,7 @@ class Searches extends Component {
   // };
   saveButtonHandler = () => {
     console.log('clicked')
-    console.log(this.props.user._id)
+    console.log(this.props.user)
   }
 
   render() {
@@ -87,7 +88,11 @@ class Searches extends Component {
             {
                 this.state.search.map(search => (
                     <SearchItem key={search.listing_id} id={search.listing_id}>
-                      <SaveBtn onClick={this.saveButtonHandler}>Save</SaveBtn>
+                      <Modal
+                        header='Please pick a wishlist,'
+                        trigger={<Button className="float-right" onClick={this.saveButtonHandler}>Save</Button>}>
+                        <p>{this.state.user.firstName + ' ' + this.state.user.lastName}</p>
+                        </Modal> 
                       <br/>
                       <strong>
                       <a target="_blank" href={search.url}>{search.title}</a><br/>
