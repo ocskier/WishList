@@ -7,7 +7,6 @@ import API from "../../utils/API";
 import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../../components/Grid";
 import { List, ListItem } from "../../components/List";
-import AddList from "../../components/AddList";
 import {Carousel,Collapsible,CollapsibleItem,Input,Row as MatRow} from 'react-materialize';
 import Moment from 'react-moment';
 
@@ -47,8 +46,7 @@ class Lists extends Component {
   addList = (e) => {
     e.preventDefault();
     API.makeList({
-      user: this.props.user.username,
-      userId: this.props.user._id, 
+      user: this.props.user._id, 
       name: this.state.newlistname
     }).then((res) => {
         console.log(res);

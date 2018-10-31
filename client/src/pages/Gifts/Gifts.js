@@ -57,10 +57,9 @@ class Gifts extends Component {
         giftName: this.state.gift,
         description: this.state.descr,
         price: this.state.price,
-        wishlistId: this.state.listid
+        wishlist: this.state.listid
       }).then((res) => {
         console.log(res);
-        this.addToList(res);
       })
       .catch((err) => console.log(err));
   }

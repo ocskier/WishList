@@ -8,7 +8,8 @@ const userSchema = new Schema({
 	firstName: { type: String, unique: false },
 	lastName: { type: String, unique: false },
     username: { type: String, unique: false, required: false },
-    password: { type: String, unique: false, required: false }
+	password: { type: String, unique: false, required: false },
+	wishlists: [{ type: mongoose.Schema.Types.ObjectId,ref:'Wishlist',required: false}],
 });
 
 // Define schema methods

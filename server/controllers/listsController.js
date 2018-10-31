@@ -13,26 +13,36 @@ module.exports = {
     db.Wishlist
       .find({_id: req.params.id})
       .populate('gifts')
+      .populate('user')
       .then(dbModel => {
         res.json(dbModel);
         console.log(dbModel)
       })
       .catch(err => res.status(422).json(err));
   },
-  findByUser: function(req, res) {
-    db.Wishlist
-      .find({userId: req.params.id})
-      .populate('gifts')
-      .then(dbModel => {
-        res.json(dbModel);
-        console.log(dbModel)
-      })
-      .catch(err => res.status(422).json(err));
-  },
+  // findByUser: function(req, res) {
+  //   db.Wishlist
+  //     .find({userId: req.params.id})
+  //     .populate('gifts')
+  //     .then(dbModel => {
+  //       res.json(dbModel);
+  //       console.log(dbModel)
+  //     })
+  //     .catch(err => res.status(422).json(err));
+  // },
   create: function(req, res) {
     db.Wishlist
       .create(req.body)
-      .then(dbModel => res.json(dbModel))
+      .then(dbModel => {
+        console.log(dbModel);
+        db.User.
+          findOneAndUpdate({ _id: dbModel.user }, {$push: {wishlists: dbModel._id}})
+          .then(dbUser => {
+            res.json(dbModel)
+          }
+        );
+        
+      })
       .catch(err => res.status(422).json(err));
   },
   update: function(req, res) {

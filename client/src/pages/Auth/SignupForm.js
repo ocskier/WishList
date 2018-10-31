@@ -42,8 +42,7 @@ class SignupForm extends Component {
     }).then(response => {
       console.log(response);
       API.makeList({
-        user: response.data.username,
-        userId: response.data._id, 
+        user: response.data._id ,
         name: response.data.firstName + "'s List"
       })
       .then(response => {
