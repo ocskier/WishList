@@ -12,13 +12,21 @@ module.exports = {
   findById: function(req, res) {
     db.Gift
       .findById(req.params.id)
+      .populate("wishlist")
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
   create: function(req, res) {
     db.Gift
       .create(req.body)
-      .then(dbModel => res.json(dbModel))
+      .then(dbModel  => {
+        db.Wishlist.
+        findOneAndUpdate({ _id: dbModel.wishlist }, {$push: {gifts: dbModel._id}})
+          .then(dbUser => {
+            res.json(dbModel)
+          }
+        );
+      })
       .catch(err => res.status(422).json(err));
   },
   update: function(req, res) {
