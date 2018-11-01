@@ -12,7 +12,7 @@ import {Card as MatCard,CardTitle} from 'react-materialize';
 // import {MediaBox} from "react-materialize";
 
 import "./GiftDetail.css";
-// const AmznImg =""
+const giftImg = "/rawpixel-1084229-unsplash.jpg";
 
 class GiftDetail extends Component {
   state = {
@@ -94,7 +94,7 @@ class GiftDetail extends Component {
             <div id="adDivLeft"></div>
           </Col>
           <Col style={{margin:"0 auto",flex:"none"}} size="s12 m8">
-              <MatCard header={<CardTitle reveal image={"Images/home.jpg"} waves='light'/>}
+              <MatCard header={<CardTitle reveal style={{height:200,backgroundSize:"cover",backgroundPosition:"50%",backgroundClip:"content-box"}} image={giftImg} waves='light'/>}
                   title={this.state.gift.giftName}
                   reveal={<div>{this.state.gift.description}</div>}>
                   <p>${this.state.gift.price}</p><br />
