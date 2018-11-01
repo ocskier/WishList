@@ -7,23 +7,19 @@ import API from "../../utils/API";
 // import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../../components/Grid";
 // import { List, ListItem } from "../../components/List";
-import {Card} from "../../components/Card";
-import {MediaBox} from "react-materialize";
+// import {Card} from "../../components/Card";
+import {Card as MatCard,CardTitle} from 'react-materialize';
+// import {MediaBox} from "react-materialize";
 
-// import "./GiftDetail.css";
-const AmznImg ="//ws-na.amazon-adsystem.com/widgets/q?ServiceVersion=20070822&OneJS=1&Operation=GetAdHtml&MarketPlace=US&source=ac&ref=tf_til&ad_type=product_link&tracking_id=proj3team6-20&marketplace=amazon&region=US&placement=B07BKPV27P&asins=B07BKPV27P&linkId=2b7ce484dcf176ace03bd6f1763811e6&show_border=false&link_opens_in_new_window=false&price_color=333333&title_color=0066c0&bg_color=ffffff"
+import "./GiftDetail.css";
+// const AmznImg =""
 
 class GiftDetail extends Component {
   state = {
     userId: false,
     gift: {}
     //books: [{giftName:"Gift1",pic:<MediaBox style={{margin: "0 auto"}} width="150" height="150" border="0" src="//ws-na.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=US&ASIN=B0773MLK5F&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL250_&tag=proj3team6-20"></MediaBox>,link:<div className="center"><a target="_blank"  href="https://www.amazon.com/gp/product/B0773MLK5F/ref=as_li_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=B0773MLK5F&linkCode=as2&tag=proj3team6-20&linkId=e4c3144365a5c7b44bfb29fd14d3fc61">Buy</a><img src="//ir-na.amazon-adsystem.com/e/ir?t=proj3team6-20&l=am2&o=1&a=B0773MLK5F" width="1" height="1" border="0" alt="" style={{border:"none !important", margin:"0px !important"}} /></div>}, 
-    //{giftName:"Gift2",link:<div className="center"><a target="_blank"  href="https://www.amazon.com/gp/product/B01EXWIBXS/ref=as_li_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=B01EXWIBXS&linkCode=as2&tag=proj3team6-20&linkId=f198fb30a94596c5cf0fc32c6216a43f"><img width="150" height="150" border="0" src="//ws-na.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=US&ASIN=B01EXWIBXS&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL250_&tag=proj3team6-20" /></a><img src="//ir-na.amazon-adsystem.com/e/ir?t=proj3team6-20&l=am2&o=1&a=B01EXWIBXS" width="1" height="1" border="0" alt="" style={{border:"none !important", margin:"0px !important"}} /></div>},
-    //{giftName:"Gift3",link:<div className="center"><a target="_blank"  href="https://www.amazon.com/gp/product/B074PY1M5G/ref=as_li_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=B074PY1M5G&linkCode=as2&tag=proj3team6-20&linkId=602bbe02ff3b4ecca3160bf83e4f55ed"><img width="150" height="150" border="0" src="//ws-na.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=US&ASIN=B074PY1M5G&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL250_&tag=proj3team6-20" /></a><img src="//ir-na.amazon-adsystem.com/e/ir?t=proj3team6-20&l=am2&o=1&a=B074PY1M5G" width="1" height="1" border="0" alt="" style={{border:"none !important", margin:"0px !important"}} /></div>}],
   };
-
-  //books: [{giftName:"Gift1",pic:<MediaBox style={{margin: "0 auto"}} width="150" height="150" border="0" src="//ws-na.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=US&ASIN=B0773MLK5F&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL250_&tag=proj3team6-20"></MediaBox>,link:<div className="center"><a target="_blank"  href="https://www.amazon.com/gp/product/B0773MLK5F/ref=as_li_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=B0773MLK5F&linkCode=as2&tag=proj3team6-20&linkId=e4c3144365a5c7b44bfb29fd14d3fc61">Buy</a><img src="//ir-na.amazon-adsystem.com/e/ir?t=proj3team6-20&l=am2&o=1&a=B0773MLK5F" width="1" height="1" border="0" alt="" style={{border:"none !important", margin:"0px !important"}} /></div>}, 
-
 
   componentDidMount() {
     console.log(this.props.giftid);
@@ -31,11 +27,18 @@ class GiftDetail extends Component {
        .then(res => {
         console.log(res);
         this.setState({gift: res.data},
-         () => 
-         console.log(this.state.gift))
+         () => {
+         console.log(this.state.gift.description);
+         const searchScript1 = '<script type="text/javascript">amzn_assoc_placement = "adunit0";amzn_assoc_tracking_id = "proj3team6-20";amzn_assoc_ad_mode = "search";amzn_assoc_ad_type = "smart";amzn_assoc_marketplace = "amazon";amzn_assoc_region = "US";amzn_assoc_title = "Shop Related Products";amzn_assoc_default_search_phrase = "'+this.state.gift.description+'";amzn_assoc_default_category = "All";amzn_assoc_linkid = "344c640cdfb4c82421aedd0a562c76db";amzn_assoc_search_bar = "true";amzn_assoc_search_bar_position = "top";</script><script src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US"></script>';
+         const searchScript2 = '<script type="text/javascript">amzn_assoc_placement = "adunit0";amzn_assoc_tracking_id = "proj3team6-20";amzn_assoc_ad_mode = "search";amzn_assoc_ad_type = "smart";amzn_assoc_marketplace = "amazon";amzn_assoc_region = "US";amzn_assoc_title = "Shop Related Products";amzn_assoc_default_search_phrase = "'+this.state.gift.description+'";amzn_assoc_default_category = "All";amzn_assoc_linkid = "d3d3fe6c790f6d1bac8a0025e3a0d068";amzn_assoc_rows = "6";amzn_assoc_design = "text_links";</script><script src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US"></script>';
+         Postscribe('#adSearchDiv',searchScript1);
+         Postscribe('#adSearchDiv',searchScript2);
+         })
        })
        .catch(err => console.log(err))
-       Postscribe('#adDiv', '<div style="text-align: -webkit-center" className="aligncenter"><script type="text/javascript">amzn_assoc_ad_type = "banner";amzn_assoc_marketplace = "amazon";amzn_assoc_region = "US";amzn_assoc_placement = "assoc_banner_placement_default";amzn_assoc_campaigns = "gift_certificates";amzn_assoc_banner_type = "category";amzn_assoc_isresponsive = "true";amzn_assoc_banner_id = "1G274HKHXM7QERC7YAG2";amzn_assoc_tracking_id = "proj3team6-20";amzn_assoc_linkid = "00082d8280273b37a749e37f6b30f4c6";</script><script src="//z-na.amazon-adsystem.com/widgets/q?ServiceVersion=20070822&Operation=GetScript&ID=OneJS&WS=1"></script></div>');
+    Postscribe('#adDivBottom', '<div style="text-align: -webkit-center" className="aligncenter"><script type="text/javascript">amzn_assoc_ad_type = "banner";amzn_assoc_marketplace = "amazon";amzn_assoc_region = "US";amzn_assoc_placement = "assoc_banner_placement_default";amzn_assoc_campaigns = "gift_certificates";amzn_assoc_banner_type = "category";amzn_assoc_isresponsive = "true";amzn_assoc_banner_id = "1G274HKHXM7QERC7YAG2";amzn_assoc_tracking_id = "proj3team6-20";amzn_assoc_linkid = "00082d8280273b37a749e37f6b30f4c6";</script><script src="//z-na.amazon-adsystem.com/widgets/q?ServiceVersion=20070822&Operation=GetScript&ID=OneJS&WS=1"></script></div>');
+    Postscribe('#adDivLeft','<div class="alignleft"><script type="text/javascript">amzn_assoc_ad_type = "banner";amzn_assoc_marketplace = "amazon";amzn_assoc_region = "US";amzn_assoc_placement = "assoc_banner_placement_default";amzn_assoc_banner_type = "ez";amzn_assoc_p = "11";amzn_assoc_width = "160";amzn_assoc_height = "600";amzn_assoc_tracking_id = "proj3team6-20";amzn_assoc_linkid = "68f180d7e777c773cf1d5eaf562b6036";</script><script src="//z-na.amazon-adsystem.com/widgets/q?ServiceVersion=20070822&Operation=GetScript&ID=OneJS&WS=1"></script></div>');
+    Postscribe('#adDivRight','<div class="alignleft"><script type="text/javascript">amzn_assoc_ad_type = "banner";amzn_assoc_marketplace = "amazon";amzn_assoc_region = "US";amzn_assoc_placement = "assoc_banner_placement_default";amzn_assoc_campaigns = "amazonhomepage";amzn_assoc_banner_type = "rotating";amzn_assoc_p = "29";amzn_assoc_width = "160";amzn_assoc_height = "600";amzn_assoc_tracking_id = "proj3team6-20";amzn_assoc_linkid = "a3e6a319a4d30945a4070fbcd67eb2ba";</script><script src="//z-na.amazon-adsystem.com/widgets/q?ServiceVersion=20070822&Operation=GetScript&ID=OneJS&WS=1"></script></div>');
   }
 
   loadGift = () => {
@@ -67,23 +70,35 @@ class GiftDetail extends Component {
     return (
       <Container style={{paddingTop:"6rem"}} fluid>
         <Row>
-          <Col size="m6 s12">
+          <Col size="s12">
+          <div className="gift-jumbo">
             <Jumbotron>
-              <h3>{this.state.gift.giftName}</h3>
+              <h3>Buy A Gift</h3>
             </Jumbotron>
-            <Row>
-              <Col size="s12">
-                <Card title={this.state.gift.description+" $"+this.state.gift.price}>
-                <MediaBox style={{margin: "0 auto"}} width="150" height="150" border="0" src="//ws-na.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=US&ASIN=B0773MLK5F&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL250_&tag=proj3team6-20"></MediaBox><div className="center"><a target="_blank"  href="https://www.amazon.com/gp/product/B0773MLK5F/ref=as_li_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=B0773MLK5F&linkCode=as2&tag=proj3team6-20&linkId=e4c3144365a5c7b44bfb29fd14d3fc61">Buy</a><img src="//ir-na.amazon-adsystem.com/e/ir?t=proj3team6-20&l=am2&o=1&a=B0773MLK5F" width="1" height="1" border="0" alt="" style={{border:"none !important", margin:"0px !important"}} /></div>
-                </Card>
-              </Col>
-            </Row>
-            <div className = "btn btn-succes" onClick = {this.buyGift}>I Bought It! (Mark as Bought!)</div>
+          </div>
+          </Col>
+        </Row>
+        <Row>
+          <Col size="s12 m2">
+            <div id="adDivLeft"></div>
+          </Col>
+          <Col style={{margin:"0 auto",flex:"none"}} size="s12 m8">
+              <MatCard header={<CardTitle reveal image={"Images/home.jpg"} waves='light'/>}
+                  title={this.state.gift.giftName}
+                  reveal={<div>{this.state.gift.description}</div>}>
+                  <p>${this.state.gift.price}</p><br />
+                  <div className = "btn btn-succes" onClick = {this.buyGift}>I Bought It! (Mark as Bought!)</div>
+                  {/* <MediaBox style={{margin: "0 auto"}} width="150" height="150" border="0" src="//ws-na.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=US&ASIN=B0773MLK5F&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL250_&tag=proj3team6-20"></MediaBox><div className="center"><a target="_blank"  href="https://www.amazon.com/gp/product/B0773MLK5F/ref=as_li_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=B0773MLK5F&linkCode=as2&tag=proj3team6-20&linkId=e4c3144365a5c7b44bfb29fd14d3fc61">Buy</a><img src="//ir-na.amazon-adsystem.com/e/ir?t=proj3team6-20&l=am2&o=1&a=B0773MLK5F" width="1" height="1" border="0" alt="" style={{border:"none !important", margin:"0px !important"}} /></div> */}
+              </MatCard>
+              <div id="adSearchDiv" style={{paddingTop:"25px"}}></div>
+          </Col>
+          <Col size="s12 m2">
+            <div id="adDivRight"></div>
           </Col>
         </Row>
         <Row>
             <Col size="s12">
-              <div id="adDiv"></div>
+              <div id="adDivBottom"></div>
             </Col>
         </Row>
       </Container>
