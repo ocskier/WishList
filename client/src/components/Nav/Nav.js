@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import { Link } from 'react-router-dom';
 
-import {Chip,Tag} from 'react-materialize';
+import {Chip} from 'react-materialize';
 
 import './Nav.css';
 
