@@ -23,5 +23,13 @@ module.exports = {
       res.json(response);
 
     });
+  },
+  searchEbay: (req,res) => {
+    console.log(req.params.word);
+    request('http://svcs.ebay.com/services/search/FindingService/v1?OPERATION-NAME=findItemsByKeywords&SERVICE-NAME=FindingService&SERVICE-VERSION=1.0.0&GLOBAL-ID=EBAY-US&SECURITY-APPNAME=JonJacks-Wsihlist-PRD-bc22ddb1d-21a09efc&RESPONSE-DATA-FORMAT=JSON&REST-PAYLOAD&keywords='+req.params.word+'&paginationInput.entriesPerPage=4', (err,response,body) => {
+      console.log('error:', err); // Print the error if one occurred
+      console.log('statusCode:', response.statusCode); // Print the response status code if a response was received
+      res.json(JSON.parse(body));
+    });
   }
 };

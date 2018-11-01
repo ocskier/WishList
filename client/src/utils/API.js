@@ -7,8 +7,12 @@ export default {
   },
   // Searches Etsy
   searchAll: function() {
-      return axios.get("/api/Search");
-    },
+      return axios.get("/api/search");
+  },
+  // Searches Ebay
+  searchEbay: (word) => 
+      {return axios.get("/api/search/eb/"+word)}
+  ,
   // Gets the Gift with the given id
   getGift: function(id) {
     return axios.get("/api/gifts/" + id);
