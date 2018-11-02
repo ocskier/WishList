@@ -9,6 +9,7 @@ import {List,ListItem} from "../../components/List";
 import {Card} from "../../components/Card";
 import './Gifts.css'
 import API from "../../utils/API";
+import AUTH from "../../utils/AUTH";
 import { inherits } from "util";
 
 class Gifts extends Component {
@@ -19,47 +20,54 @@ class Gifts extends Component {
     gift: "",
     price: "",
     descr:"",
-    listid:"",
+    wishlist:"",
     code:""
   };
 
   componentDidMount() { 
-    console.log(this.props.user._id,this.props.id);
+    console.log(this.props.user,this.props.id);
     !(this.props.id) ? 
-    this.setState({userId: true},this.getUserGifts()) :
-    API.getList(this.props.id)
-    .then((res) => {
-      console.log(res);
-      this.props.user._id === res.data[0].userId ?
-      this.setState({userId: true},this.getUserGifts()) : 
-      this.setState({gifts: res.data[0].gifts,listid:res.data[0]._id},
-        () => 
-       console.log(this.state.gifts))
-    })
-    .catch(err => console.log(err))
+    this.setState({userId: true},
+      () => {
+        AUTH.getUser()
+      .then(res => {
+        console.log(res);
+        this.setState({wishlist:res.data.wishlists[0]._id},
+        ()=> this.getGifts(this.state.wishlist));
+      })
+      .catch(err=>console.log(err))
+    }) :
+    this.setState({userId: false,wishlist:this.props.id},
+      () => this.getGifts(this.state.wishlist));   
   }
 
-  getUserGifts = () => {
-    API.getUserList(this.props.user._id)
+  getGifts = (id) => {
+    API.getList(id)
     .then(res => {
       console.log(res);
-      this.setState({gifts: res.data[0].gifts,listid:res.data[0]._id},
+      this.setState({gifts: res.data[0].gifts},
        () => 
       console.log(this.state.gifts));
-    }
-    )
+    })
     .catch(err => console.log(err))
   }
 
   addGift = (e) => {
     e.preventDefault();
+    console.log(this.state);
     API.saveGift({
         giftName: this.state.gift,
         description: this.state.descr,
         price: this.state.price,
-        wishlist: this.state.listid
+        wishlist: this.state.wishlist
       }).then((res) => {
         console.log(res);
+        this.setState({
+                gift: "",
+                price: "",
+                descr: ""
+        },
+        this.getGifts(this.state.wishlist));
       })
       .catch((err) => console.log(err));
   }
@@ -79,21 +87,6 @@ class Gifts extends Component {
       [name]: value
     },console.log(this.state));
   };
-  
-
-  addToList(res) {
-    API.updateList(this.state.listid, {
-      $push: {
-        gifts: res.data._id
-      }
-    }).then((res) => {
-      this.setState({
-        gift: "",
-        price: "",
-        descr: ""
-      },()=>this.getUserGifts());
-    }).catch((err) => console.log(err));
-  }
 
   scanner = () => {
     Quagga.init({
