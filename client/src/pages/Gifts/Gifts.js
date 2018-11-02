@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {Collapsible,CollapsibleItem,Input,Row as MatRow} from 'react-materialize';
+import {Card as MatCard,CardTitle,Collapsible,CollapsibleItem,Input,Row as MatRow} from 'react-materialize';
 import Quagga from 'quagga';
 
 import { Link } from "react-router-dom";
@@ -10,6 +10,8 @@ import {Card} from "../../components/Card";
 import './Gifts.css'
 import API from "../../utils/API";
 // import { inherits } from "util";
+
+const giftImg = "/rawpixel-1084229-unsplash.jpg";
 
 class Gifts extends Component {
 
@@ -25,19 +27,16 @@ class Gifts extends Component {
 
   componentDidMount() { 
     console.log(this.props.user,this.props.id);
-    !(this.props.id) ? 
-    this.setState({userId: true},
-      () => {
-        API.getUser(this.props.user._id)
+    API.getUser(this.props.user._id)
       .then(res => {
         console.log(res);
-        this.setState({wishlist:res.data.wishlists[0]._id},
-        ()=> this.getGifts(this.state.wishlist));
-      })
+        !(this.props.id) || this.props.id===res.data.wishlists[0]._id ?  
+          this.setState({userId: true, wishlist:res.data.wishlists[0]._id},
+            () => this.getGifts(this.state.wishlist)) :
+          this.setState({userId: false,wishlist:this.props.id},
+            () => this.getGifts(this.state.wishlist))
+        })
       .catch(err=>console.log(err))
-    }) :
-    this.setState({userId: false,wishlist:this.props.id},
-      () => this.getGifts(this.state.wishlist));   
   }
 
   getGifts = (id) => {
@@ -118,7 +117,7 @@ class Gifts extends Component {
           <Col size="m12">
           <div className="gift-jumbo container">
           <Jumbotron>
-              <h3>🎁 Gifts on my List 🎁 </h3>
+              <h3><span>🎁 Gifts on my List 🎁</span></h3>
             </Jumbotron>
           </div>            
           </Col>
@@ -142,22 +141,33 @@ class Gifts extends Component {
           </Col> : null
         }
           <Col size="m8" style={{margin: "0 auto",flexGrow: 0,flexBasis: "auto"}}>
-          <List> {
-                this.state.gifts.map(gift => (
-                    <ListItem key={gift._id} id={gift._id}>
-                      <strong>
-                      {gift.giftName}<br />
-                       {gift.description}<br />
-                       {gift.price}<br />
-                       {!this.state.userId ?
-                       <Link to={gift.status==="Open" ? "/giftdetail/" + gift._id : "#"}><button style={{background:"red",borderRadius:"10px",padding:5,marginTop:"10px"}}>{gift.status ==="Open" ? "Available to Buy!" : "Purchased"}</button></Link>
-                       : <div><p>{gift.status ==="Open" ? "Not Purchased!" : "Purchased"}</p><button onClick={() => this.deleteGift(gift._id)} >Delete Item</button></div>
-                       }
-                      </strong>
-                    </ListItem>
-                  ))
-                }
-              </List>
+              {
+                this.state.gifts.map(item => (
+                      <MatCard style={{width:"25%"}} className="small" header={<CardTitle style={{height:200,backgroundSize:"cover",backgroundPosition:"50%",backgroundClip:"content-box"}} image={giftImg} waves='light'/>}
+                        title={item.giftName}
+                        reveal =
+                        {this.state.userId ? 
+                          <div>
+                            <br />
+                            <p style={{fontWeight:"bold"}}>{item.status ==="Open" ? "Not Purchased!" : "Purchased"}</p>
+                            <button onClick={() => this.deleteGift(item._id)} >Delete Item</button>
+                          </div>
+                          : null
+                        } >
+                        <span>${item.price}</span>
+                        <div className="right">
+                        {!this.state.userId ?
+                             <Link to={item.status==="Open" ? "/giftdetail/" + item._id : "#"}>
+                                <button key={item._id} id={item._id} style={{background:"red",borderRadius:"10px",padding:5,marginTop:"10px"}}>{item.status ==="Open" ? "Available to Buy!" : "Purchased"}
+                                </button>
+                             </Link>
+                          : null  
+                        }
+                        </div>
+                        {/* <MediaBox style={{margin: "0 auto"}} width="150" height="150" border="0" src="//ws-na.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=US&ASIN=B0773MLK5F&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL250_&tag=proj3team6-20"></MediaBox><div className="center"><a target="_blank"  href="https://www.amazon.com/gp/product/B0773MLK5F/ref=as_li_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=B0773MLK5F&linkCode=as2&tag=proj3team6-20&linkId=e4c3144365a5c7b44bfb29fd14d3fc61">Buy</a><img src="//ir-na.amazon-adsystem.com/e/ir?t=proj3team6-20&l=am2&o=1&a=B0773MLK5F" width="1" height="1" border="0" alt="" style={{border:"none !important", margin:"0px !important"}} /></div> */}
+                      </MatCard>
+                ))
+              }
           </Col>
         </Row>
       </Container>
