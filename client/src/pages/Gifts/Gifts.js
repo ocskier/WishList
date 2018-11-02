@@ -143,8 +143,8 @@ class Gifts extends Component {
           <Col size="m8" style={{margin: "0 auto",flexGrow: 0,flexBasis: "auto"}}>
               { 
                 this.state.gifts.map(item => (
-                      <MatCard style={{flexDirection:"initial",width:"50%",height: 200}} horizontal className="small" header={<CardTitle style={{height:200,backgroundSize:"cover",backgroundPosition:"50%",backgroundClip:"content-box"}} image={giftImg} waves='light'></CardTitle>}>
-                        <span>{item.giftName}</span><br /><br /><br />
+                      <MatCard style={{flexDirection:"initial",width:"66%",height: 140}} horizontal className="small" header={<CardTitle style={{height:200,backgroundSize:"cover",backgroundPosition:"50%",backgroundClip:"content-box"}} image={giftImg} waves='light'></CardTitle>}>
+                        <span>{item.giftName}</span><br /><br />
                         <span>${item.price}</span>
                         <div className="right">
                         {!this.state.userId ?
