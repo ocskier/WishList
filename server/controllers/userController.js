@@ -6,11 +6,7 @@ module.exports = {
     console.log('===== user!!======');
     console.log(req.user);
     if (req.user) {
-      db.User.findById(req.user._id)
-      .populate('wishlists')
-      .then(dbModel => {
-        res.json(dbModel)
-      });
+      return res.json({ user: req.user });
     } else {
       return res.json({ user: null });
     }
@@ -19,7 +15,6 @@ module.exports = {
     db.User
       .find(req.query)
       .sort({ date: -1 })
-      .populate('wishlists')
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
@@ -67,8 +62,7 @@ module.exports = {
   },
   authenticate: (req, res) => {
 		console.log('POST to /login');
-    const user = JSON.parse(JSON.stringify(req.user));
-    console.log(user) // hack
+		const user = JSON.parse(JSON.stringify(req.user)); // hack
 		const cleanUser = Object.assign({}, user);
 		if (cleanUser) {
 			console.log(`Deleting ${cleanUser.password}`);
