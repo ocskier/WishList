@@ -33,9 +33,10 @@ class Searches extends Component {
 
   searchAll = () => {
     API.searchAll()
-      .then(res =>
-        this.setState({ search: res.data})
-      )
+      .then(res => {
+        console.log(res);
+        this.setState({ search: res.data});
+      })
       .catch(err => console.log(err));
   };
 
