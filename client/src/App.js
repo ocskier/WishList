@@ -12,7 +12,7 @@ import NoMatch from "./pages/NoMatch";
 import AUTH from './utils/AUTH';
 
 import "./App.css";
-import API from './utils/API';
+// import API from './utils/API';
 
 const image = './Images/home.jpg'
 

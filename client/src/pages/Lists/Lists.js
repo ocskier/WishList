@@ -7,7 +7,7 @@ import API from "../../utils/API";
 import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../../components/Grid";
 import { List, ListItem } from "../../components/List";
-import {Carousel,Collapsible,CollapsibleItem,Input,Row as MatRow} from 'react-materialize';
+import {Collapsible,CollapsibleItem,Input,Row as MatRow} from 'react-materialize';
 import Moment from 'react-moment';
 
 import './Lists.css';
@@ -57,19 +57,6 @@ class Lists extends Component {
       })
       .catch((err) => console.log(err));
   }
-
-  // handleFormSubmit = event => {
-  //   event.preventDefault();
-  //   if (this.state.title && this.state.author) {
-  //     API.saveBook({
-  //       title: this.state.title,
-  //       author: this.state.author,
-  //       synopsis: this.state.synopsis
-  //     })
-  //       .then(res => this.loadBooks())
-  //       .catch(err => console.log(err));
-  //   }
-  // };
 
   render() {
     return (

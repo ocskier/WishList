@@ -9,8 +9,7 @@ import {List,ListItem} from "../../components/List";
 import {Card} from "../../components/Card";
 import './Gifts.css'
 import API from "../../utils/API";
-import AUTH from "../../utils/AUTH";
-import { inherits } from "util";
+// import { inherits } from "util";
 
 class Gifts extends Component {
 
@@ -29,7 +28,7 @@ class Gifts extends Component {
     !(this.props.id) ? 
     this.setState({userId: true},
       () => {
-        AUTH.getUser()
+        API.getUser(this.props.user._id)
       .then(res => {
         console.log(res);
         this.setState({wishlist:res.data.wishlists[0]._id},
@@ -44,10 +43,8 @@ class Gifts extends Component {
   getGifts = (id) => {
     API.getList(id)
     .then(res => {
-      console.log(res);
       this.setState({gifts: res.data[0].gifts},
-       () => 
-      console.log(this.state.gifts));
+       () => console.log(this.state.gifts));
     })
     .catch(err => console.log(err))
   }

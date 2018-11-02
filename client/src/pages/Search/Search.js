@@ -7,7 +7,6 @@ import { Search, SearchItem } from "../../components/Search";
 import {Modal, Button} from 'react-materialize';
 import {List, ListItem} from '../../components/List';
 import './Search.css';
-import AUTH from "../../utils/AUTH";
 
 //let user = []
 
@@ -21,7 +20,7 @@ class Searches extends Component {
 
   componentDidMount() {
     this.searchAll();
-    AUTH.getUser().then(response => {
+    API.getUser(this.props.user._id).then(response => {
       console.log(response.data.wishlists)
       //user.push(response.data.wishlists)
       this.setState({
