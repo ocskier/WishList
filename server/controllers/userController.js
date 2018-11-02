@@ -5,11 +5,15 @@ module.exports = {
   getUser: (req, res, next) => {
     console.log('===== user!!======');
     console.log(req.user);
-    db.User.findById(req.user._id)
+    if (req.user) {
+      db.User.findById(req.user._id)
       .populate('wishlists')
       .then(dbModel => {
         res.json(dbModel)
-      })
+      });
+    } else {
+      return res.json({ user: null });
+    }
   },
   findAll: function(req, res) {
     db.User
