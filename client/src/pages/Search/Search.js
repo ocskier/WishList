@@ -4,19 +4,32 @@ import Jumbotron from "../../components/Jumbotron";
 import API from "../../utils/API";
 import { Col, Row, Container } from "../../components/Grid";
 import { Search, SearchItem } from "../../components/Search";
-import {Modal, Button} from 'react-materialize'
+import {Modal, Button} from 'react-materialize';
+import {List, ListItem} from '../../components/List';
 import './Search.css';
+import AUTH from "../../utils/AUTH";
 
+//let user = []
 
 class Searches extends Component {
   state = {
     search: [{msg:"Search1"}],
     user: this.props.user,
-    newsearchname: "*"
+    newsearchname: "*",
+    wishlists: []
   };
 
   componentDidMount() {
     this.searchAll();
+    AUTH.getUser().then(response => {
+      console.log(response.data.wishlists)
+      //user.push(response.data.wishlists)
+      this.setState({
+        wishlists: response.data.wishlists
+      })
+      console.log(this.state)
+    })
+  
   }
 
   searchAll = () => {
@@ -59,6 +72,7 @@ class Searches extends Component {
   saveButtonHandler = () => {
     console.log('clicked')
     console.log(this.props.user)
+    console.log(this.props.user.wishlists)
   }
 
   render() {
@@ -75,11 +89,18 @@ class Searches extends Component {
             <Search>
             {
                 this.state.search.map(search => (
-                    <SearchItem key={search.listing_id} id={search.listing_id}>
+                    <SearchItem key={search.listing_id} id={search.listing_id} onClick={this.saveButtonHandler}>
                       <Modal
                         header='Please pick a wishlist,'
-                        trigger={<Button className="float-right" onClick={this.saveButtonHandler}>Save</Button>}>
+                        trigger={<Button className="float-right">Save</Button>}>
                         <p>{this.state.user.firstName + ' ' + this.state.user.lastName}</p>
+                        <List>
+                          {this.state.wishlists.map(wishlist => (
+                            <ListItem>
+                              {wishlist.name}
+                            </ListItem>
+                          ))}
+                        </List>
                         </Modal> 
                       <br/>
                       <strong>
