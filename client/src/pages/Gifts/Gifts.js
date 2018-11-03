@@ -9,7 +9,6 @@ import {List,ListItem} from "../../components/List";
 import {Card} from "../../components/Card";
 import './Gifts.css'
 import API from "../../utils/API";
-// import { inherits } from "util";
 
 const giftImg = "/rawpixel-1084229-unsplash.jpg";
 
