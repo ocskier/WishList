@@ -14,21 +14,29 @@ import './Lists.css';
 
 class Lists extends Component {
   state = {
-    lists: [{msg:"List1"},{msg:"List2"},{msg:"List3"}],
+    userlists: [],
+    lists: [],
+    listsNoUser: [],
     newlistname: ""
   };
 
   componentDidMount() {
-    this.loadLists();
+    this.prepareLists();
   }
 
-  loadLists = () => {
-    API.getLists()
-      .then(res =>
-        this.setState({ lists: res.data})
-      )
-      .catch(err => console.log(err));
-  };
+  prepareLists = () =>
+    API.getUser(this.props.user._id)
+    .then(res =>
+      this.setState({ userlists: res.data.wishlists}, ()=>
+        API.getLists()
+        .then(res =>
+          this.setState({ lists: res.data}, () =>
+            this.setState({listsNoUser:this.removeUserLists()})
+          )
+        )
+        .catch(err => console.log(err)))
+    )
+    .catch(err => console.log(err));
 
   deleteList = id => {
     API.deleteList(id)
@@ -52,10 +60,26 @@ class Lists extends Component {
         console.log(res);
         this.setState({
           newlistname: ""
-        });
-        this.loadLists();
-      })
-      .catch((err) => console.log(err));
+        }, () => 
+          API.getUser(this.props.user._id)
+          .then(res =>
+            this.setState({ userlists: res.data.wishlists})
+          )
+        )
+    })
+    .catch((err) => console.log(err));
+  }
+
+  removeUserLists = () => {
+    let filteredList = this.state.lists;
+    for (let i = 0; i < this.state.userlists.length; i++) {
+      filteredList = this.filterList(filteredList,this.state.userlists[i]._id);
+    }
+    return filteredList
+  }
+
+  filterList = (mylist,id) => {
+    return mylist.filter(list=>!(list._id===id))
   }
 
   render() {
@@ -85,7 +109,23 @@ class Lists extends Component {
                     </div>
                   </ListItem>
                   <p className="center" style={{width: "80%",margin:"5px auto 0",border:"2px solid"}}>My Lists</p>
-                  <div style={{height:100}}></div>
+                  <div style={{height:100,width:"80%",margin:"0 auto"}}>
+                    <List>
+                      {
+                        this.state.userlists.map(list => (
+                          <ListItem key={list._id} id={list._id}>
+                            <i className="material-icons left">redeem</i>
+                            <Link to={"/gifts/"+list._id}>
+                              <strong>
+                                {list.name}<br></br>
+                                <Moment date={list.date} format="MM-DD-YYYY hh:mm" />
+                              </strong>
+                            </Link>
+                          </ListItem>
+                        ))
+                      }
+                    </List>
+                  </div>
                 </List>
             </Card>
             </div>
@@ -101,17 +141,18 @@ class Lists extends Component {
             </div>            
             <div className="gifts">
             <List>
-                {this.state.lists.map(list => (
-                    <ListItem key={list._id} id={list._id}>
-                      <i className="material-icons left">redeem</i>
-                      <Link to={"/gifts/"+list._id}>
-                      <strong>
-                        {list.name}<br></br>
-                        <Moment date={list.date} format="MM-DD-YYYY hh:mm" />
-                      </strong>
-                      </Link>
-                    </ListItem>
-                  ))
+                {
+                  this.state.listsNoUser.map(list=> (
+                      <ListItem key={list._id} id={list._id}>
+                        <i className="material-icons left">redeem</i>
+                        <Link to={"/gifts/"+list._id}>
+                        <strong>
+                          {list.name}<br></br>
+                          <Moment date={list.date} format="MM-DD-YYYY hh:mm" />
+                        </strong>
+                        </Link>
+                      </ListItem>
+                    ))
                 }
               </List>
             </div>

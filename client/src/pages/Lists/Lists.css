@@ -20,3 +20,11 @@ div .jumbotron {
   border-radius: 8px;
   box-shadow: 2px 4px 10px 2px #2b2828;
 }
+
+.card-image span {
+  text-shadow: none;
+}
+
+.card-content p {
+  text-shadow: none;
+}
