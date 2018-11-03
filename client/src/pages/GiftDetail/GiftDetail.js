@@ -59,6 +59,8 @@ class GiftDetail extends Component {
       .catch(err => console.log(err));
   };
 
+  // this.state.gift.description[5] === ":" ?
+
   searchAuction = () => {
     API.searchEbay(this.state.gift.description)
       .then(res=> {
