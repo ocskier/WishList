@@ -61,7 +61,7 @@ class GiftDetail extends Component {
   };
 
   searchAuction = () => {
-    API.searchEbay(this.state.gift.description)
+    API.searchEbay(this.state.gift.description[5] === ":" ? this.state.gift.description : null)
       .then(res=> {
         console.log(res);
         this.setState({searchResults: res.data.findItemsByKeywordsResponse[0].searchResult[0].item});
