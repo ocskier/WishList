@@ -1,4 +1,3 @@
-const db = require("../models");
 const request = require('request');
 
 let url = "http://svcs.ebay.com/services/search/FindingService/v1?";
@@ -6,7 +5,7 @@ url += "OPERATION-NAME=findItemsByKeywords";
 url += "&SERVICE-NAME=FindingService";
 url += "&SERVICE-VERSION=1.0.0";
 url +="&GLOBAL-ID=EBAY-US";
-url +="&SECURITY-APPNAME=";
+url +="&SECURITY-APPNAME="+process.env.APP_ID;
 url +="&RESPONSE-DATA-FORMAT=JSON";
 url +="&REST-PAYLOAD";
 
@@ -35,7 +34,7 @@ module.exports = {
   },
   searchEbay: (req,res) => {
     console.log(req.params.word);
-    request(url+'&keywords='+req.params.word+'&paginationInput.entriesPerPage=5', (err,response,body) => {
+    request(url+'&keywords='+req.params.word+'&paginationInput.entriesPerPage=4', (err,response,body) => {
       console.log('error:', err); // Print the error if one occurred
       console.log('statusCode:', response.statusCode); // Print the response status code if a response was received
       res.json(JSON.parse(body));

@@ -25,7 +25,14 @@ export default {
   deleteList: (id) => {return axios.delete("/api/lists/" + id)},
   
   // Saves a Wishlist to the database
-  getUser: (id) => {return axios.get("/api/users/" + id)},
+  
+  searchUsers: (query) => {return axios.get("/api/users/searchuser/" + query)},
+  //usersearch/"+ query
+  // getOtherGifts: function() {
+  //   return axios.get("/api/gifts");
+  // },
+  // Gets the book with the given id
+  getUser: (id) => {return axios.get("/api/users/userid/" + id)},
 
   // Saves a gift to the database
   saveGift: (giftData) => {return axios.post("/api/gifts", giftData)},

@@ -6,14 +6,18 @@ import { Col, Row, Container } from "../../components/Grid";
 import { Search, SearchItem } from "../../components/Search";
 import {Modal, Button} from 'react-materialize';
 import {List, ListItem} from '../../components/List';
+import SaveBtn from '../../components/SaveBtn'
 import './Search.css';
 
 //let user = []
 
 class Searches extends Component {
+  
   state = {
     search: [{msg:"Search1"}],
     user: this.props.user,
+    price: '',
+    description: '',
     newsearchname: "*",
     wishlists: []
   };
@@ -69,10 +73,31 @@ class Searches extends Component {
       .catch((err) => console.log(err));
   }
 
-  saveButtonHandler = () => {
+  saveButtonHandler = (data) => {
     console.log('clicked')
-    console.log(this.props.user)
-    console.log(this.props.user.wishlists)
+    const { wishlist, giftName, description, price } = data;
+    console.log(data);
+    API.saveGift({
+      wishlist: wishlist,
+      giftName: giftName,
+      description: description,
+      price: price,
+    })
+    .then(res => {
+      console.log(res)
+    }) 
+  }
+
+  bindState = (price, desc) => {
+    this.setState({
+      price: price,
+      description: desc
+    })
+    console.log(this.state)
+  }
+
+  clickHandler = () => {
+    console.log('you clicked me')
   }
 
   render() {
@@ -89,15 +114,16 @@ class Searches extends Component {
             <Search>
             {
                 this.state.search.map(search => (
-                    <SearchItem key={search.listing_id} id={search.listing_id} onClick={this.saveButtonHandler}>
+                    <SearchItem key={search.listing_id} id={search.listing_id} desc={search.url} price={search.price}>
                       <Modal
                         header='Please pick a wishlist,'
-                        trigger={<Button className="float-right">Save</Button>}>
+                        trigger={<Button onClick={this.clickHandler} price={search.price} desc={search.url} className="float-right">Save</Button>}>
                         <p>{this.state.user.firstName + ' ' + this.state.user.lastName}</p>
                         <List>
                           {this.state.wishlists.map(wishlist => (
-                            <ListItem>
+                            <ListItem key={wishlist._id}>
                               {wishlist.name}
+                              <SaveBtn id={wishlist._id} name={search.title} price={search.price} desc={search.url} click={() => this.saveButtonHandler({ wishlist: wishlist._id, giftName: search.title, price: search.price, description: search.url })}/>
                             </ListItem>
                           ))}
                         </List>
