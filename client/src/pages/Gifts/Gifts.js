@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {Col as MatCol,Card as MatCard,CardTitle,Collapsible,CollapsibleItem,Input,Row as MatRow} from 'react-materialize';
+import {Card as MatCard,CardTitle,Collapsible,CollapsibleItem,Input,Row as MatRow} from 'react-materialize';
 import Quagga from 'quagga';
 
 import { Link } from "react-router-dom";
@@ -117,7 +117,7 @@ class Gifts extends Component {
           <Col size="m12">
           <div className="gift-jumbo container">
           <Jumbotron>
-              <h3><span>🎁 Gifts on my List 🎁</span></h3>
+              <h3><span className="left emoji">🎁</span><span> Gift List </span><span className="right emoji">🎁</span></h3>
             </Jumbotron>
           </div>            
           </Col>
@@ -143,20 +143,20 @@ class Gifts extends Component {
           <Col size="m8" style={{margin: "0 auto",flexGrow: 0,flexBasis: "auto"}}>
               { 
                 this.state.gifts.map(item => (
-                      <MatCard style={{flexDirection:"initial",width:"66%",height: 140}} horizontal className="small" header={<CardTitle style={{height:200,backgroundSize:"cover",backgroundPosition:"50%",backgroundClip:"content-box"}} image={giftImg} waves='light'></CardTitle>}>
-                        <span>{item.giftName}</span><br /><br />
-                        <span>${item.price}</span>
-                        <div className="right">
+                      <MatCard style={{marginBottom:"10px",flexDirection:"initial",width:"66%",height: 140}} horizontal className="small" header={<CardTitle style={{height:200,backgroundSize:"cover",backgroundPosition:"50%",backgroundClip:"content-box"}} image={giftImg} waves='light'></CardTitle>}>
+                        <span style={{fontSize:20,width:"100%",background:"lightgrey",position:"absolute",top: 0,left:0,paddingLeft:15}}>{item.giftName}</span>
+                        {this.state.userId ? <span style={{color:"crimson",position:"absolute",top: 0,right:0,paddingRight:5}} className="right">{item.status ==="Open" ? "Not Purchased!" : "Purchased"}</span> :null }
+                        <br /><br />
+                        <span style={{position:"absolute",bottom: 15,left:14}}>${item.price}</span>
+                        <div style={{position:"absolute",bottom:12,right:12}} className="right">
                         {!this.state.userId ?
                              <Link to={item.status==="Open" ? "/giftdetail/" + item._id : "#"}>
-                                <button key={item._id} id={item._id} style={{background:"red",borderRadius:"10px",padding:5,marginTop:"10px"}}>{item.status ==="Open" ? "Available to Buy!" : "Purchased"}
+                                <button className={item.status ==="Open" ? "btn-floating pulse" : "btn-floating black"} key={item._id} id={item._id} style={{width:"100%",fontSize:18,background:"red",borderRadius:"10px",padding:"0 5px",marginTop:"10px"}}>{item.status ==="Open" ? "Available to Buy!" : "Purchased"}
                                 </button>
                              </Link>
                           :
                             <div>
-                              <br />
-                              <p style={{fontWeight:"bold"}}>{item.status ==="Open" ? "Not Purchased!" : "Purchased"}</p>
-                              <button onClick={() => this.deleteGift(item._id)} >Delete Item</button>
+                              {item.status ==="Open" ? <button style={{fontSize:18}} onClick={() => this.deleteGift(item._id)} >Delete Item</button> : null}
                             </div>
                         }
                         </div>
