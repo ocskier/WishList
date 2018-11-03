@@ -70,7 +70,6 @@ class Gifts extends Component {
   deleteGift = id => {
     API.deleteGift(id)
       .then(res => {
-        console.log(res);
         this.getUserGifts()
       })
       .catch(err => console.log(err));
@@ -101,9 +100,12 @@ class Gifts extends Component {
       console.log("Initialization finished. Ready to start");
       Quagga.start();
       Quagga.onDetected((data) => {
+        console.log("Detected");
+        console.log(data.codeResult.code);
         this.setState({
           code: data.codeResult.code
-        })
+        });
+        console.log(data.codeResult.code);
       }
       )
     });
