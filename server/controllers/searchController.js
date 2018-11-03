@@ -1,4 +1,3 @@
-const db = require("../models");
 const request = require('request');
 
 let url = "http://svcs.ebay.com/services/search/FindingService/v1?";
@@ -6,7 +5,7 @@ url += "OPERATION-NAME=findItemsByKeywords";
 url += "&SERVICE-NAME=FindingService";
 url += "&SERVICE-VERSION=1.0.0";
 url +="&GLOBAL-ID=EBAY-US";
-url +="&SECURITY-APPNAME=";
+url +="&SECURITY-APPNAME="+process.env.APP_ID;
 url +="&RESPONSE-DATA-FORMAT=JSON";
 url +="&REST-PAYLOAD";
 
