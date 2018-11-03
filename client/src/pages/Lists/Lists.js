@@ -7,8 +7,8 @@ import { Col, Row, Container } from "../../components/Grid";
 import { List, ListItem } from "../../components/List";
 import {Collapsible,CollapsibleItem,Input,Row as MatRow} from 'react-materialize';
 import Moment from 'react-moment';
-
 import './Lists.css';
+declare var $: any; 
 
 class Lists extends Component {
   state = {
@@ -17,29 +17,30 @@ class Lists extends Component {
     listsNoUser: [],
     newlistname: "",
     city: '',
-    coutnry: ''
+    region: '',
+    country: ''
   };
 
   
   componentDidMount() {
     this.prepareLists();
+    this.getLocation();
   }
 
   getLocation = () => {
     $.ajax('http://ip-api.com/json')
-    .then(
-      function success(response) {
-          console.log('User\'s Location Data is ', response);
-          console.log('User\'s Country', response.country);
-      },
-
-      function fail(data, status) {
-          console.log('Request failed.  Returned status of',
-                      status);
-      }
-  );
+    .then(res => {
+      this.setState({
+        city: res.city,
+        region: res.region,
+        country: res.country
+      })
+    }).then(result => {
+      console.log(this.state)
+    })
+    ;
   }
-  }
+  
 
   prepareLists = () =>
     API.getUser(this.props.user._id)
@@ -122,11 +123,11 @@ class Lists extends Component {
                     <div className="row">
                       <div className="col s5">
                         <i className="material-icons left">domain</i>Location</div>
-                      <div className="col s7 right-align">{`${this.state.city}, ${this.state.country}`}</div>
+                      <div className="col s7 right-align">{`${this.state.city}, ${this.state.region}, ${this.state.country}`}</div>
                     </div>
                   </ListItem>
                   <p className="center" style={{width: "80%",margin:"5px auto 0",border:"2px solid"}}>My Lists</p>
-                  <div style={{height:100,width:"80%",margin:"0 auto"}}>
+                  <div style={{width:"80%",margin:"0 auto"}}>
                     <List>
                       {
                         this.state.userlists.map(list => (
@@ -183,7 +184,8 @@ class Lists extends Component {
                 }
               </List>
             </div>
-            <a className = 'btn green' href = "/searchuser">Search For a Friend!</a>
+            <br/>
+            <a href = "/searchuser"><button className = 'btn search-friend' >Search for a Friend!</button></a>
             
             
             {/* )} */}
