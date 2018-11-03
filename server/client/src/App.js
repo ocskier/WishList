@@ -32,13 +32,11 @@ class App extends Component {
 			if (!!response.data.user) {
 				this.setState({
 					loggedIn: true,
-					loginAttempt: false,
 					user: response.data.user
 				});
 			} else {
 				this.setState({
 					loggedIn: false,
-					loginAttempt: 0,
 					user: null
 				});
 			}
@@ -53,7 +51,6 @@ class App extends Component {
 			if (response.status === 200) {
 				this.setState({
 					loggedIn: false,
-					loginAttempt: false,
 					user: null
 				});
 			}
@@ -71,26 +68,26 @@ class App extends Component {
         });
       }
     }, failure => {
-			console.log("Failure");
-				// alert("Incorrect User id or Password. Please try again.");
-				this.setState({loginAttempt:true});
-				console.log(this.state);
-			// }
-		 });
+			console.log(failure);
+			
+      if (response.status === 200) {
+        // update the state
+        this.setState({
+          loggedIn: false,
+          user: null
+        });
+      } );
 	}
 
 	render() {
 		return (
 			<div className="App">
         { this.state.loggedIn && (
-					<div>
+          <div>
             <Nav user={this.state.user} logout={this.logout}>Wish List</Nav>
-						
-
-						
             <div className="main-view" style={{backgroundImage: `url(${image})`}}>
               <Switch>
-                <Route exact path="/" component={() => <Home loginAttempt = {this.state.loginAttempt} user={this.state.user}/>} />
+                <Route exact path="/" component={() => <Home user={this.state.user}/>} />
                 <Route exact path="/gifts/:id" component={({match}) => <Gifts user={this.state.user} id={match.params.id} />} />
 								<Route exact path="/gifts" component={() => <Gifts user={this.state.user}/>} />
 								<Route exact path="/lists" component={() => <Lists user={this.state.user}/>} />
@@ -103,9 +100,8 @@ class App extends Component {
           </div>
         )}
         { !this.state.loggedIn && (
-
           <div className="auth-wrapper">
-            <Route exact path="/" component={() => <LoginForm loginAttempt={this.state.loginAttempt} login={this.login}/>} />
+            <Route exact path="/" component={() => <LoginForm login={this.login}/>} />
             <Route exact path="/gifts" component={() => <LoginForm login={this.login}/>} />
 						<Route exact path="/gifts/:id" component={() => <LoginForm login={this.login}/>} />
 						<Route exact path="/lists" component={() => <LoginForm login={this.login}/>} />

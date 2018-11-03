@@ -1,0 +1,9 @@
+
+.main-view {
+    background-size: cover;
+    min-height: 90vh
+}
+
+.card {
+    box-shadow: 2px 4px 10px 2px #2b2828;
+}
