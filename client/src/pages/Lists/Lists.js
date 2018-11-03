@@ -1,7 +1,5 @@
 import React, { Component } from "react";
-
 import {Card} from "../../components/Card";
-// import DeleteBtn from "../../components/DeleteBtn";
 import Jumbotron from "../../components/Jumbotron";
 import API from "../../utils/API";
 import { Link } from "react-router-dom";
@@ -17,11 +15,30 @@ class Lists extends Component {
     userlists: [],
     lists: [],
     listsNoUser: [],
-    newlistname: ""
+    newlistname: "",
+    city: '',
+    coutnry: ''
   };
 
+  
   componentDidMount() {
     this.prepareLists();
+  }
+
+  getLocation = () => {
+    $.ajax('http://ip-api.com/json')
+    .then(
+      function success(response) {
+          console.log('User\'s Location Data is ', response);
+          console.log('User\'s Country', response.country);
+      },
+
+      function fail(data, status) {
+          console.log('Request failed.  Returned status of',
+                      status);
+      }
+  );
+  }
   }
 
   prepareLists = () =>
@@ -104,8 +121,8 @@ class Lists extends Component {
                   <ListItem>
                     <div className="row">
                       <div className="col s5">
-                        <i className="material-icons left">domain</i> Lives in</div>
-                      <div className="col s7 right-align">Raleigh-Durham, NC, USA</div>
+                        <i className="material-icons left">domain</i>Location</div>
+                      <div className="col s7 right-align">{`${this.state.city}, ${this.state.country}`}</div>
                     </div>
                   </ListItem>
                   <p className="center" style={{width: "80%",margin:"5px auto 0",border:"2px solid"}}>My Lists</p>
