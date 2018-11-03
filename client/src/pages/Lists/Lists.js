@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-
 import {Card} from "../../components/Card";
 import Jumbotron from "../../components/Jumbotron";
 import API from "../../utils/API";
@@ -140,19 +139,6 @@ class Lists extends Component {
             </div>            
             <div className="gifts">
             <List>
-<<<<<<< HEAD
-                {this.state.lists.map(list => (
-                    <ListItem key={list._id} id={list._id}>
-                      <i className="material-icons left">redeem</i>
-                      <Link to={"/gifts/"+list._id}>
-                      <strong>
-                        {list.name}<br></br>
-                        {/* <Moment date={list.date} format="MM-DD-YYYY hh:mm" /> */}
-                      </strong>
-                      </Link>
-                    </ListItem>
-                  ))
-=======
                 {
                   this.state.listsNoUser.map(list=> (
                       <ListItem key={list._id} id={list._id}>
@@ -165,7 +151,6 @@ class Lists extends Component {
                         </Link>
                       </ListItem>
                     ))
->>>>>>> dc8934586261e1f0710be0c2c57beaf98826088a
                 }
               </List>
             </div>

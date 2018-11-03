@@ -50,7 +50,7 @@ class LoginForm extends Component {
           <Row style={{display: "-webkit-box"}}>
             <Col size="m3"></Col>
             <Col size="m6">
-              <Card title="Login to React Reading List">
+              <Card title="Welcome to WishList">
                 <form style={{marginTop: 10}}>
                   <label htmlFor="username">Username: </label>
                   <Input
