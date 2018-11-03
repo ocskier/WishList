@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {Collapsible,CollapsibleItem,Input,Row as MatRow} from 'react-materialize';
+import {Card as MatCard,CardTitle,Collapsible,CollapsibleItem,Input,Row as MatRow} from 'react-materialize';
 import Quagga from 'quagga';
 
 import { Link } from "react-router-dom";
@@ -9,7 +9,9 @@ import {List,ListItem} from "../../components/List";
 import {Card} from "../../components/Card";
 import './Gifts.css'
 import API from "../../utils/API";
-import { inherits } from "util";
+// import { inherits } from "util";
+
+const giftImg = "/rawpixel-1084229-unsplash.jpg";
 
 class Gifts extends Component {
 
@@ -24,6 +26,7 @@ class Gifts extends Component {
   };
 
   componentDidMount() { 
+<<<<<<< HEAD
     console.log(this.props.user._id,this.props.id);
     !(this.props.id) ? 
     this.setState({userId: true},this.getUserGifts()) :
@@ -37,29 +40,46 @@ class Gifts extends Component {
        console.log(this.state.gifts))
     })
     .catch(err => console.log(err))
+=======
+    console.log(this.props.user,this.props.id);
+    API.getUser(this.props.user._id)
+      .then(res => {
+        console.log(res);
+        !(this.props.id) || this.props.id===res.data.wishlists[0]._id ?  
+          this.setState({userId: true, wishlist:res.data.wishlists[0]._id},
+            () => this.getGifts(this.state.wishlist)) :
+          this.setState({userId: false,wishlist:this.props.id},
+            () => this.getGifts(this.state.wishlist))
+        })
+      .catch(err=>console.log(err))
+>>>>>>> 1cc8690859623215f7751af904167ca4e1df2721
   }
 
-  getUserGifts = () => {
-    API.getUserList(this.props.user._id)
+  getGifts = (id) => {
+    API.getList(id)
     .then(res => {
-      console.log(res);
-      this.setState({gifts: res.data[0].gifts,listid:res.data[0]._id},
-       () => 
-      console.log(this.state.gifts));
-    }
-    )
+      this.setState({gifts: res.data[0].gifts},
+       () => console.log(this.state.gifts));
+    })
     .catch(err => console.log(err))
   }
 
   addGift = (e) => {
     e.preventDefault();
+    console.log(this.state);
     API.saveGift({
         giftName: this.state.gift,
         description: this.state.descr,
         price: this.state.price,
-        wishlist: this.state.listid
+        wishlist: this.state.wishlist
       }).then((res) => {
         console.log(res);
+        this.setState({
+                gift: "",
+                price: "",
+                descr: ""
+        },
+        this.getGifts(this.state.wishlist));
       })
       .catch((err) => console.log(err));
   }
@@ -79,21 +99,6 @@ class Gifts extends Component {
       [name]: value
     },console.log(this.state));
   };
-  
-
-  addToList(res) {
-    API.updateList(this.state.listid, {
-      $push: {
-        gifts: res.data._id
-      }
-    }).then((res) => {
-      this.setState({
-        gift: "",
-        price: "",
-        descr: ""
-      },()=>this.getUserGifts());
-    }).catch((err) => console.log(err));
-  }
 
   scanner = () => {
     Quagga.init({
@@ -128,7 +133,7 @@ class Gifts extends Component {
           <Col size="m12">
           <div className="gift-jumbo container">
           <Jumbotron>
-              <h3>🎁 Gifts on my List 🎁 </h3>
+              <h3><span className="left emoji">🎁</span><span> Gift List </span><span className="right emoji">🎁</span></h3>
             </Jumbotron>
           </div>            
           </Col>
@@ -152,22 +157,29 @@ class Gifts extends Component {
           </Col> : null
         }
           <Col size="m8" style={{margin: "0 auto",flexGrow: 0,flexBasis: "auto"}}>
-          <List> {
-                this.state.gifts.map(gift => (
-                    <ListItem key={gift._id} id={gift._id}>
-                      <strong>
-                      {gift.giftName}<br />
-                       {gift.description}<br />
-                       {gift.price}<br />
-                       {!this.state.userId ?
-                       <Link to={gift.status==="Open" ? "/giftdetail/" + gift._id : "#"}><button style={{background:"red",borderRadius:"10px",padding:5,marginTop:"10px"}}>{gift.status ==="Open" ? "Available to Buy!" : "Purchased"}</button></Link>
-                       : <div><p>{gift.status ==="Open" ? "Not Purchased!" : "Purchased"}</p><button onClick={() => this.deleteGift(gift._id)} >Delete Item</button></div>
-                       }
-                      </strong>
-                    </ListItem>
-                  ))
-                }
-              </List>
+              { 
+                this.state.gifts.map(item => (
+                      <MatCard style={{marginBottom:"10px",flexDirection:"initial",width:"66%",height: 140}} horizontal className="small" header={<CardTitle style={{height:200,backgroundSize:"cover",backgroundPosition:"50%",backgroundClip:"content-box"}} image={giftImg} waves='light'></CardTitle>}>
+                        <span style={{fontSize:20,width:"100%",background:"lightgrey",position:"absolute",top: 0,left:0,paddingLeft:15}}>{item.giftName}</span>
+                        {this.state.userId ? <span style={{color:"crimson",position:"absolute",top: 0,right:0,paddingRight:5}} className="right">{item.status ==="Open" ? "Not Purchased!" : "Purchased"}</span> :null }
+                        <br /><br />
+                        <span style={{position:"absolute",bottom: 15,left:14}}>${item.price}</span>
+                        <div style={{position:"absolute",bottom:12,right:12}} className="right">
+                        {!this.state.userId ?
+                             <Link to={item.status==="Open" ? "/giftdetail/" + item._id : "#"}>
+                                <button className={item.status ==="Open" ? "btn-floating pulse" : "btn-floating black"} key={item._id} id={item._id} style={{width:"100%",fontSize:18,background:"red",borderRadius:"10px",padding:"0 5px",marginTop:"10px"}}>{item.status ==="Open" ? "Available to Buy!" : "Purchased"}
+                                </button>
+                             </Link>
+                          :
+                            <div>
+                              {item.status ==="Open" ? <button style={{fontSize:18}} onClick={() => this.deleteGift(item._id)} >Delete Item</button> : null}
+                            </div>
+                        }
+                        </div>
+                        {/* <MediaBox style={{margin: "0 auto"}} width="150" height="150" border="0" src="//ws-na.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=US&ASIN=B0773MLK5F&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL250_&tag=proj3team6-20"></MediaBox><div className="center"><a target="_blank"  href="https://www.amazon.com/gp/product/B0773MLK5F/ref=as_li_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=B0773MLK5F&linkCode=as2&tag=proj3team6-20&linkId=e4c3144365a5c7b44bfb29fd14d3fc61">Buy</a><img src="//ir-na.amazon-adsystem.com/e/ir?t=proj3team6-20&l=am2&o=1&a=B0773MLK5F" width="1" height="1" border="0" alt="" style={{border:"none !important", margin:"0px !important"}} /></div> */}
+                      </MatCard>
+                ))
+              }
           </Col>
         </Row>
       </Container>

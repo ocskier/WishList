@@ -5,8 +5,13 @@
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 let MONGO_URL;
+<<<<<<< HEAD
 //const MONGO_LOCAL_URL = 'mongodb+srv://mistmr7:axkeFkMza7Yt1iq9@cluster0-3ioar.azure.mongodb.net/Wish?retryWrites=true';
 const MONGO_LOCAL_URL = 'mongodb://localhost/wishlist2'
+=======
+// const MONGO_LOCAL_URL = "";
+const MONGO_LOCAL_URL = 'mongodb://localhost/wishlist'
+>>>>>>> 1cc8690859623215f7751af904167ca4e1df2721
 
 if (process.env.MONGODB_URI) {
 	mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true });

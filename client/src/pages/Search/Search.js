@@ -4,26 +4,40 @@ import Jumbotron from "../../components/Jumbotron";
 import API from "../../utils/API";
 import { Col, Row, Container } from "../../components/Grid";
 import { Search, SearchItem } from "../../components/Search";
-import {Modal, Button} from 'react-materialize'
+import {Modal, Button} from 'react-materialize';
+import {List, ListItem} from '../../components/List';
+import SaveBtn from '../../components/SaveBtn'
 import './Search.css';
 
+//let user = []
 
 class Searches extends Component {
   state = {
     search: [{msg:"Search1"}],
     user: this.props.user,
-    newsearchname: "*"
+    newsearchname: "*",
+    wishlists: []
   };
 
   componentDidMount() {
     this.searchAll();
+    API.getUser(this.props.user._id).then(response => {
+      console.log(response.data.wishlists)
+      //user.push(response.data.wishlists)
+      this.setState({
+        wishlists: response.data.wishlists
+      })
+      console.log(this.state)
+    })
+  
   }
 
   searchAll = () => {
     API.searchAll()
-      .then(res =>
-        this.setState({ search: res.data})
-      )
+      .then(res => {
+        console.log(res);
+        this.setState({ search: res.data});
+      })
       .catch(err => console.log(err));
   };
 
@@ -56,9 +70,21 @@ class Searches extends Component {
       .catch((err) => console.log(err));
   }
 
-  saveButtonHandler = () => {
+  saveButtonHandler = (event) => {
     console.log('clicked')
-    console.log(this.props.user)
+    const wishlist = event.target.id
+    const giftName = event.target.name
+    const description = event.target.desc
+    const price = event.target.price
+    API.saveGift({
+      wishlist: wishlist,
+      giftName: giftName,
+      description: description,
+      price: price,
+    })
+    .then(res => {
+      console.log(res)
+    }) 
   }
 
   render() {
@@ -78,8 +104,16 @@ class Searches extends Component {
                     <SearchItem key={search.listing_id} id={search.listing_id}>
                       <Modal
                         header='Please pick a wishlist,'
-                        trigger={<Button className="float-right" onClick={this.saveButtonHandler}>Save</Button>}>
+                        trigger={<Button className="float-right">Save</Button>}>
                         <p>{this.state.user.firstName + ' ' + this.state.user.lastName}</p>
+                        <List>
+                          {this.state.wishlists.map(wishlist => (
+                            <ListItem key={wishlist._id}>
+                              {wishlist.name}
+                              <SaveBtn id={wishlist._id} name={search.title} price={search.price} desc={search.url} click={this.saveButtonHandler.bind(this)}/>
+                            </ListItem>
+                          ))}
+                        </List>
                         </Modal> 
                       <br/>
                       <strong>

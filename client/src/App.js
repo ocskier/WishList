@@ -12,6 +12,7 @@ import NoMatch from "./pages/NoMatch";
 import AUTH from './utils/AUTH';
 
 import "./App.css";
+// import API from './utils/API';
 
 const image = './Images/home.jpg'
 
@@ -59,7 +60,7 @@ class App extends Component {
 
 	login = (username, password) => {
 		AUTH.login(username, password).then(response => {
-      console.log(response);
+			console.log(response.data.user.wishlists[0].name);
       if (response.status === 200) {
         // update the state
         this.setState({
