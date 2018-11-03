@@ -26,21 +26,6 @@ class Gifts extends Component {
   };
 
   componentDidMount() { 
-<<<<<<< HEAD
-    console.log(this.props.user._id,this.props.id);
-    !(this.props.id) ? 
-    this.setState({userId: true},this.getUserGifts()) :
-    API.getList(this.props.id)
-    .then((res) => {
-      console.log(res);
-      this.props.user._id === res.data[0].user._id ?
-      this.setState({userId: true},this.getUserGifts()) : 
-      this.setState({gifts: res.data[0].gifts,listid:res.data[0]._id},
-        () => 
-       console.log(this.state.gifts))
-    })
-    .catch(err => console.log(err))
-=======
     console.log(this.props.user,this.props.id);
     API.getUser(this.props.user._id)
       .then(res => {
@@ -52,7 +37,6 @@ class Gifts extends Component {
             () => this.getGifts(this.state.wishlist))
         })
       .catch(err=>console.log(err))
->>>>>>> 1cc8690859623215f7751af904167ca4e1df2721
   }
 
   getGifts = (id) => {

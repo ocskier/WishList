@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 
+import {Card as MatCard,CardTitle,Collapsible,CollapsibleItem,Input,Row as MatRow} from 'react-materialize';
 import Jumbotron from "../../components/Jumbotron";
 import API from "../../utils/API";
 import { Col, Row, Container } from "../../components/Grid";
@@ -25,12 +26,20 @@ class SearchUser extends Component {
   }
 
   search = () => {
-    let query = "?";
+    let query = "";
+    const firstName = this.state.firstName;
+    const lastName = this.state.lastName;
+    const username = this.state.username;
+    query = firstName + lastName + username === "" ? '' : '?';
     query = firstName === "" ? query : query+ "firstName=" + firstName;
+    query = (firstName !== "") && (lastName + username !== "") ? query + '&': query;
     query = lastName === "" ? query : query+ "lastName=" + lastName;
+    query = (username !== "") && (lastName + firstName !== "") ? query + '&': query;
     query = username === "" ? query : query+ "username=" + username;
 
-    API.searchUsers()
+    console.log(query);
+
+    API.searchUsers(query)
       .then(res =>
         this.setState({ users: res.data})
       )
@@ -78,11 +87,11 @@ class SearchUser extends Component {
           <Col size="m6 s12">
             <div className="list-gifts">
             <Jumbotron>
-              <h4>Suggestions</h4>
+              <h4>Search for a Friend!</h4>
             </Jumbotron>
             </div>
-            <Card link={<button onClick={this.addGift} className="btn green waves-effect waves-light" type="submit" name="action">
-              <i style={{marginLeft:0}} className="material-icons right">add</i></button>}>
+            <Card link={<button onClick={this.search} className="btn green waves-effect waves-light" type="submit" name="action">
+              Search</button>}>
               <MatRow style={{flex:"none",display: "block"}}>
                 <Input onChange={this.handleInputChange} style={{fontWeight:"bold"}} s={6} label="First Name" value={this.state.gift} name="firstName" />
                 <Input onChange={this.handleInputChange} s={6} label="Last Name" value={this.state.price} name="lastName" />
@@ -97,7 +106,7 @@ class SearchUser extends Component {
                       
                       <br/>
                       <strong>
-                      <a target="_blank" href={"/users/" + user._id}>{user.firstName + ' '+ user.lasName}</a><br/>
+                      <a target="_blank" href={"/users/" + user._id}>{user.firstName + ' '+ user.lastName}</a><br/>
                       </strong>
                     </SearchItem>
                   ))
@@ -113,4 +122,4 @@ class SearchUser extends Component {
   }
 }
 
-export default Searches;
+export default SearchUser;

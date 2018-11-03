@@ -12,6 +12,7 @@ module.exports = {
     }
   },
   findAll: function(req, res) {
+    console.log('search');
     db.User
       .find(req.query)
       .sort({ date: -1 })

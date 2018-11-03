@@ -1,0 +1,30 @@
+
+
+div .jumbotron {
+  box-shadow: 2px 4px 10px 2px #2b2828;
+}
+
+.list-gifts .jumbotron {
+  background-color: green;
+}
+
+.jumbotron h4 {
+  font-family: 'Mountains of Christmas', cursive;
+  color: white;
+  font-size: 70px;
+  margin-top: 0;
+  text-shadow: 3px 3px 5px #000000;
+}
+
+.gifts {
+  border-radius: 8px;
+  box-shadow: 2px 4px 10px 2px #2b2828;
+}
+
+.card-image span {
+  text-shadow: none;
+}
+
+.card-content p {
+  text-shadow: none;
+}
