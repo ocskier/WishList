@@ -61,7 +61,8 @@ module.exports = {
 		next();
   },
   authenticate: (req, res) => {
-		console.log('POST to /login');
+    console.log('POST to /login');
+    console.log(req.user);
 		const user = JSON.parse(JSON.stringify(req.user)); // hack
 		const cleanUser = Object.assign({}, user);
 		if (cleanUser) {

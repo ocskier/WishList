@@ -33,6 +33,9 @@ export default {
   getUser: function(id) {
     return axios.get("/api/users/" + id);
   },
+  searchUsers: function(query) {
+    return axios.get("/api/usersearch/"+ query);
+  },
   // getOtherGifts: function() {
   //   return axios.get("/api/gifts");
   // },

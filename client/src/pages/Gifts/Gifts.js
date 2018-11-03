@@ -19,7 +19,7 @@ class Gifts extends Component {
     gift: "",
     price: "",
     descr:"",
-    listid:"",
+    wishlist:"",
     code:""
   };
 
@@ -30,7 +30,7 @@ class Gifts extends Component {
     API.getList(this.props.id)
     .then((res) => {
       console.log(res);
-      this.props.user._id === res.data[0].userId ?
+      this.props.user._id === res.data[0].user._id ?
       this.setState({userId: true},this.getUserGifts()) : 
       this.setState({gifts: res.data[0].gifts,listid:res.data[0]._id},
         () => 

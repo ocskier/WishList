@@ -8,5 +8,9 @@ router.route("/")
 router
   .route("/:id")
   .get(userController.findById);
+router
+  .route("/search/:query")
+  .get(userController.findall);
+
 
 module.exports = router;
