@@ -7,7 +7,9 @@ import Home from "./pages/Home"
 import Lists from './pages/Lists';
 import GiftDetail from './pages/GiftDetail';
 import Gifts from "./pages/Gifts";
+import User from "./pages/User";
 import Search from "./pages/Search";
+import SearchUser from "./pages/SearchUser";
 import NoMatch from "./pages/NoMatch";
 import AUTH from './utils/AUTH';
 
@@ -98,6 +100,8 @@ class App extends Component {
 								<Route exact path="/search" component={() => <Search user={this.state.user}/>} />
 								<Route exact path="/giftdetail" component={() => <GiftDetail user={this.state.user}/>} />
 								<Route exact path="/giftdetail/:id" component={({match}) => <GiftDetail user={this.state.user} giftid = {match.params.id}/>} />
+								<Route exact path="/searchuser" component={() => <SearchUser user={this.state.user}/>} />
+								<Route exact path="/users/:id" component={({match}) => <User user={this.state.user} id={match.params.id} />} />
                 <Route component={NoMatch} />
               </Switch>
             </div>
@@ -112,6 +116,8 @@ class App extends Component {
 						<Route exact path="/lists" component={() => <LoginForm login={this.login}/>} />
 						<Route exact path="/search" component={() => <LoginForm login={this.login}/>} />
 						<Route exact path="/giftdetail" component={() => <LoginForm login={this.login}/>} />
+						<Route exact path="/searchuser" component={() => <LoginForm login={this.login}/>} />
+						<Route exact path="/users/:id" component={() => <LoginForm login={this.login}/>} />
             <Route exact path="/signup" component={SignupForm} />
           </div>
         )}
