@@ -7,7 +7,9 @@ import Home from "./pages/Home"
 import Lists from './pages/Lists';
 import GiftDetail from './pages/GiftDetail';
 import Gifts from "./pages/Gifts";
+import User from "./pages/User";
 import Search from "./pages/Search";
+import SearchUser from "./pages/SearchUser";
 import NoMatch from "./pages/NoMatch";
 import AUTH from './utils/AUTH';
 
@@ -33,11 +35,13 @@ class App extends Component {
 			if (!!response.data.user) {
 				this.setState({
 					loggedIn: true,
+					loginAttempt: false,
 					user: response.data.user
 				});
 			} else {
 				this.setState({
 					loggedIn: false,
+					loginAttempt: 0,
 					user: null
 				});
 			}
@@ -52,6 +56,7 @@ class App extends Component {
 			if (response.status === 200) {
 				this.setState({
 					loggedIn: false,
+					loginAttempt: false,
 					user: null
 				});
 			}
@@ -68,37 +73,51 @@ class App extends Component {
           user: response.data.user
         });
       }
-    });
+    }, failure => {
+			console.log("Failure");
+				// alert("Incorrect User id or Password. Please try again.");
+				this.setState({loginAttempt:true});
+				console.log(this.state);
+			// }
+		 });
 	}
 
 	render() {
 		return (
 			<div className="App">
         { this.state.loggedIn && (
-          <div>
+					<div>
             <Nav user={this.state.user} logout={this.logout}>Wish List</Nav>
+						
+
+						
             <div className="main-view" style={{backgroundImage: `url(${image})`}}>
               <Switch>
-                <Route exact path="/" component={() => <Home user={this.state.user}/>} />
+                <Route exact path="/" component={() => <Home loginAttempt = {this.state.loginAttempt} user={this.state.user}/>} />
                 <Route exact path="/gifts/:id" component={({match}) => <Gifts user={this.state.user} id={match.params.id} />} />
 								<Route exact path="/gifts" component={() => <Gifts user={this.state.user}/>} />
 								<Route exact path="/lists" component={() => <Lists user={this.state.user}/>} />
 								<Route exact path="/search" component={() => <Search user={this.state.user}/>} />
 								<Route exact path="/giftdetail" component={() => <GiftDetail user={this.state.user}/>} />
 								<Route exact path="/giftdetail/:id" component={({match}) => <GiftDetail user={this.state.user} giftid = {match.params.id}/>} />
+								<Route exact path="/searchuser" component={() => <SearchUser user={this.state.user}/>} />
+								<Route exact path="/users/:id" component={({match}) => <User user={this.state.user} id={match.params.id} />} />
                 <Route component={NoMatch} />
               </Switch>
             </div>
           </div>
         )}
         { !this.state.loggedIn && (
+
           <div className="auth-wrapper">
-            <Route exact path="/" component={() => <LoginForm login={this.login}/>} />
+            <Route exact path="/" component={() => <LoginForm loginAttempt={this.state.loginAttempt} login={this.login}/>} />
             <Route exact path="/gifts" component={() => <LoginForm login={this.login}/>} />
 						<Route exact path="/gifts/:id" component={() => <LoginForm login={this.login}/>} />
 						<Route exact path="/lists" component={() => <LoginForm login={this.login}/>} />
 						<Route exact path="/search" component={() => <LoginForm login={this.login}/>} />
 						<Route exact path="/giftdetail" component={() => <LoginForm login={this.login}/>} />
+						<Route exact path="/searchuser" component={() => <LoginForm login={this.login}/>} />
+						<Route exact path="/users/:id" component={() => <LoginForm login={this.login}/>} />
             <Route exact path="/signup" component={SignupForm} />
           </div>
         )}
