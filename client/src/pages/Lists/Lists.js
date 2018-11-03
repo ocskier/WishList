@@ -126,6 +126,16 @@ class Lists extends Component {
                     </List>
                   </div>
                 </List>
+                <Collapsible popout defaultActiveKey={1}>
+                  <CollapsibleItem header='Add A List' icon='filter_drama'>
+                    <Card link={<button onClick={this.addList} className="btn green waves-effect waves-light" type="submit" name="action">
+                      <i style={{marginLeft:0}} className="material-icons right">add</i></button>}>
+                      <MatRow style={{flex:"none",display: "block"}}>
+                        <Input onChange={this.handleInputChange} style={{fontWeight:"bold"}} s={6} label="List Name" value={this.state.newlistname} name="newlistname" />
+                      </MatRow>
+                    </Card>
+                  </CollapsibleItem>
+                </Collapsible>
             </Card>
             </div>
             {/* <!-- Profile About  --> */}
@@ -155,16 +165,8 @@ class Lists extends Component {
                 }
               </List>
             </div>
-            <Collapsible popout defaultActiveKey={1}>
-              <CollapsibleItem header='Add A List' icon='filter_drama'>
-                <Card link={<button onClick={this.addList} className="btn green waves-effect waves-light" type="submit" name="action">
-                  <i style={{marginLeft:0}} className="material-icons right">add</i></button>}>
-                  <MatRow style={{flex:"none",display: "block"}}>
-                    <Input onChange={this.handleInputChange} style={{fontWeight:"bold"}} s={6} label="List Name" value={this.state.newlistname} name="newlistname" />
-                  </MatRow>
-                </Card>
-              </CollapsibleItem>
-            </Collapsible>
+            <a className = 'btn green' href = "/searchuser">Search For a Friend!</a>
+            
             
             {/* )} */}
           </Col>

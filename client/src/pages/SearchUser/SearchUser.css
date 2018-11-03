@@ -4,7 +4,7 @@ div .jumbotron {
   box-shadow: 2px 4px 10px 2px #2b2828;
 }
 
-.list-gifts .jumbotron {
+.list-gifts .jumbotron .btn{
   background-color: green;
 }
 
