@@ -7,20 +7,40 @@ import { Col, Row, Container } from "../../components/Grid";
 import { List, ListItem } from "../../components/List";
 import {Collapsible,CollapsibleItem,Input,Row as MatRow} from 'react-materialize';
 import Moment from 'react-moment';
-
 import './Lists.css';
+declare var $: any; 
 
 class Lists extends Component {
   state = {
     userlists: [],
     lists: [],
     listsNoUser: [],
-    newlistname: ""
+    newlistname: "",
+    city: '',
+    region: '',
+    country: ''
   };
 
+  
   componentDidMount() {
     this.prepareLists();
+    this.getLocation();
   }
+
+  getLocation = () => {
+    $.ajax('http://ip-api.com/json')
+    .then(res => {
+      this.setState({
+        city: res.city,
+        region: res.region,
+        country: res.country
+      })
+    }).then(result => {
+      console.log(this.state)
+    })
+    ;
+  }
+  
 
   prepareLists = () =>
     API.getUser(this.props.user._id)
@@ -102,12 +122,12 @@ class Lists extends Component {
                   <ListItem>
                     <div className="row">
                       <div className="col s5">
-                        <i className="material-icons left">domain</i> Lives in</div>
-                      <div className="col s7 right-align">Raleigh-Durham, NC, USA</div>
+                        <i className="material-icons left">domain</i>Location</div>
+                      <div className="col s7 right-align">{`${this.state.city}, ${this.state.region}, ${this.state.country}`}</div>
                     </div>
                   </ListItem>
                   <p className="center" style={{width: "80%",margin:"5px auto 0",border:"2px solid"}}>My Lists</p>
-                  <div style={{height:100,width:"80%",margin:"0 auto"}}>
+                  <div style={{width:"80%",margin:"0 auto"}}>
                     <List>
                       {
                         this.state.userlists.map(list => (
@@ -125,6 +145,16 @@ class Lists extends Component {
                     </List>
                   </div>
                 </List>
+                <Collapsible popout defaultActiveKey={1}>
+                  <CollapsibleItem header='Add A List' icon='filter_drama'>
+                    <Card link={<button onClick={this.addList} className="btn green waves-effect waves-light" type="submit" name="action">
+                      <i style={{marginLeft:0}} className="material-icons right">add</i></button>}>
+                      <MatRow style={{flex:"none",display: "block"}}>
+                        <Input onChange={this.handleInputChange} style={{fontWeight:"bold"}} s={6} label="List Name" value={this.state.newlistname} name="newlistname" />
+                      </MatRow>
+                    </Card>
+                  </CollapsibleItem>
+                </Collapsible>
             </Card>
             </div>
             {/* <!-- Profile About  --> */}
@@ -154,16 +184,9 @@ class Lists extends Component {
                 }
               </List>
             </div>
-            <Collapsible popout defaultActiveKey={1}>
-              <CollapsibleItem header='Add A List' icon='filter_drama'>
-                <Card link={<button onClick={this.addList} className="btn green waves-effect waves-light" type="submit" name="action">
-                  <i style={{marginLeft:0}} className="material-icons right">add</i></button>}>
-                  <MatRow style={{flex:"none",display: "block"}}>
-                    <Input onChange={this.handleInputChange} style={{fontWeight:"bold"}} s={6} label="List Name" value={this.state.newlistname} name="newlistname" />
-                  </MatRow>
-                </Card>
-              </CollapsibleItem>
-            </Collapsible>
+            <br/>
+            <a href = "/searchuser"><button className = 'btn search-friend' >Search for a Friend!</button></a>
+            
             
             {/* )} */}
           </Col>
