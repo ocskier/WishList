@@ -5,7 +5,7 @@ url += "OPERATION-NAME=findItemsByKeywords";
 url += "&SERVICE-NAME=FindingService";
 url += "&SERVICE-VERSION=1.0.0";
 url +="&GLOBAL-ID=EBAY-US";
-url +="&SECURITY-APPNAME=JonJacks-Wsihlist-PRD-bc22ddb1d-21a09efc";
+url +="&SECURITY-APPNAME="+process.env.APP_ID;
 url +="&RESPONSE-DATA-FORMAT=JSON";
 url +="&REST-PAYLOAD";
 
