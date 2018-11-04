@@ -1,13 +1,14 @@
 import React, { Component } from "react";
 
-import {Card as MatCard,CardTitle,Collapsible,CollapsibleItem,Input,Row as MatRow} from 'react-materialize';
+import {Input,Row as MatRow} from 'react-materialize';
+// import {Card as MatCard,CardTitle,Collapsible,CollapsibleItem} from 'react-materialize';
 import Jumbotron from "../../components/Jumbotron";
 import API from "../../utils/API";
 import { Col, Row, Container } from "../../components/Grid";
 import { Search, SearchItem } from "../../components/Search";
-import {Modal, Button} from 'react-materialize'
+// import {Modal, Button} from 'react-materialize'
 import {Card} from "../../components/Card";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import './SearchUser.css';
 
 
