@@ -28,3 +28,9 @@ div .jumbotron {
 .card-content p {
   text-shadow: none;
 }
+
+.search-friend {
+  background-color: green;
+  text-shadow: 3px 3px 5px #000000;
+  box-shadow: 2px 4px 10px 2px #2b2828;
+}
