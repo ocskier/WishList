@@ -1,12 +1,21 @@
 const router = require("express").Router();
 const userController = require("../../controllers/userController");
 
-router.route("/")
+router.route("/all")
   .get(userController.findAll);
 
 // Matches with "/api/users/:id"
 router
-  .route("/:id")
+  .route("/userid/:id")
   .get(userController.findById);
+
+router
+  .route("/searchuser/:query")
+  .get(userController.findAll);
+  
+router
+  .route("/searchuser/")
+  .get(userController.findAll);
+
 
 module.exports = router;
