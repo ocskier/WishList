@@ -129,9 +129,26 @@ class Searches extends Component {
                         </List>
                         </Modal> 
                       <br/>
-                      <strong>
-                      <a target="_blank" href={search.url}>{search.title}</a><br/>
-                      </strong>
+                      
+                      <br></br>
+                      <a target="_blank" href={search.url}>{search.title} </a><br/>
+                      <p align="left" className="p"> {search.description} </p>
+                    
+                      <br/>
+                          <div class="row">
+                            <div class="col-md-6">
+                              <em>
+                                Ideas for:
+                                  <br/>
+                                    {search.category_path}
+                                  <br/>
+                              </em>
+                            </div>
+                            <div class = "col-md-6">
+                              Price: {search.price} {search.currency_code}
+                            </div>
+                          </div>
+                          
                     </SearchItem>
                   ))
                 }
