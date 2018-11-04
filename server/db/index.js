@@ -5,15 +5,15 @@
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 let MONGO_URL;
-const MONGO_LOCAL_URL = 'mongodb://localhost/wishlist'
+const MONGO_LOCAL_URL = 'mongodb+srv://ocskier:kYklS2NBJnvJE51F@cluster0-3ioar.azure.mongodb.net/Wish?retryWrites=true';
 
-if (process.env.MONGODB_URI) {
-	mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true });
-	MONGO_URL = process.env.MONGODB_URI;
-} else {
+// if (process.env.MONGODB_URI) {
+// 	mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true });
+// 	MONGO_URL = process.env.MONGODB_URI;
+// } else {
 	mongoose.connect(MONGO_LOCAL_URL, { useNewUrlParser: true }); // local mongo url
 	MONGO_URL = MONGO_LOCAL_URL;
-}
+// }
 
 // should mongoose.connection be put in the call back of mongoose.connect???
 const db = mongoose.connection;
