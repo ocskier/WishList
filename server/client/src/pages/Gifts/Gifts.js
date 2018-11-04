@@ -5,10 +5,7 @@ import Quagga from 'quagga';
 import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../../components/Grid";
 import Jumbotron from "../../components/Jumbotron";
-<<<<<<< HEAD:server/client/src/pages/Gifts/Gifts.js
 // import {List,ListItem} from "../../components/List";
-=======
->>>>>>> master:client/src/pages/Gifts/Gifts.js
 import {Card} from "../../components/Card";
 import './Gifts.css'
 import API from "../../utils/API";

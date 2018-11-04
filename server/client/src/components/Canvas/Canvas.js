@@ -13,7 +13,7 @@ class Canvas extends React.Component {
         ctx.font = "40px Courier"
         ctx.fillText(this.props.text, 210, 75)
       }
-    }
+    
     
     render() {
         return(
