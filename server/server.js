@@ -14,6 +14,8 @@ const routes = require("./routes");
 const passport = require('./passport');
 const app = express();
 const PORT = process.env.PORT || 3001;
+console.log(process.env.APP_ID);
+console.log(process.env.MONGODB_URI);
 
 // Middlewares
 app.use(morgan('dev'));
@@ -34,9 +36,9 @@ app.use(passport.session()); // will call the deserializeUser
 if (process.env.NODE_ENV === 'production') {
 	const path = require('path');
 	console.log('YOU ARE IN THE PRODUCTION ENV');
-	app.use('/static', express.static(path.join(__dirname, './client/build/static')));
-	app.get('/', (req, res) => {
-		res.sendFile(path.join(__dirname, './client/build/'))
+	app.use(express.static(path.join(__dirname, 'client/build')));
+	app.get('*', (req, res) => {
+		res.sendFile(path.join(__dirname+ '/client/build/index.html'))
 	});
 }
 
