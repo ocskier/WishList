@@ -117,7 +117,7 @@ class Gifts extends Component {
           <Col size="m12">
           <div className="gift-jumbo container">
           <Jumbotron>
-              <h3><span className="left emoji">🎁</span><span> Gift List </span><span className="right emoji">🎁</span></h3>
+              <h3><span role="img" aria-label="gift" className="left emoji">🎁</span><span> Gift List </span><span role="img" aria-label="gift" className="right emoji">🎁</span></h3>
             </Jumbotron>
           </div>            
           </Col>

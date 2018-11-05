@@ -93,7 +93,7 @@ class App extends Component {
 						
             <div className="main-view" style={{backgroundImage: `url(${image})`}}>
               <Switch>
-                <Route exact path="/" component={() => <Home loginAttempt = {this.state.loginAttempt} user={this.state.user}/>} />
+                <Route exact path="/" component={() => <Home user={this.state.user}/>} />
                 <Route exact path="/gifts/:id" component={({match}) => <Gifts user={this.state.user} id={match.params.id} />} />
 								<Route exact path="/gifts" component={() => <Gifts user={this.state.user}/>} />
 								<Route exact path="/lists" component={() => <Lists user={this.state.user}/>} />
