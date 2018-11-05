@@ -130,8 +130,7 @@ class Searches extends Component {
                         </Modal> 
                       <br/>
                       
-                      <br></br>
-                      <a target="_blank" href={search.url}>{search.title} </a><br/>
+                      <a target="_blank" href={search.url}><h5 className="search-title">{search.title}</h5></a><br/>
                       <p align="left" className="p"> {search.description} </p>
                     
                       <br/>
