@@ -16,7 +16,8 @@ class LoginForm extends Component {
 		this.state = {
 			username: '',
 			password: '',
-			redirectTo: null
+			redirectTo: null,
+			loginAttempt: false
 		};
 	}
 
@@ -24,14 +25,18 @@ class LoginForm extends Component {
 		this.setState({
 			[event.target.name]: event.target.value
 		});
+		console.log("Changes to State !!");
+		console.log(this.state);
 	}
 
 	handleSubmit = (event) => {
 		event.preventDefault();
 		console.log('handleSubmit');
 		this.props.login(this.state.username, this.state.password);
+
 		this.setState({
-			redirectTo: '/'
+			redirectTo: '/',
+			loginAttempt: false
 		});
 	}
 
