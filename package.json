@@ -1,5 +1,5 @@
 {
-  "name": "reactreadinglist-auth-server",
+  "name": "wishlist-app",
   "version": "1.0.1",
   "description": "Full Stack React App with Authentication",
   "main": "server/server.js",
