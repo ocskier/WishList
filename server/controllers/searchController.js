@@ -35,7 +35,6 @@ module.exports = {
   },
   searchEbay: (req,res) => {
     console.log(req.params.word);
-    console.log(url);
     request(url+'&keywords='+req.params.word+'&paginationInput.entriesPerPage=4', (err,response,body) => {
       console.log('error:', err); // Print the error if one occurred
       console.log('statusCode:', response.statusCode); // Print the response status code if a response was received
