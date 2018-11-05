@@ -20,7 +20,8 @@ class SignupForm extends Component {
       lastName: '',
 			username: '',
 			password: '',
-			confirmPassword: '',
+      confirmPassword: '',
+      loginAttempt: false,
 			redirectTo: null
 		};
   }
@@ -52,6 +53,7 @@ class SignupForm extends Component {
       if (!response.data.errmsg) {
         console.log('youre good');
         this.setState({
+          loginAttempt: false,
           redirectTo: '/'
         });
       } else {
@@ -62,7 +64,7 @@ class SignupForm extends Component {
   
 	render() {
 		if (this.state.redirectTo) {
-			return <Redirect to={{ pathname: this.state.redirectTo }} />
+			return <Redirect to={{ pathname: this.state.redirectTo, loginAttempt: this.state.loginAttempt}} />
     }
     
 		return (
@@ -71,7 +73,7 @@ class SignupForm extends Component {
         <Row style={{display: "-webkit-box"}}>
           <Col size="s12 m3"></Col>
           <Col size="s12 m6">
-            <Card title="Register for React Reading List">
+            <Card title="Register for WishList!">
               <form style={{marginTop: 10}}>
                 <label htmlFor="username">First name: </label>
                 <Input
