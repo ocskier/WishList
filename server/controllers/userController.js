@@ -57,6 +57,7 @@ module.exports = {
     }
   },
   auth: function(req, res, next) {
+    console.log("Got here!");
 		console.log(req.body);
 		console.log('================');
 		next();
