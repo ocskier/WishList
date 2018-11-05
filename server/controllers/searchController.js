@@ -1,5 +1,4 @@
 const request = require('request');
-require('dotenv').config();
 
 let url = "http://svcs.ebay.com/services/search/FindingService/v1?";
 url += "OPERATION-NAME=findItemsByKeywords";
