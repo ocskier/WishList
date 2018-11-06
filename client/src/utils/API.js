@@ -43,5 +43,6 @@ export default {
   
   getLists: () => {return axios.get("/api/lists")},
   
-  makeList: (user) => {return axios.post('/api/lists',user)}
+  makeList: (user) => {return axios.post('/api/lists',user)},
+  getLocation: () => {return axios.get("/api/users/location")}
 };
