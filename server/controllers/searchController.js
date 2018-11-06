@@ -1,6 +1,6 @@
 const request = require('request');
 
-let url = "http://svcs.ebay.com/services/search/FindingService/v1?";
+let url = "https://svcs.ebay.com/services/search/FindingService/v1?";
 url += "OPERATION-NAME=findItemsByKeywords";
 url += "&SERVICE-NAME=FindingService";
 url += "&SERVICE-VERSION=1.0.0";
