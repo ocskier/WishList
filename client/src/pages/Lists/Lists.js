@@ -28,12 +28,13 @@ class Lists extends Component {
   }
 
   getLocation = () => {
-    $.ajax('http://ip-api.com/json')
+    API.getLocation()
     .then(res => {
+      console.log(res);
       this.setState({
-        city: res.city,
-        region: res.region,
-        country: res.country
+        city: res.data.city,
+        region: res.data.region,
+        country: res.data.country
       })
     }).then(result => {
       console.log(this.state)
