@@ -40,6 +40,8 @@ export default {
   updateGift: (id,giftData) => {return axios.put("/api/gifts/" + id,giftData)},
   
   updateList: (id,listData) => {return axios.put("/api/lists/"+id,listData)},
+
+  updateUser: (userData) => {return axios.put("/api/users/userid/",userData)},
   
   getLists: () => {return axios.get("/api/lists")},
   
