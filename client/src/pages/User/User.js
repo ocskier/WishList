@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
-import {Button,Toast} from "react-materialize";
+import {Button} from "react-materialize";
+
 import {Card} from "../../components/Card";
 // import DeleteBtn from "../../components/DeleteBtn";
 // import Jumbotron from "../../components/Jumbotron";
@@ -84,7 +85,7 @@ class User extends Component {
                               </strong>
                             </Link>
                             <div className="right">
-                              <Toast toast="Added"><Button onClick={this.addFriend(list._id)} style={{marginRight:5}} floating small className='green' waves='light' icon='add' /></Toast>
+                              <Button onClick={this.addFriend(list._id)} style={{marginRight:5}} floating small className='green' waves='light' icon='add' />
                               <Button style={{marginLeft:5}} floating small className='blue' waves='light' icon='share' />
                             </div>
                           </ListItem>
