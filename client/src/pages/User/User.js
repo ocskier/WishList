@@ -2,12 +2,11 @@ import React, { Component } from "react";
 
 import {Card} from "../../components/Card";
 // import DeleteBtn from "../../components/DeleteBtn";
-import Jumbotron from "../../components/Jumbotron";
+// import Jumbotron from "../../components/Jumbotron";
 import API from "../../utils/API";
 import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../../components/Grid";
 import { List, ListItem } from "../../components/List";
-import {Collapsible,CollapsibleItem,Input,Row as MatRow} from 'react-materialize';
 import Moment from 'react-moment';
 
 import './User.css';

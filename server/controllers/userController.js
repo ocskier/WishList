@@ -27,7 +27,7 @@ module.exports = {
   },
   update: function(req, res) {
     db.User
-      .findOneAndUpdate({ _id: req.params.id }, req.body)
+      .findOneAndUpdate({ _id: req.user._id }, req.body)
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
@@ -62,6 +62,7 @@ module.exports = {
     }
   },
   auth: function(req, res, next) {
+    console.log("Got here!");
 		console.log(req.body);
 		console.log('================');
 		next();

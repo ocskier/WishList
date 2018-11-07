@@ -5,7 +5,8 @@ url += "OPERATION-NAME=findItemsByKeywords";
 url += "&SERVICE-NAME=FindingService";
 url += "&SERVICE-VERSION=1.0.0";
 url +="&GLOBAL-ID=EBAY-US";
-url +="&SECURITY-APPNAME="+process.env.APP_ID;
+url +="&SECURITY-APPNAME=";
+url += process.env.APP_ID;
 url +="&RESPONSE-DATA-FORMAT=JSON";
 url +="&REST-PAYLOAD";
 
@@ -39,5 +40,12 @@ module.exports = {
       console.log('statusCode:', response.statusCode); // Print the response status code if a response was received
       res.json(JSON.parse(body));
     });
+  },
+  getLocation: (req,res) => {
+    request("http://ip-api.com/json",(err,response,body) => {
+      console.log('error:', err); // Print the error if one occurred
+      console.log('statusCode:', response.statusCode); // Print the response status code if a response was received
+      res.json(JSON.parse(body));
+    })
   }
 };

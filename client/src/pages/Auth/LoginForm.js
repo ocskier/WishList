@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Redirect, Link } from 'react-router-dom';
+import {Alert} from 'react-bootstrap';
 import { Container, Row, Col } from '../../components/Grid';
 import { Card } from '../../components/Card';
 import { Input, FormBtn } from '../../components/Form';
@@ -15,7 +16,8 @@ class LoginForm extends Component {
 		this.state = {
 			username: '',
 			password: '',
-			redirectTo: null
+			redirectTo: null,
+			loginAttempt: false
 		};
 	}
 
@@ -23,16 +25,24 @@ class LoginForm extends Component {
 		this.setState({
 			[event.target.name]: event.target.value
 		});
+		console.log("Changes to State !!");
+		console.log(this.state);
 	}
 
 	handleSubmit = (event) => {
 		event.preventDefault();
 		console.log('handleSubmit');
 		this.props.login(this.state.username, this.state.password);
+
 		this.setState({
-			redirectTo: '/'
+			redirectTo: '/',
+			loginAttempt: false
 		});
 	}
+
+	componentDidMount(){
+  console.log(this.props.loginAttempt);
+	};
 
 	render() {
 		if (this.state.redirectTo) {
@@ -41,10 +51,11 @@ class LoginForm extends Component {
 			return (
 				<div className="login valign-wrapper" style={{backgroundImage: `url(${image})`}}>
 				<Container>
+					{this.props.loginAttempt && (<Alert bsStyle ="danger"> Incorrect Username or Password - please try again  </Alert>)}
           <Row style={{display: "-webkit-box"}}>
             <Col size="m3"></Col>
             <Col size="m6">
-              <Card title="Login to React Reading List">
+              <Card title="Welcome to WishList">
                 <form style={{marginTop: 10}}>
                   <label htmlFor="username">Username: </label>
                   <Input

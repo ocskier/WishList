@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const userController = require("../../controllers/userController");
+const searchController = require("../../controllers/searchController");
 
 router.route("/all")
   .get(userController.findAll);
@@ -7,7 +8,10 @@ router.route("/all")
 // Matches with "/api/users/:id"
 router
   .route("/userid/:id")
-  .get(userController.findById)
+  .get(userController.findById);
+
+router
+  .route("/userid/")
   .put(userController.update);
 
 router
@@ -18,5 +22,8 @@ router
   .route("/searchuser/")
   .get(userController.findAll);
 
+  router
+  .route("/location")
+  .get(searchController.getLocation);
 
 module.exports = router;

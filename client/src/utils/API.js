@@ -41,9 +41,10 @@ export default {
   
   updateList: (id,listData) => {return axios.put("/api/lists/"+id,listData)},
 
-  updateUser: (id,userData) => {return axios.put("/api/users/userid"+id,userData)},
+  updateUser: (userData) => {return axios.put("/api/users/userid/",userData)},
   
   getLists: () => {return axios.get("/api/lists")},
   
-  makeList: (user) => {return axios.post('/api/lists',user)}
+  makeList: (user) => {return axios.post('/api/lists',user)},
+  getLocation: () => {return axios.get("/api/users/location")}
 };

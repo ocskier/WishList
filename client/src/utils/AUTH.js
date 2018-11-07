@@ -9,6 +9,7 @@ export default {
   
   // Log the user in
   login: function(username, password) {
+    console.log("Got here!");
     return axios.post('/auth/login', { username, password })
   },
   

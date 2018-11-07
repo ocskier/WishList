@@ -1,14 +1,15 @@
 import React, { Component } from "react";
 import {Card as MatCard,CardTitle,Collapsible,CollapsibleItem,Input,Row as MatRow} from 'react-materialize';
-import Quagga from 'quagga';
 
 import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../../components/Grid";
 import Jumbotron from "../../components/Jumbotron";
-import {List,ListItem} from "../../components/List";
+// import {List,ListItem} from "../../components/List";
 import {Card} from "../../components/Card";
 import './Gifts.css'
 import API from "../../utils/API";
+
+import Camera from '../../components/CameraApp/Camera';
 
 const giftImg = "/rawpixel-1084229-unsplash.jpg";
 
@@ -35,7 +36,7 @@ class Gifts extends Component {
           this.setState({userId: false,wishlist:this.props.id},
             () => this.getGifts(this.state.wishlist))
         })
-      .catch(err=>console.log(err))
+      .catch(err=>console.log(err));
   }
 
   getGifts = (id) => {
@@ -70,7 +71,6 @@ class Gifts extends Component {
   deleteGift = id => {
     API.deleteGift(id)
       .then(res => {
-        console.log(res);
         this.getUserGifts()
       })
       .catch(err => console.log(err));
@@ -84,29 +84,7 @@ class Gifts extends Component {
   };
 
   scanner = () => {
-    Quagga.init({
-    inputStream : {
-      name : "Live",
-      type : "LiveStream",
-      target: document.querySelector('#scanner')    // Or '#yourElement' (optional)
-    },
-    decoder : {
-      readers : ["code_128_reader"]
-    }
-    }, function(err) {
-      if (err) {
-          console.log(err);
-          return
-      }
-      console.log("Initialization finished. Ready to start");
-      Quagga.start();
-      Quagga.onDetected((data) => {
-        this.setState({
-          code: data.codeResult.code
-        })
-      }
-      )
-    });
+    
   }
 
   render() {
@@ -116,7 +94,7 @@ class Gifts extends Component {
           <Col size="m12">
           <div className="gift-jumbo container">
           <Jumbotron>
-              <h3><span className="left emoji">🎁</span><span> Gift List </span><span className="right emoji">🎁</span></h3>
+              <h3><span role="img" aria-label="gift" className="left emoji">🎁</span><span> Gift List </span><span role="img" aria-label="gift" className="right emoji">🎁</span></h3>
             </Jumbotron>
           </div>            
           </Col>
@@ -132,7 +110,7 @@ class Gifts extends Component {
                     <Input onChange={this.handleInputChange} style={{fontWeight:"bold"}} s={6} label="Gift Name" value={this.state.gift} name="gift" />
                     <Input onChange={this.handleInputChange} s={6} label="Price" value={this.state.price} name="price" />
                     <Input onChange={this.handleInputChange} s={12} label="Description" value={this.state.descr} name="descr" />
-                    <Input onClick={this.scanner} id="scanner" s={12} label="UPC" />
+                    <Camera />
                   </MatRow>
                 </Card>
               </CollapsibleItem>
@@ -142,7 +120,7 @@ class Gifts extends Component {
           <Col size="m8" style={{margin: "0 auto",flexGrow: 0,flexBasis: "auto"}}>
               { 
                 this.state.gifts.map(item => (
-                      <MatCard style={{marginBottom:"10px",flexDirection:"initial",width:"66%",height: 140}} horizontal className="small" header={<CardTitle style={{height:200,backgroundSize:"cover",backgroundPosition:"50%",backgroundClip:"content-box"}} image={giftImg} waves='light'></CardTitle>}>
+                      <MatCard  key={item._id} style={{marginBottom:"10px",flexDirection:"initial",width:"66%",height: 140}} horizontal className="small" header={<CardTitle style={{height:200,backgroundSize:"cover",backgroundPosition:"50%",backgroundClip:"content-box"}} image={giftImg} waves='light'></CardTitle>}>
                         <span style={{fontSize:20,width:"100%",background:"lightgrey",position:"absolute",top: 0,left:0,paddingLeft:15}}>{item.giftName}</span>
                         {this.state.userId ? <span style={{color:"crimson",position:"absolute",top: 0,right:0,paddingRight:5}} className="right">{item.status ==="Open" ? "Not Purchased!" : "Purchased"}</span> :null }
                         <br /><br />
@@ -150,7 +128,7 @@ class Gifts extends Component {
                         <div style={{position:"absolute",bottom:12,right:12}} className="right">
                         {!this.state.userId ?
                              <Link to={item.status==="Open" ? "/giftdetail/" + item._id : "#"}>
-                                <button className={item.status ==="Open" ? "btn-floating pulse" : "btn-floating black"} key={item._id} id={item._id} style={{width:"100%",fontSize:18,background:"red",borderRadius:"10px",padding:"0 5px",marginTop:"10px"}}>{item.status ==="Open" ? "Available to Buy!" : "Purchased"}
+                                <button className={item.status ==="Open" ? "btn-floating pulse" : "btn-floating black"} id={item._id} style={{width:"100%",fontSize:18,background:"red",borderRadius:"10px",padding:"0 5px",marginTop:"10px"}}>{item.status ==="Open" ? "Available to Buy!" : "Purchased"}
                                 </button>
                              </Link>
                           :

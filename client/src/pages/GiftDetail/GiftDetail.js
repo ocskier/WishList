@@ -59,6 +59,8 @@ class GiftDetail extends Component {
       .catch(err => console.log(err));
   };
 
+  // this.state.gift.description[5] === ":" ?
+
   searchAuction = () => {
     API.searchEbay(this.state.gift.description)
       .then(res=> {
@@ -107,11 +109,11 @@ class GiftDetail extends Component {
                 <Col size="s12 m6">
                   <Row>
                     {
-                      this.state.searchResults.map(searchResult => (
-                        <Col size="s12" style={{flex:"none"}}>
-                        <MatCard style={{flexDirection:"initial"}} horizontal header={<CardTitle image={searchResult.galleryURL[0]}></CardTitle>}>
-                          <p>{searchResult.title[0]}</p>
-                        </MatCard>
+                      this.state.searchResults.map((searchResult,index) => (
+                        <Col key={index} size="s12" style={{flex:"none"}}>
+                          <MatCard style={{flexDirection:"initial"}} horizontal header={<CardTitle image={searchResult.galleryURL[0]}></CardTitle>}>
+                            <p>{searchResult.title[0]}</p>
+                          </MatCard>
                         </Col>
                       ))
                     }
