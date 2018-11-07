@@ -15,6 +15,8 @@ class Lists extends Component {
     userlists: [],
     sharedlists: [],
     newlistname: "",
+    newfirstName: this.props.user.firstName, 
+    newlastName: this.props.user.lastName,
     city: '',
     region: '',
     country: ''
@@ -65,6 +67,12 @@ class Lists extends Component {
       [name]: value
     });
   };
+
+  updateUser = () => {
+    
+    API.updateUser({firstName: this.state.newfirstName, lastName: this.state.newlastName})
+      .then(res => window.location.reload());
+  }
 
   addList = (e) => {
     e.preventDefault();
@@ -148,6 +156,17 @@ class Lists extends Component {
                       <i style={{marginLeft:0}} className="material-icons right">add</i></button>}>
                       <MatRow style={{flex:"none",display: "block"}}>
                         <Input onChange={this.handleInputChange} style={{fontWeight:"bold"}} s={6} label="List Name" value={this.state.newlistname} name="newlistname" />
+                      </MatRow>
+                    </Card>
+                  </CollapsibleItem>
+                </Collapsible>
+                <Collapsible popout defaultActiveKey={1}>
+                  <CollapsibleItem header='Edit your Profile' icon='filter_drama'>
+                    <Card link={<button onClick={this.updateUser} className="btn green waves-effect waves-light" type="submit" name="action">
+                      Apply</button>}>
+                      <MatRow style={{flex:"none",display: "block"}}>
+                        <Input onChange={this.handleInputChange} style={{fontWeight:"bold"}} s={6} label="First Name" value={this.state.newfirstName} name="newfirstName" />
+                        <Input onChange={this.handleInputChange} style={{fontWeight:"bold"}} s={6} label="Last Name" value={this.state.newlastName} name="newlastName" />
                       </MatRow>
                     </Card>
                   </CollapsibleItem>

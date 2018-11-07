@@ -11,9 +11,13 @@ router
   .get(userController.findById);
 
 router
+  .route("/userid/")
+  .put(userController.update);
+
+router
   .route("/searchuser/:query")
   .get(userController.findAll);
-  
+
 router
   .route("/searchuser/")
   .get(userController.findAll);
