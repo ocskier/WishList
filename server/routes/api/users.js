@@ -7,12 +7,13 @@ router.route("/all")
 // Matches with "/api/users/:id"
 router
   .route("/userid/:id")
-  .get(userController.findById);
+  .get(userController.findById)
+  .put(userController.update);
 
 router
   .route("/searchuser/:query")
   .get(userController.findAll);
-  
+
 router
   .route("/searchuser/")
   .get(userController.findAll);
