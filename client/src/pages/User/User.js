@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 
+import {Button,Toast} from "react-materialize";
 import {Card} from "../../components/Card";
 // import DeleteBtn from "../../components/DeleteBtn";
 // import Jumbotron from "../../components/Jumbotron";
@@ -29,6 +30,19 @@ class User extends Component {
         })
       .catch(err => console.log(err));
 
+  addFriend = (listId) => {
+    API.updateUser({
+      $push: {
+        sharedlists: listId
+      }
+    })
+    .then(res => {
+      console.log(this.props.id);
+      console.log(res.data);
+      this.setState({ userLocal: res.data})
+      })
+    .catch(err => console.log(err));
+  }
 
   render() {
     return (
@@ -69,6 +83,10 @@ class User extends Component {
                                 <Moment date={list.date} format="MM-DD-YYYY hh:mm" />
                               </strong>
                             </Link>
+                            <div className="right">
+                              <Toast toast="Added"><Button onClick={this.addFriend(list._id)} style={{marginRight:5}} floating small className='green' waves='light' icon='add' /></Toast>
+                              <Button style={{marginLeft:5}} floating small className='blue' waves='light' icon='share' />
+                            </div>
                           </ListItem>
                         ))
                       }

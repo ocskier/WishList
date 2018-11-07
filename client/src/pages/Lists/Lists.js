@@ -13,8 +13,7 @@ declare var $: any;
 class Lists extends Component {
   state = {
     userlists: [],
-    lists: [],
-    listsNoUser: [],
+    sharedlists: [],
     newlistname: "",
     city: '',
     region: '',
@@ -43,19 +42,16 @@ class Lists extends Component {
   }
   
 
-  prepareLists = () =>
+  prepareLists = () => {
     API.getUser(this.props.user._id)
     .then(res =>
-      this.setState({ userlists: res.data.wishlists}, ()=>
-        API.getLists()
-        .then(res =>
-          this.setState({ lists: res.data}, () =>
-            this.setState({listsNoUser:this.removeUserLists()})
-          )
-        )
-        .catch(err => console.log(err)))
+      this.setState({
+        userlists: res.data.wishlists,
+        sharedlists: res.data.sharedlists
+      })
     )
-    .catch(err => console.log(err));
+    .catch(err => console.log(err))
+  }
 
   deleteList = id => {
     API.deleteList(id)
@@ -89,17 +85,17 @@ class Lists extends Component {
     .catch((err) => console.log(err));
   }
 
-  removeUserLists = () => {
-    let filteredList = this.state.lists;
-    for (let i = 0; i < this.state.userlists.length; i++) {
-      filteredList = this.filterList(filteredList,this.state.userlists[i]._id);
-    }
-    return filteredList
-  }
+  // removeUserLists = () => {
+  //   let filteredList = this.state.lists;
+  //   for (let i = 0; i < this.state.userlists.length; i++) {
+  //     filteredList = this.filterList(filteredList,this.state.userlists[i]._id);
+  //   }
+  //   return filteredList
+  // }
 
-  filterList = (mylist,id) => {
-    return mylist.filter(list=>!(list._id===id))
-  }
+  // filterList = (mylist,id) => {
+  //   return mylist.filter(list=>!(list._id===id))
+  // }
 
   render() {
     return (
@@ -171,7 +167,7 @@ class Lists extends Component {
             <div className="gifts">
             <List>
                 {
-                  this.state.listsNoUser.map(list=> (
+                  this.state.sharedlists.map(list=> (
                       <ListItem key={list._id} id={list._id}>
                         <i className="material-icons left">redeem</i>
                         <Link to={"/gifts/"+list._id}>

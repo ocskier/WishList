@@ -9,6 +9,7 @@ const userSchema = new Schema({
 	lastName: { type: String, unique: false },
     username: { type: String, unique: false, required: false },
 	password: { type: String, unique: false, required: false },
+	sharedlists: [{ type: mongoose.Schema.Types.ObjectId,ref:'Wishlist',required: false}],
 	wishlists: [{ type: mongoose.Schema.Types.ObjectId,ref:'Wishlist',required: false}],
 });
 

@@ -23,6 +23,7 @@ module.exports = {
     db.User
       .findById(req.params.id)
       .populate('wishlists')
+      .populate('sharedlists')
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
