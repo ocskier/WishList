@@ -205,7 +205,7 @@ class Lists extends Component {
               </List>
             </div>
             <br/>
-            <Link to="/searchuser"><button className = 'btn search-friend' >Search for a Friend!</button></Link>
+            <Link to={"/searchuser"}><button className = 'btn search-friend' >Search for a Friend!</button></Link>
 
           </Col>
         </Row>
