@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 
 import {Input,Row as MatRow} from 'react-materialize';
-// import {Card as MatCard,CardTitle,Collapsible,CollapsibleItem} from 'react-materialize';
+
 import Jumbotron from "../../components/Jumbotron";
 import API from "../../utils/API";
 import { Col, Row, Container } from "../../components/Grid";
 import { Search, SearchItem } from "../../components/Search";
-// import {Modal, Button} from 'react-materialize'
+
 import {Card} from "../../components/Card";
 import { Link } from "react-router-dom";
 import './SearchUser.css';
@@ -41,8 +41,11 @@ class SearchUser extends Component {
     console.log(query);
 
     API.searchUsers(query)
-      .then(res =>
-        this.setState({ users: res.data})
+      .then(res => {
+        this.removeUser(res.data,(list) => 
+          this.setState({ users: list})
+        )
+      }
       )
       .catch(err => console.log(err));
   };
@@ -76,10 +79,20 @@ class SearchUser extends Component {
       .catch((err) => console.log(err));
   }
 
-  saveButtonHandler = () => {
-    console.log('clicked')
-    console.log(this.props.user)
+  removeUser = (list,callback) => {
+    let filteredList = list;
+    filteredList = this.filterList(filteredList,this.state.user._id);
+    callback(filteredList);
   }
+
+  filterList = (mylist,id) => {
+    return mylist.filter(list=>!(list._id===id))
+  }
+
+  // saveButtonHandler = () => {
+  //   console.log('clicked')
+  //   console.log(this.props.user)
+  // }
 
   render() {
     return (
