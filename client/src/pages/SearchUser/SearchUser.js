@@ -107,7 +107,7 @@ class SearchUser extends Component {
                       
                       <br/>
                       <strong>
-                      <a target="_blank" href={"/users/" + user._id}>{user.firstName + ' '+ user.lastName}</a><br/>
+                        <Link to={"/users/" + user._id} target="_blank">{user.firstName + ' '+ user.lastName}</Link><br/>
                       </strong>
                     </SearchItem>
                   ))
