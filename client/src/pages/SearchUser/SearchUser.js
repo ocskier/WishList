@@ -8,7 +8,7 @@ import { Col, Row, Container } from "../../components/Grid";
 import { Search, SearchItem } from "../../components/Search";
 // import {Modal, Button} from 'react-materialize'
 import {Card} from "../../components/Card";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import './SearchUser.css';
 
 
