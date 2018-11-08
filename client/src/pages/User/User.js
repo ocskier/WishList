@@ -20,13 +20,15 @@ class User extends Component {
     this.prepareLists();
   }
 
-  prepareLists = () =>
+  prepareLists = () => {
+    console.log(this.props.id);
     API.getUser(this.props.id)
       .then(res => {
         console.log(res.data);
         this.setState({ userLocal: res.data})
         })
       .catch(err => console.log(err));
+    }
 
   addFriend = (e) => {
     e.preventDefault();
