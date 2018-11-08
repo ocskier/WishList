@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 
+import {Collection,CollectionItem,Button} from "react-materialize";
+
 import {Card} from "../../components/Card";
 // import DeleteBtn from "../../components/DeleteBtn";
 // import Jumbotron from "../../components/Jumbotron";
@@ -10,7 +12,6 @@ import { List, ListItem } from "../../components/List";
 import Moment from 'react-moment';
 
 import './User.css';
-
 class User extends Component {
   state = {
     userLocal: {wishlists:[]}
@@ -29,6 +30,20 @@ class User extends Component {
         })
       .catch(err => console.log(err));
 
+  addFriend = (e) => {
+    e.preventDefault();
+    API.updateUser({
+      $push: {
+        sharedlists: e.id
+      }
+    })
+    .then(res => {
+      console.log(this.props.id);
+      console.log(res.data);
+      this.setState({ userLocal: res.data})
+      })
+    .catch(err => console.log(err));
+  }
 
   render() {
     return (
@@ -41,21 +56,21 @@ class User extends Component {
             <div className="about-me">
             <Card className="about-me" title="About Me!">
                 <p className="center">Wanting a lot of electronics this season!</p>
-                <List>
-                  <ListItem>
+                <Collection>
+                  <CollectionItem>
                     <div className="row">
                       <div className="col s5">
                         <i className="material-icons left">poll</i> Name: </div>
                       <div className="col s7 right-align">{this.state.userLocal.firstName + " " + this.state.userLocal.lastName}</div>
                     </div>
-                  </ListItem>
-                  <ListItem>
+                  </CollectionItem>
+                  <CollectionItem>
                     <div className="row">
                       <div className="col s5">
                         <i className="material-icons left">domain</i> Lives in</div>
                       <div className="col s7 right-align">Raleigh-Durham, NC, USA</div>
                     </div>
-                  </ListItem>
+                  </CollectionItem>
                   <p className="center" style={{width: "80%",margin:"5px auto 0",border:"2px solid"}}>My Lists</p>
                   <div style={{height:100,width:"80%",margin:"0 auto"}}>
                     <List>
@@ -69,12 +84,16 @@ class User extends Component {
                                 <Moment date={list.date} format="MM-DD-YYYY hh:mm" />
                               </strong>
                             </Link>
+                            <div className="right">
+                              <Button onClick={this.addFriend} id={list._id} style={{marginRight:5}} floating className='green' waves='light' icon='add' />
+                              <Button style={{marginLeft:5}} floating className='blue' waves='light' icon='share' />
+                            </div>
                           </ListItem>
                         ))
                       }
                     </List>
                   </div>
-                </List>
+                </Collection>
             </Card>
             </div>
             {/* <!-- Profile About  --> */}
