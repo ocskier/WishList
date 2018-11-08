@@ -4,7 +4,7 @@ import Jumbotron from "../../components/Jumbotron";
 import API from "../../utils/API";
 import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../../components/Grid";
-import { List, ListItem } from "../../components/List";
+import { List } from "../../components/List";
 import {Collection,CollectionItem,Collapsible,CollapsibleItem,Input,Row as MatRow} from 'react-materialize';
 import Moment from 'react-moment';
 import './Lists.css';
@@ -136,9 +136,9 @@ class Lists extends Component {
                         <div className="col s7 right-align">{`${this.state.city}, ${this.state.region}, ${this.state.country}`}</div>
                       </div>
                     </CollectionItem>
-                    <p className="center" style={{width: "80%",margin:"5px auto 0",border:"2px solid"}}>My Lists</p>
+                    <p className="center" style={{fontWeight:"bold",width: "80%",margin:"5px auto 0",boxShadow:"2px 4px 10px 2px #2b2828"}}>My Lists</p>
                     <div style={{width:"80%",margin:"0 auto"}}>
-                      <List>
+                      <List style={{boxShadow:"2px 4px 10px 2px #2b2828",margin:"5px 0"}}>
                         {
                           this.state.userlists.map(list => (
                             <li className="collection-item" key={list._id} id={list._id}>
@@ -191,7 +191,7 @@ class Lists extends Component {
               <List>
                   {
                     this.state.sharedlists.map(list=> (
-                        <li style={{background:"white"}} key={list._id} id={list._id}>
+                        <li style={{background:"mintcream",border: "1px solid green",margin:"2px 0"}} key={list._id} id={list._id}>
                           <i className="material-icons left">redeem</i>
                           <Link to={"/gifts/"+list._id}>
                           <strong>
@@ -205,7 +205,7 @@ class Lists extends Component {
               </List>
             </div>
             <br/>
-            <Link to="/searchuser"><button className = 'btn search-friend' >Search for a Friend!</button></Link>
+            <Link to={"/searchuser"}><button className = 'btn search-friend' >Search for a Friend!</button></Link>
 
           </Col>
         </Row>

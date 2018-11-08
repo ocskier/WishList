@@ -3,8 +3,7 @@ import React, { Component } from "react";
 import {Collection,CollectionItem,Button} from "react-materialize";
 
 import {Card} from "../../components/Card";
-// import DeleteBtn from "../../components/DeleteBtn";
-// import Jumbotron from "../../components/Jumbotron";
+
 import API from "../../utils/API";
 import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../../components/Grid";
@@ -24,7 +23,6 @@ class User extends Component {
   prepareLists = () =>
     API.getUser(this.props.id)
       .then(res => {
-        console.log(this.props.id);
         console.log(res.data);
         this.setState({ userLocal: res.data})
         })
@@ -32,13 +30,14 @@ class User extends Component {
 
   addFriend = (e) => {
     e.preventDefault();
+    let el = e.target.parentNode;
+    console.log(el);
     API.updateUser({
       $push: {
-        sharedlists: e.id
+        sharedlists: el.id
       }
     })
     .then(res => {
-      console.log(this.props.id);
       console.log(res.data);
       this.setState({ userLocal: res.data})
       })
@@ -72,7 +71,7 @@ class User extends Component {
                     </div>
                   </CollectionItem>
                   <p className="center" style={{width: "80%",margin:"5px auto 0",border:"2px solid"}}>My Lists</p>
-                  <div style={{height:100,width:"80%",margin:"0 auto"}}>
+                  <div style={{width:"80%",margin:"0 auto"}}>
                     <List>
                       {
                         this.state.userLocal.wishlists.map(list => (
@@ -85,7 +84,7 @@ class User extends Component {
                               </strong>
                             </Link>
                             <div className="right">
-                              <Button onClick={this.addFriend} id={list._id} style={{marginRight:5}} floating className='green' waves='light' icon='add' />
+                              <Button onClick={this.addFriend} id={list._id} style={{marginRight:5}} floating className='green' waves='light'icon="add" />
                               <Button style={{marginLeft:5}} floating className='blue' waves='light' icon='share' />
                             </div>
                           </ListItem>
