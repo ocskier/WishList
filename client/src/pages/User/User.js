@@ -31,7 +31,7 @@ class User extends Component {
     }
 
   addFriend = (e) => {
-    e.preventDefault();
+    e.parentNode.preventDefault();
     let el = e.target.parentNode;
     console.log(el);
     API.updateUser({
