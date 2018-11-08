@@ -107,15 +107,13 @@ class SearchUser extends Component {
                       
                       <br/>
                       <strong>
-                        <Link to={"/users/" + user._id} target="_blank">{user.firstName + ' '+ user.lastName}</Link><br/>
+                        <Link to={"/users/" + user._id}>{user.firstName + ' '+ user.lastName}</Link><br/>
                       </strong>
                     </SearchItem>
                   ))
                 }
             </Search>
             </div>
-            
-            
           </Col>
         </Row>
       </Container>
