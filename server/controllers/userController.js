@@ -22,6 +22,7 @@ module.exports = {
     db.User
       .findById(req.params.id)
       .populate('wishlists')
+      .populate('sharedlists')
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
@@ -44,7 +45,9 @@ module.exports = {
         'firstName': firstName,
         'lastName': lastName,
         'username': username,
-        'password': password
+        'password': password,
+        'imgUrl': "https://www.vectorstock.com/royalty-free-vectors/blank-user-avatar-vectors",
+        'aboutMe': ""
       });
       newUser.save((err, savedUser) => {
         if (err) return res.json(err);

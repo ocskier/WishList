@@ -14,7 +14,7 @@ const Nav = (props) => {
 		greeting = (
 			<Fragment>
 				<Chip>
-        <img src='https://fthmb.tqn.com/-Hcyju6fZRKE4Bx-dC8Nwfoxm0o=/500x500/filters:fill(auto,1)/triangular-timberlake-56a60ffb3df78cf7728b28d8.jpg' alt='Contact Person' />
+        <img src={props.user.imgUrl} alt='Contact Person' />
         <strong style={{fontWeight:900}}>{props.user.firstName}</strong>
         </Chip>
 			</Fragment>

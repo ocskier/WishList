@@ -18,6 +18,8 @@ class Lists extends Component {
     newlistname: "",
     newfirstName: this.props.user.firstName, 
     newlastName: this.props.user.lastName,
+    newimgUrl: this.props.user.imgUrl, 
+    newaboutMe: this.props.user.aboutMe,
     city: '',
     region: '',
     country: ''
@@ -74,7 +76,12 @@ class Lists extends Component {
 
   updateUser = () => {
     
-    API.updateUser({firstName: this.state.newfirstName, lastName: this.state.newlastName})
+    API.updateUser({
+      firstName: this.state.newfirstName, 
+      lastName: this.state.newlastName,
+      imgUrl: this.state.newimgUrl, 
+      aboutMe: this.state.newaboutMe
+    })
       .then(res => window.location.reload());
   }
 
@@ -118,8 +125,8 @@ class Lists extends Component {
           {/* <!-- profile-page-content --> */}
               {/* <!-- Profile About  --> */}
             <div className="about-me">
-            <Card className="about-me" title="About Me!">
-                <p className="center">Wanting a lot of electronics this season!</p>
+            <Card className="about-me" title={this.props.user.username} image={this.props.user.imgUrl}>
+                <p className="center">{this.props.user.aboutMe}</p>
                 <List>
                   <ListItem>
                     <div className="row">
@@ -171,6 +178,8 @@ class Lists extends Component {
                       <MatRow style={{flex:"none",display: "block"}}>
                         <Input onChange={this.handleInputChange} style={{fontWeight:"bold"}} s={6} label="First Name" value={this.state.newfirstName} name="newfirstName" />
                         <Input onChange={this.handleInputChange} style={{fontWeight:"bold"}} s={6} label="Last Name" value={this.state.newlastName} name="newlastName" />
+                        <Input onChange={this.handleInputChange} style={{fontWeight:"bold"}} s={12} label="Profile Image URL" value={this.state.newimgUrl} name="newimgUrl" />
+                        <Input onChange={this.handleInputChange} style={{fontWeight:"bold"}} s={12} label="About Me" value={this.state.newaboutMe} name="newaboutMe" />
                       </MatRow>
                     </Card>
                   </CollapsibleItem>

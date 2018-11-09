@@ -12,6 +12,7 @@ import Search from "./pages/Search";
 import SearchUser from "./pages/SearchUser";
 import NoMatch from "./pages/NoMatch";
 import AUTH from './utils/AUTH';
+import API from './utils/API';
 
 import "./App.css";
 // import API from './utils/API';
@@ -37,7 +38,13 @@ class App extends Component {
 					loggedIn: true,
 					loginAttempt: false,
 					user: response.data.user
-				});
+				})
+					API.getUser(response.data.user._id)
+						.then(res =>
+							this.setState({
+							user: res.data})
+						)
+						.catch(err => console.log(err));
 			} else {
 				this.setState({
 					loggedIn: false,
