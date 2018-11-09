@@ -18,7 +18,12 @@ router
 router
   .route("/eb/:word")
   .get(searchController.searchEbay);
-// router
+
+router
+  .route("/ean/:word")
+  .get(searchController.searchEAN);
+
+  // router
 //   .route("/user/:id")
 //   .get(listsController.findByUser);
 

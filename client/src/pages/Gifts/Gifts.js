@@ -51,6 +51,14 @@ class Gifts extends Component {
   addGift = (e) => {
     e.preventDefault();
     console.log(this.state);
+    this.state.code ?
+    API.searchEAN(this.state.code)
+    .then((res) => {
+      console.log(res)
+    })
+    .catch((err) => {
+      console.log(err)
+    }) :
     API.saveGift({
         giftName: this.state.gift,
         description: this.state.descr,

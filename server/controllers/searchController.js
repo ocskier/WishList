@@ -41,6 +41,14 @@ module.exports = {
       res.json(JSON.parse(body));
     });
   },
+  searchEAN: (req,res) => {
+    console.log(req.params.word);
+    request('https://api.barcodelookup.com/v2/products?barcode='+req.params.word+'&formatted=y&key=', (err,response,body) => {
+      console.log('error:', err); // Print the error if one occurred
+      console.log('statusCode:', response.statusCode); // Print the response status code if a response was received
+      res.json(JSON.parse(body));
+    });
+  },
   getLocation: (req,res) => {
     request("http://ip-api.com/json",(err,response,body) => {
       console.log('error:', err); // Print the error if one occurred
