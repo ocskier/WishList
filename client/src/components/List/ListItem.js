@@ -1,7 +1,7 @@
 import React from "react";
 
-export const ListItem = props => (
-  <li className="collection-item" id={props.id}>
+export const ListItem = (props) => (
+  <li style={{justifyContent:"space-around"}} className="collection-item valign-wrapper" id={props.id}>
     {props.children}
   </li>
 );

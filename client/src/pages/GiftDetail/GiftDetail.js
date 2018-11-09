@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import Postscribe from "postscribe";
 
+import {Link} from "react-router-dom" 
 import Jumbotron from "../../components/Jumbotron";
 import API from "../../utils/API";
-// import { Link } from "react-router-dom";
+
 import { Col, Row, Container } from "../../components/Grid";
-// import { List, ListItem } from "../../components/List";
-// import {Card} from "../../components/Card";
+
 import {Card as MatCard,CardTitle} from 'react-materialize';
 // import {MediaBox} from "react-materialize";
 
@@ -52,10 +52,7 @@ class GiftDetail extends Component {
   buyGift = () => {
     console.log(this.props.giftid);
     API.updateGift(this.props.giftid,{status: "Purchased"})
-      .then(res=> {
-        window.location.assign('/lists');
-        console.log(res);
-      })
+      .then(res=> console.log(res))
       .catch(err => console.log(err));
   };
 
@@ -98,7 +95,7 @@ class GiftDetail extends Component {
                   title={this.state.gift.giftName}
                   reveal={<div>{this.state.gift.description}</div>}>
                   <p>${this.state.gift.price}</p><br />
-                  <div className = "btn btn-succes" onClick = {this.buyGift}>I Bought It! (Mark as Bought!)</div>
+                  <div className = "btn btn-succes" onClick = {this.buyGift}><Link to="/lists">I Bought It! (Mark as Bought!)</Link></div>
                   {/* <MediaBox style={{margin: "0 auto"}} width="150" height="150" border="0" src="//ws-na.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=US&ASIN=B0773MLK5F&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL250_&tag=proj3team6-20"></MediaBox><div className="center"><a target="_blank"  href="https://www.amazon.com/gp/product/B0773MLK5F/ref=as_li_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=B0773MLK5F&linkCode=as2&tag=proj3team6-20&linkId=e4c3144365a5c7b44bfb29fd14d3fc61">Buy</a><img src="//ir-na.amazon-adsystem.com/e/ir?t=proj3team6-20&l=am2&o=1&a=B0773MLK5F" width="1" height="1" border="0" alt="" style={{border:"none !important", margin:"0px !important"}} /></div> */}
               </MatCard>
               <div id="adSearchText"></div>

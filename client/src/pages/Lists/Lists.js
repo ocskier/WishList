@@ -4,17 +4,17 @@ import Jumbotron from "../../components/Jumbotron";
 import API from "../../utils/API";
 import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../../components/Grid";
-import { List, ListItem } from "../../components/List";
-import {Collapsible,CollapsibleItem,Input,Row as MatRow} from 'react-materialize';
+import { List } from "../../components/List";
+import {Collection,CollectionItem,Collapsible,CollapsibleItem,Input,Row as MatRow} from 'react-materialize';
 import Moment from 'react-moment';
 import './Lists.css';
+
 declare var $: any; 
 
 class Lists extends Component {
   state = {
     userlists: [],
-    lists: [],
-    listsNoUser: [],
+    sharedlists: [],
     newlistname: "",
     newfirstName: this.props.user.firstName, 
     newlastName: this.props.user.lastName,
@@ -47,19 +47,18 @@ class Lists extends Component {
   }
   
 
-  prepareLists = () =>
+  prepareLists = () => {
     API.getUser(this.props.user._id)
-    .then(res =>
-      this.setState({ userlists: res.data.wishlists}, ()=>
-        API.getLists()
-        .then(res =>
-          this.setState({ lists: res.data}, () =>
-            this.setState({listsNoUser:this.removeUserLists()})
-          )
-        )
-        .catch(err => console.log(err)))
+    .then(res => {
+      console.log(res);
+      this.setState({
+        userlists: res.data.wishlists,
+        sharedlists: res.data.sharedlists
+      })
+    }
     )
-    .catch(err => console.log(err));
+    .catch(err => console.log(err))
+  }
 
   deleteList = id => {
     API.deleteList(id)
@@ -104,26 +103,28 @@ class Lists extends Component {
     .catch((err) => console.log(err));
   }
 
-  removeUserLists = () => {
-    let filteredList = this.state.lists;
-    for (let i = 0; i < this.state.userlists.length; i++) {
-      filteredList = this.filterList(filteredList,this.state.userlists[i]._id);
-    }
-    return filteredList
-  }
+  // removeUserLists = () => {
+  //   let filteredList = this.state.lists;
+  //   for (let i = 0; i < this.state.userlists.length; i++) {
+  //     filteredList = this.filterList(filteredList,this.state.userlists[i]._id);
+  //   }
+  //   return filteredList
+  // }
 
-  filterList = (mylist,id) => {
-    return mylist.filter(list=>!(list._id===id))
-  }
+  // filterList = (mylist,id) => {
+  //   return mylist.filter(list=>!(list._id===id))
+  // }
 
   render() {
     return (
       <Container style={{paddingTop:"6rem"}} fluid>
         <Row>
           <Col size="m6">
+          
           {/* <!--/ profile-page-header --> */}
           {/* <!-- profile-page-content --> */}
               {/* <!-- Profile About  --> */}
+            
             <div className="about-me">
             <Card className="about-me" title={this.props.user.username} image={this.props.user.imgUrl}>
                 <p className="center">{this.props.user.aboutMe}</p>
@@ -190,34 +191,34 @@ class Lists extends Component {
             {/* <!-- Profile About Details  --> */}
             
           </Col>
+
           <Col size="m6 s12">
+            
             <div className="list-gifts">
-            <Jumbotron>
-              <h4>Gift Lists</h4>
-            </Jumbotron>
+              <Jumbotron>
+                <h4>Gift Lists</h4>
+              </Jumbotron>
             </div>            
             <div className="gifts">
-            <List>
-                {
-                  this.state.listsNoUser.map(list=> (
-                      <ListItem key={list._id} id={list._id}>
-                        <i className="material-icons left">redeem</i>
-                        <Link to={"/gifts/"+list._id}>
-                        <strong>
-                          {list.name}<br></br>
-                          <Moment date={list.date} format="MM-DD-YYYY hh:mm" />
-                        </strong>
-                        </Link>
-                      </ListItem>
-                    ))
-                }
+              <List>
+                  {
+                    this.state.sharedlists.map(list=> (
+                        <li style={{background:"mintcream",border: "1px solid green",margin:"2px 0"}} key={list._id} id={list._id}>
+                          <i className="material-icons left">redeem</i>
+                          <Link to={"/gifts/"+list._id}>
+                          <strong>
+                            {list.name}<br></br>
+                            <Moment date={list.date} format="MM-DD-YYYY hh:mm" />
+                          </strong>
+                          </Link>
+                        </li>
+                      ))
+                  }
               </List>
             </div>
             <br/>
-            <a href = "/searchuser"><button className = 'btn search-friend' >Search for a Friend!</button></a>
-            
-            
-            {/* )} */}
+            <Link to={"/searchuser"}><button className = 'btn search-friend' >Search for a Friend!</button></Link>
+
           </Col>
         </Row>
       </Container>

@@ -1,14 +1,14 @@
 import React, { Component } from "react";
 
 import {Input,Row as MatRow} from 'react-materialize';
-// import {Card as MatCard,CardTitle,Collapsible,CollapsibleItem} from 'react-materialize';
+
 import Jumbotron from "../../components/Jumbotron";
 import API from "../../utils/API";
 import { Col, Row, Container } from "../../components/Grid";
 import { Search, SearchItem } from "../../components/Search";
-// import {Modal, Button} from 'react-materialize'
+
 import {Card} from "../../components/Card";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import './SearchUser.css';
 
 
@@ -41,8 +41,11 @@ class SearchUser extends Component {
     console.log(query);
 
     API.searchUsers(query)
-      .then(res =>
-        this.setState({ users: res.data})
+      .then(res => {
+        this.removeUser(res.data,(list) => 
+          this.setState({ users: list})
+        )
+      }
       )
       .catch(err => console.log(err));
   };
@@ -76,10 +79,20 @@ class SearchUser extends Component {
       .catch((err) => console.log(err));
   }
 
-  saveButtonHandler = () => {
-    console.log('clicked')
-    console.log(this.props.user)
+  removeUser = (list,callback) => {
+    let filteredList = list;
+    filteredList = this.filterList(filteredList,this.state.user._id);
+    callback(filteredList);
   }
+
+  filterList = (mylist,id) => {
+    return mylist.filter(list=>!(list._id===id))
+  }
+
+  // saveButtonHandler = () => {
+  //   console.log('clicked')
+  //   console.log(this.props.user)
+  // }
 
   render() {
     return (
@@ -94,9 +107,9 @@ class SearchUser extends Component {
             <Card link={<button onClick={this.search} className="btn green waves-effect waves-light" type="submit" name="action">
               Search</button>}>
               <MatRow style={{flex:"none",display: "block"}}>
-                <Input onChange={this.handleInputChange} style={{fontWeight:"bold"}} s={6} label="First Name" value={this.state.gift} name="firstName" />
-                <Input onChange={this.handleInputChange} s={6} label="Last Name" value={this.state.price} name="lastName" />
-                <Input onChange={this.handleInputChange} s={12} label="Username" value={this.state.descr} name="username" />
+                <Input onChange={this.handleInputChange} style={{fontWeight:"bold"}} s={6} label="First Name" defaultValue={this.state.gift} name="firstName" />
+                <Input onChange={this.handleInputChange} s={6} label="Last Name" defaultValue={this.state.price} name="lastName" />
+                <Input onChange={this.handleInputChange} s={12} label="Username" defaultValue={this.state.descr} name="username" />
               </MatRow>
             </Card>            
             <div className="lists">
@@ -107,15 +120,13 @@ class SearchUser extends Component {
                       
                       <br/>
                       <strong>
-                      <a target="_blank" href={"/users/" + user._id}>{user.firstName + ' '+ user.lastName}</a><br/>
+                        <Link to={"/users/" + user._id}>{user.firstName + ' '+ user.lastName}</Link><br/>
                       </strong>
                     </SearchItem>
                   ))
                 }
             </Search>
             </div>
-            
-            
           </Col>
         </Row>
       </Container>

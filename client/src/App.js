@@ -72,7 +72,7 @@ class App extends Component {
 
 	login = (username, password) => {
 		AUTH.login(username, password).then(response => {
-			console.log(response.data.user.wishlists[0].name);
+			console.log(response.data.user);
       if (response.status === 200) {
         // update the state
         this.setState({
@@ -95,9 +95,7 @@ class App extends Component {
         { this.state.loggedIn && (
 					<div>
             <Nav user={this.state.user} logout={this.logout}>Wish List</Nav>
-						
 
-						
             <div className="main-view" style={{backgroundImage: `url(${image})`}}>
               <Switch>
                 <Route exact path="/" component={() => <Home user={this.state.user}/>} />
