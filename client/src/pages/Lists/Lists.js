@@ -126,42 +126,45 @@ class Lists extends Component {
               {/* <!-- Profile About  --> */}
             
             <div className="about-me">
-            <Card className="about-me" title={this.props.user.username} image={this.props.user.imgUrl}>
+            <Card className="about-me" title={this.props.user.username}>
+              <div>
+                <img class="responsive-img" src={this.props.user.imgUrl}/>
                 <p className="center">{this.props.user.aboutMe}</p>
-                <List>
-                  <ListItem>
-                    <div className="row">
-                      <div className="col s5">
-                        <i className="material-icons left">poll</i> Name: </div>
-                      <div className="col s7 right-align">{this.props.user.firstName + " " + this.props.user.lastName}</div>
+              </div>
+              <Collection>
+                    <CollectionItem>
+                      <div className="row">
+                        <div className="col s5">
+                          <i className="material-icons left">poll</i> Name: </div>
+                        <div className="col s7 right-align">{this.props.user.firstName + " " + this.props.user.lastName}</div>
+                      </div>
+                    </CollectionItem>
+                    <CollectionItem>
+                      <div className="row">
+                        <div className="col s5">
+                          <i className="material-icons left">domain</i>Location</div>
+                        <div className="col s7 right-align">{`${this.state.city}, ${this.state.region}, ${this.state.country}`}</div>
+                      </div>
+                    </CollectionItem>
+                    <p className="center" style={{fontWeight:"bold",width: "80%",margin:"5px auto 0",boxShadow:"2px 4px 10px 2px #2b2828"}}>My Lists</p>
+                    <div style={{width:"80%",margin:"0 auto"}}>
+                      <List style={{boxShadow:"2px 4px 10px 2px #2b2828",margin:"5px 0"}}>
+                        {
+                          this.state.userlists.map(list => (
+                            <li className="collection-item" key={list._id} id={list._id}>
+                              <i className="material-icons left">redeem</i>
+                              <Link to={"/gifts/"+list._id}>
+                                <strong>
+                                  {list.name}<br></br>
+                                  <Moment date={list.date} format="MM-DD-YYYY hh:mm" />
+                                </strong>
+                              </Link>
+                            </li>
+                          ))
+                        }
+                      </List>
                     </div>
-                  </ListItem>
-                  <ListItem>
-                    <div className="row">
-                      <div className="col s5">
-                        <i className="material-icons left">domain</i>Location</div>
-                      <div className="col s7 right-align">{`${this.state.city}, ${this.state.region}, ${this.state.country}`}</div>
-                    </div>
-                  </ListItem>
-                  <p className="center" style={{width: "80%",margin:"5px auto 0",border:"2px solid"}}>My Lists</p>
-                  <div style={{width:"80%",margin:"0 auto"}}>
-                    <List>
-                      {
-                        this.state.userlists.map(list => (
-                          <ListItem key={list._id} id={list._id}>
-                            <i className="material-icons left">redeem</i>
-                            <Link to={"/gifts/"+list._id}>
-                              <strong>
-                                {list.name}<br></br>
-                                <Moment date={list.date} format="MM-DD-YYYY hh:mm" />
-                              </strong>
-                            </Link>
-                          </ListItem>
-                        ))
-                      }
-                    </List>
-                  </div>
-                </List>
+                  </Collection>
                 <Collapsible popout defaultActiveKey={1}>
                   <CollapsibleItem header='Add A List' icon='filter_drama'>
                     <Card link={<button onClick={this.addList} className="btn green waves-effect waves-light" type="submit" name="action">
