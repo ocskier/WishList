@@ -107,9 +107,9 @@ class SearchUser extends Component {
             <Card link={<button onClick={this.search} className="btn green waves-effect waves-light" type="submit" name="action">
               Search</button>}>
               <MatRow style={{flex:"none",display: "block"}}>
-                <Input onChange={this.handleInputChange} style={{fontWeight:"bold"}} s={6} label="First Name" defaultValue={this.state.gift} name="firstName" />
-                <Input onChange={this.handleInputChange} s={6} label="Last Name" defaultValue={this.state.price} name="lastName" />
-                <Input onChange={this.handleInputChange} s={12} label="Username" defaultValue={this.state.descr} name="username" />
+                <Input onChange={this.handleInputChange} style={{fontWeight:"bold"}} s={6} label="First Name" defaultValue={this.state.firstName} name="firstName" />
+                <Input onChange={this.handleInputChange} s={6} label="Last Name" defaultValue={this.state.lastName} name="lastName" />
+                <Input onChange={this.handleInputChange} s={12} label="Username" defaultValue={this.state.username} name="username" />
               </MatRow>
             </Card>            
             <div className="lists">

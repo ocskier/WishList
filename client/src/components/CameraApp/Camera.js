@@ -1,29 +1,35 @@
 import React,{Component} from 'react';
 import Scanner from './Scanner';
 import Result from './Result';
+import {Input} from 'react-materialize';
 
 class Camera extends Component {
     state = {
-        scanning: false,
         results: []
     };
 
-    _scan = () => {
-        this.setState({scanning: !this.state.scanning});
-    }
-
     _onDetected = (result) => {
-        this.setState({results: this.state.results.concat([result])});
+        this.setState({results: this.state.results.concat([result])},
+            () => this.props.scanner(result.codeResult.code))
     }
 
     render() {
         return (
             <div>
-                <button className="btn btn-large" onClick={this._scan}>{this.state.scanning ? 'Click When Done' : 'Scan a Barcode'}</button>
+                
+                <br />
                 <ul className="results">
                     {this.state.results.map((result) => (<Result key={result.codeResult.code} result={result} />))}
                 </ul>
-                {this.state.scanning ? <Scanner onDetected={this._onDetected}/> : null}
+                {this.props.scanning ? <Scanner onDetected={this._onDetected.bind(this)}/> : null}
+                {/* <Modal id="modal1" header={this.state.articleTitle} fixedFooter style={{maxHeight:"80%"}}
+                    actions={
+                    <div className="modal-footer" style={{width:"100%",display:"block",paddingTop:"10px"}}>
+                        <button style={{margin:"0 20px"}} onClick={this.cancel} className="modal-close waves-effect waves-red left">Exit</button>
+                    </div>
+                    }>
+                    <br />
+                </Modal> */}
             </div>
         )
     }

@@ -11,6 +11,8 @@ export default {
   searchEbay: (word) => 
       {return axios.get("/api/search/eb/"+word)}
   ,
+
+  searchEAN: (code) => {return axios.get("/api/search/ean/"+code)},
   
   // Gets the Gift with the given id
   getGift: (id) => {return axios.get("/api/gifts/" + id)},
