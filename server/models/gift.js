@@ -9,7 +9,12 @@ const giftSchema = new Schema({
   wishlist: { type: Schema.Types.ObjectId, ref: 'Wishlist' },
   //wishlists: [{type: mongoose.Schema.Types.ObjectId,ref:'Wishlist', required:false}],
   contribution: {type: Number, required: false},
-  status: { type:String, required:true, default:"Open" }
+  status: { type:String, required:true, default:"Open" },
+  code: { type: String, required: false },
+  pic: { type: String, required: false },
+  manufacturer: { type: String, required: false },
+  model:{ type: String, required: false },
+  mpn:{ type: String, required: false }
 });
 
 const Gift = mongoose.model("Gift", giftSchema);

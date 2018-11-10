@@ -114,6 +114,7 @@ class App extends Component {
 						<Route exact path="/lists" component={() => <LoginForm login={this.login}/>} />
 						<Route exact path="/search" component={() => <LoginForm login={this.login}/>} />
 						<Route exact path="/giftdetail" component={() => <LoginForm login={this.login}/>} />
+						<Route exact path="/giftdetail/:id" component={() => <LoginForm login={this.login}/>} />
 						<Route exact path="/searchuser" component={() => <LoginForm login={this.login}/>} />
 						<Route exact path="/users/:id" component={() => <LoginForm login={this.login}/>} />
             <Route exact path="/signup" component={SignupForm} />

@@ -43,7 +43,7 @@ module.exports = {
   },
   searchEAN: (req,res) => {
     console.log(req.params.word);
-    request('https://api.barcodelookup.com/v2/products?barcode='+req.params.word+'&formatted=y&key=', (err,response,body) => {
+    request('https://api.barcodelookup.com/v2/products?barcode='+req.params.word+'&formatted=y&key=8jpzd6x5coeiny4vibpxw5m0jp505x', (err,response,body) => {
       console.log('error:', err); // Print the error if one occurred
       console.log('statusCode:', response.statusCode); // Print the response status code if a response was received
       res.json(JSON.parse(body));
@@ -54,6 +54,6 @@ module.exports = {
       console.log('error:', err); // Print the error if one occurred
       console.log('statusCode:', response.statusCode); // Print the response status code if a response was received
       res.json(JSON.parse(body));
-    })
+    });
   }
 };
