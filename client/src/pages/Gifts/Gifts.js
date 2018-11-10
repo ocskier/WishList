@@ -28,14 +28,12 @@ class Gifts extends Component {
 
   componentDidMount() { 
     console.log(this.props.user,this.props.id);
-    API.getUser(this.props.user._id)
+    API.getList(this.props.id)
       .then(res => {
         console.log(res);
-        !(this.props.id) || this.props.id===res.data.wishlists[0]._id ?  
-          this.setState({userId: true, wishlist:res.data.wishlists[0]._id},
-            () => this.getGifts(this.state.wishlist)) :
-          this.setState({userId: false,wishlist:this.props.id},
-            () => this.getGifts(this.state.wishlist))
+        !(this.props.user._id) || this.props.user._id===res.data.user._id ?  
+          this.setState({userId: true, wishlist: res.data._id, gifts: res.data.gifts}) :
+          this.setState({userId: false,wishlist: res.data._id, gifts: res.data.gifts})
         })
       .catch(err=>console.log(err));
   }
@@ -43,7 +41,7 @@ class Gifts extends Component {
   getGifts = (id) => {
     API.getList(id)
     .then(res => {
-      this.setState({gifts: res.data[0].gifts},
+      this.setState({gifts: res.data.gifts},
        () => console.log(this.state.gifts));
     })
     .catch(err => console.log(err))

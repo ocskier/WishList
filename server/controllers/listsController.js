@@ -11,7 +11,7 @@ module.exports = {
   },
   findById: function(req, res) {
     db.Wishlist
-      .find({_id: req.params.id})
+      .findById({_id: req.params.id})
       .populate('gifts')
       .populate('user')
       .then(dbModel => {

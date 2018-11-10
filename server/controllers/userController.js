@@ -12,10 +12,20 @@ module.exports = {
     }
   },
   findAll: function(req, res) {
+    let query = req.query;
+    if(query.firstName){
+      query.firstName = {$regex: new RegExp(query.firstName, "ig")}
+    }
+    if(query.lastName){
+      query.lastName = {$regex: new RegExp(query.lastName, "ig")}
+    }
+    if(query.username){
+      query.username = {$regex: new RegExp(query.username, "ig")}
+    }
     db.User
-      .find(req.query)
+      .find(query)
       .sort({ date: -1 })
-      .then(dbModel => res.json(dbModel))
+      .then(dbModel => res.json(dbModel.slice(0,10)))
       .catch(err => res.status(422).json(err));
   },
   findById: function(req, res) {
