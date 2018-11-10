@@ -11,6 +11,8 @@ const userSchema = new Schema({
 	password: { type: String, unique: false, required: false },
 	sharedlists: [{ type: mongoose.Schema.Types.ObjectId,ref:'Wishlist',required: false}],
 	wishlists: [{ type: mongoose.Schema.Types.ObjectId,ref:'Wishlist',required: false}],
+	imgUrl: { type: String, unique: false },
+	aboutMe: { type: String, unique: false }
 });
 
 // Define schema methods

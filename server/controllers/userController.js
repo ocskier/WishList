@@ -45,7 +45,9 @@ module.exports = {
         'firstName': firstName,
         'lastName': lastName,
         'username': username,
-        'password': password
+        'password': password,
+        'imgUrl': "https://www.vectorstock.com/royalty-free-vectors/blank-user-avatar-vectors",
+        'aboutMe': ""
       });
       newUser.save((err, savedUser) => {
         if (err) return res.json(err);

@@ -55,8 +55,11 @@ class User extends Component {
           {/* <!-- profile-page-content --> */}
               {/* <!-- Profile About  --> */}
             <div className="about-me">
-            <Card className="about-me" title="About Me!">
-                <p className="center">Wanting a lot of electronics this season!</p>
+            <Card className="about-me" title={this.state.userLocal.username}>
+              
+                <img class="responsive-img" src={this.state.userLocal.imgUrl}/>
+                <p className="center">{this.state.userLocal.aboutMe}</p>
+              
                 <Collection>
                   <CollectionItem>
                     <div className="row">
