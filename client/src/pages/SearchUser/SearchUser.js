@@ -60,7 +60,7 @@ class SearchUser extends Component {
     const { name, value } = event.target;
     this.setState({
       [name]: value
-    });
+    },this.search);
   };
 
   addList = (e) => {
