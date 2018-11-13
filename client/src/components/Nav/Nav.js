@@ -44,6 +44,7 @@ const Nav = (props) => {
 							/>
               <SideNavItem waves icon='home'><Link to="/" style={{fontWeight:"bold",fontFamily:"sans-serif",fontSize: "1.2rem"}}>Home</Link></SideNavItem>
               <SideNavItem waves icon='person'><Link to="/lists" style={{fontWeight:"bold",fontFamily:"sans-serif",fontSize: "1.2rem"}}>Lists</Link></SideNavItem>
+              <SideNavItem waves icon='redeem'><Link to="/gifts" style={{fontWeight:"bold",fontFamily:"sans-serif",fontSize: "1.2rem"}}>Gifts</Link></SideNavItem>
 					</SideNav>
           <p className="brand-logo center" style={{fontSize: "6rem", textShadow: "3px 3px 5px #000000"}}>{props.children}</p>
           <ul className="right" style={{display: "grid",lineHeight: "35px"}}>

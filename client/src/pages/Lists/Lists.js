@@ -11,6 +11,8 @@ import './Lists.css';
 
 declare var $: any; 
 
+const urlBack2 = '/Images/home.jpg';
+
 class Lists extends Component {
   state = {
     userlists: [],
@@ -127,8 +129,8 @@ class Lists extends Component {
             
             <div className="about-me">
             <Card className="about-me" title={this.props.user.username}>
-              <div>
-                <img className="responsive-img" style={{width:150,height:120}} src={this.props.user.imgUrl}/>
+              <div style={{backgroundImage: `url(${urlBack2})`}}>
+                <img className="responsive-img circle" style={{padding:"10px 0 5px 5px",width:170,height:170}} src={this.props.user.imgUrl}/>
                 <p className="center">{this.props.user.aboutMe}</p>
               </div>
               <Collection>

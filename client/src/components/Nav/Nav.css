@@ -9,3 +9,15 @@
 .userView a span {
   color: black !important;
 }
+
+@media only screen and (max-width : 768px) {
+  .brand-logo {
+    font-size: 4.2rem !important
+  }
+}
+
+@media only screen and (max-width : 576px) {
+    .brand-logo {
+      font-size: 3.2rem !important
+    }
+  }

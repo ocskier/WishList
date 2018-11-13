@@ -138,7 +138,7 @@ class Gifts extends Component {
         </Row>
         <Row>
         {this.state.userId ?
-          <Col size="m4">
+          <Col size="s12 l4">
             <Collapsible popout defaultActiveKey={1}>
               <CollapsibleItem header='Add A Gift' icon='filter_drama'>
                 <Card link={<button onClick={this.addGift} className="btn green waves-effect waves-light" type="submit" name="action">
@@ -157,14 +157,14 @@ class Gifts extends Component {
             </Collapsible>
           </Col> : null
         }
-          <Col size="m8" style={{margin: "0 auto",flexGrow: 0,flexBasis: "auto"}}>
+          <Col size="s12 l8" style={{margin: "0 auto",flexGrow: 0,flexBasis: "auto"}}>
               <Camera scanning={this.state.scanning} scanner={this.scanner.bind(this)} />
               { 
                 this.state.gifts.map(item => (
                       <MatCard  
                         key={item._id} 
                         style={{marginBottom:"10px",flexDirection:"initial",width:"66%",height: 140}} 
-                        horizontal className="small" 
+                        horizontal className="small mycard" 
                         header={
                           <CardTitle style={{height:200,backgroundSize:"cover",backgroundPosition:"50%",backgroundClip:"content-box"}} 
                             image={item.pic ? item.pic : giftImg} 
