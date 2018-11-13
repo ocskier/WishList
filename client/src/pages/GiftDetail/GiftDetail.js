@@ -25,26 +25,25 @@ class GiftDetail extends Component {
     API.getGift(this.props.giftid)
        .then(res => {
         console.log(res);
+        let codeQuery = res.data.manufacturer;
+        codeQuery += " ";
+        codeQuery += res.data.model;
+        codeQuery += " ";
+        codeQuery += res.data.mpn;
+        const searchQuery =  res.data.code ? codeQuery : res.data.description;
+        const searchScript1 = '<script type="text/javascript">amzn_assoc_placement = "adunit0";amzn_assoc_tracking_id = "proj3team6-20";amzn_assoc_ad_mode = "search";amzn_assoc_ad_type = "smart";amzn_assoc_marketplace = "amazon";amzn_assoc_region = "US";amzn_assoc_title = "Shop Related Products";amzn_assoc_default_search_phrase = "'+ searchQuery +'";amzn_assoc_default_category = "All";amzn_assoc_linkid = "d3d3fe6c790f6d1bac8a0025e3a0d068";amzn_assoc_rows = "6";amzn_assoc_design = "text_links";</script><script src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US"></script>';
+        const searchScript2 = '<script type="text/javascript">amzn_assoc_placement = "adunit0";amzn_assoc_tracking_id = "proj3team6-20";amzn_assoc_ad_mode = "search";amzn_assoc_ad_type = "smart";amzn_assoc_marketplace = "amazon";amzn_assoc_region = "US";amzn_assoc_title = "Shop Related Products";amzn_assoc_default_search_phrase = "'+ searchQuery +'";amzn_assoc_default_category = "All";amzn_assoc_linkid = "344c640cdfb4c82421aedd0a562c76db";amzn_assoc_search_bar = "true";amzn_assoc_search_bar_position = "top";</script><script src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US"></script>';
         this.setState({gift: res.data},
-         () => {
-         console.log(this.state.gift.description);
-         this.searchAuction();
-         let codeQuery = this.state.gift.manufacturer;
-         codeQuery += " ";
-         codeQuery += this.state.gift.model;
-         codeQuery += " ";
-         codeQuery += this.state.gift.mpn;
-         const searchQuery =  this.state.gift.code ? codeQuery : this.state.gift.description;
-         const searchScript1 = '<script type="text/javascript">amzn_assoc_placement = "adunit0";amzn_assoc_tracking_id = "proj3team6-20";amzn_assoc_ad_mode = "search";amzn_assoc_ad_type = "smart";amzn_assoc_marketplace = "amazon";amzn_assoc_region = "US";amzn_assoc_title = "Shop Related Products";amzn_assoc_default_search_phrase = "'+ searchQuery +'";amzn_assoc_default_category = "All";amzn_assoc_linkid = "d3d3fe6c790f6d1bac8a0025e3a0d068";amzn_assoc_rows = "6";amzn_assoc_design = "text_links";</script><script src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US"></script>';
-         const searchScript2 = '<script type="text/javascript">amzn_assoc_placement = "adunit0";amzn_assoc_tracking_id = "proj3team6-20";amzn_assoc_ad_mode = "search";amzn_assoc_ad_type = "smart";amzn_assoc_marketplace = "amazon";amzn_assoc_region = "US";amzn_assoc_title = "Shop Related Products";amzn_assoc_default_search_phrase = "'+ searchQuery +'";amzn_assoc_default_category = "All";amzn_assoc_linkid = "344c640cdfb4c82421aedd0a562c76db";amzn_assoc_search_bar = "true";amzn_assoc_search_bar_position = "top";</script><script src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US"></script>';
-         Postscribe('#adSearchText',searchScript1);
-         Postscribe('#adSearchPics',searchScript2); 
-        })
+          () => {
+          console.log(this.state.gift.description);
+          this.searchAuction(()=> {
+            Postscribe('#adSearchText',searchScript1);
+            Postscribe('#adSearchPics',searchScript2);
+          });
+          })
        })
        .catch(err => console.log(err))
-    Postscribe('#adDivBottom', '<div style="text-align: -webkit-center" className="aligncenter"><script type="text/javascript">amzn_assoc_ad_type = "banner";amzn_assoc_marketplace = "amazon";amzn_assoc_region = "US";amzn_assoc_placement = "assoc_banner_placement_default";amzn_assoc_campaigns = "gift_certificates";amzn_assoc_banner_type = "category";amzn_assoc_isresponsive = "true";amzn_assoc_banner_id = "1G274HKHXM7QERC7YAG2";amzn_assoc_tracking_id = "proj3team6-20";amzn_assoc_linkid = "00082d8280273b37a749e37f6b30f4c6";</script><script src="//z-na.amazon-adsystem.com/widgets/q?ServiceVersion=20070822&Operation=GetScript&ID=OneJS&WS=1"></script></div>');
-    Postscribe('#adDivLeft','<div class="alignleft"><script type="text/javascript">amzn_assoc_ad_type = "banner";amzn_assoc_marketplace = "amazon";amzn_assoc_region = "US";amzn_assoc_placement = "assoc_banner_placement_default";amzn_assoc_banner_type = "ez";amzn_assoc_p = "11";amzn_assoc_width = "160";amzn_assoc_height = "600";amzn_assoc_tracking_id = "proj3team6-20";amzn_assoc_linkid = "68f180d7e777c773cf1d5eaf562b6036";</script><script src="//z-na.amazon-adsystem.com/widgets/q?ServiceVersion=20070822&Operation=GetScript&ID=OneJS&WS=1"></script></div>');
-    Postscribe('#adDivRight','<div class="alignleft"><script type="text/javascript">amzn_assoc_ad_type = "banner";amzn_assoc_marketplace = "amazon";amzn_assoc_region = "US";amzn_assoc_placement = "assoc_banner_placement_default";amzn_assoc_campaigns = "amazonhomepage";amzn_assoc_banner_type = "rotating";amzn_assoc_p = "29";amzn_assoc_width = "160";amzn_assoc_height = "600";amzn_assoc_tracking_id = "proj3team6-20";amzn_assoc_linkid = "a3e6a319a4d30945a4070fbcd67eb2ba";</script><script src="//z-na.amazon-adsystem.com/widgets/q?ServiceVersion=20070822&Operation=GetScript&ID=OneJS&WS=1"></script></div>');
+    
   }
 
   loadGift = () => {
@@ -64,11 +63,17 @@ class GiftDetail extends Component {
 
   // this.state.gift.description[5] === ":" ?
 
-  searchAuction = () => {
+  searchAuction = (callback) => {
     API.searchEbay(this.state.gift.code ? this.state.gift.giftName : this.state.gift.description)
       .then(res=> {
         console.log(res);
-        this.setState({searchResults: res.data.findItemsByKeywordsResponse[0].searchResult[0].item});
+        this.setState({searchResults: res.data.findItemsByKeywordsResponse[0].searchResult[0].item},
+          () => {
+            Postscribe('#adDivLeft','<div class="alignleft"><script type="text/javascript">amzn_assoc_ad_type = "banner";amzn_assoc_marketplace = "amazon";amzn_assoc_region = "US";amzn_assoc_placement = "assoc_banner_placement_default";amzn_assoc_banner_type = "ez";amzn_assoc_p = "11";amzn_assoc_width = "160";amzn_assoc_height = "600";amzn_assoc_tracking_id = "proj3team6-20";amzn_assoc_linkid = "68f180d7e777c773cf1d5eaf562b6036";</script><script src="//z-na.amazon-adsystem.com/widgets/q?ServiceVersion=20070822&Operation=GetScript&ID=OneJS&WS=1"></script></div>');
+            Postscribe('#adDivRight','<div class="alignleft"><script type="text/javascript">amzn_assoc_ad_type = "banner";amzn_assoc_marketplace = "amazon";amzn_assoc_region = "US";amzn_assoc_placement = "assoc_banner_placement_default";amzn_assoc_campaigns = "amazonhomepage";amzn_assoc_banner_type = "rotating";amzn_assoc_p = "29";amzn_assoc_width = "160";amzn_assoc_height = "600";amzn_assoc_tracking_id = "proj3team6-20";amzn_assoc_linkid = "a3e6a319a4d30945a4070fbcd67eb2ba";</script><script src="//z-na.amazon-adsystem.com/widgets/q?ServiceVersion=20070822&Operation=GetScript&ID=OneJS&WS=1"></script></div>'); 
+            Postscribe('#adDivBottom', '<div style="text-align: -webkit-center" className="aligncenter"><script type="text/javascript">amzn_assoc_ad_type = "banner";amzn_assoc_marketplace = "amazon";amzn_assoc_region = "US";amzn_assoc_placement = "assoc_banner_placement_default";amzn_assoc_campaigns = "gift_certificates";amzn_assoc_banner_type = "category";amzn_assoc_isresponsive = "true";amzn_assoc_banner_id = "1G274HKHXM7QERC7YAG2";amzn_assoc_tracking_id = "proj3team6-20";amzn_assoc_linkid = "00082d8280273b37a749e37f6b30f4c6";</script><script src="//z-na.amazon-adsystem.com/widgets/q?ServiceVersion=20070822&Operation=GetScript&ID=OneJS&WS=1"></script></div>');
+          });
+        callback();
       })
       .catch(err => console.log(err));
   }
@@ -81,6 +86,7 @@ class GiftDetail extends Component {
   };
 
   render() {
+    
     return (
       <Container style={{paddingTop:"6rem"}} fluid>
         <Row>
@@ -101,8 +107,8 @@ class GiftDetail extends Component {
                   title={this.state.gift.giftName}
                   reveal={<div>{this.state.gift.description}</div>}>
                   <p>${this.state.gift.price}</p><br />
-                  <div className = "btn btn-succes" onClick = {this.buyGift}>
-                    <Link to="/lists">I Bought It! (Mark as Bought!)</Link>
+                  <div className = "btn btn-succes red" onClick = {this.buyGift}>
+                    <Link to="/lists"><span style={{color:"floralwhite"}}> I Bought It! (Mark as Bought!)</span></Link>
                   </div>
                   {/* <MediaBox style={{margin: "0 auto"}} width="150" height="150" border="0" src="//ws-na.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=US&ASIN=B0773MLK5F&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL250_&tag=proj3team6-20"></MediaBox><div className="center"><a target="_blank"  href="https://www.amazon.com/gp/product/B0773MLK5F/ref=as_li_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=B0773MLK5F&linkCode=as2&tag=proj3team6-20&linkId=e4c3144365a5c7b44bfb29fd14d3fc61">Buy</a><img src="//ir-na.amazon-adsystem.com/e/ir?t=proj3team6-20&l=am2&o=1&a=B0773MLK5F" width="1" height="1" border="0" alt="" style={{border:"none !important", margin:"0px !important"}} /></div> */}
               </MatCard>
@@ -111,7 +117,7 @@ class GiftDetail extends Component {
                 <Col size="s12 m6">
                   <div id="adSearchPics"></div>
                 </Col>
-                <Col size="s12 m6">
+                <Col size="s12 m6" style={{flex:"none"}}>
                   <Row>
                     {
                       this.state.searchResults.map((searchResult,index) => (
@@ -120,7 +126,7 @@ class GiftDetail extends Component {
                             header={
                               <CardTitle image={searchResult.galleryURL[0]}></CardTitle>
                             }>
-                              <p>{searchResult.title[0]}</p>
+                              <a target="blank" href={searchResult.viewItemURL}><p>{searchResult.title[0]}</p></a>
                           </MatCard>
                         </Col>
                       ))

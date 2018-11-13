@@ -27,8 +27,6 @@ const Nav = (props) => {
 		)
   }
   
-
-
   return (
     <nav style={{height: "120px",padding: "25px 20px 0 20px", backgroundColor: 'red'}}>
       <div className="nav-wrapper" style={StyleSheet.header}>

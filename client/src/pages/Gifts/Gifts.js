@@ -148,6 +148,7 @@ class Gifts extends Component {
                     <Input onChange={this.handleInputChange} s={6} label="Price" value={this.state.price} name="price" />
                     <Input onChange={this.handleInputChange} s={12} label="Description" value={this.state.descr} name="descr" />
                     <button className="btn btn-large" onClick={this._scan}>{this.state.scanning ? 'Click When Done' : 'Scan a Barcode'}</button>
+                    <br /><br />
                     <Input type="text" onChange={this.handleInputChange} s={12} label="UPC: " value={this.state.code} name="code" />
             
                   </MatRow>
