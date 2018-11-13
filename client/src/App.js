@@ -17,6 +17,7 @@ import API from './utils/API';
 import "./App.css";
 // import API from './utils/API';
 
+declare var $ : any;
 const image = './Images/home.jpg'
 
 class App extends Component {
@@ -32,6 +33,7 @@ class App extends Component {
   }
   
 	componentDidMount() {
+		$('.sidebar').sideNav();
 		AUTH.getUser().then(response => {
 			console.log(response.data);
 			if (!!response.data.user) {
