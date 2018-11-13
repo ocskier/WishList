@@ -5,3 +5,7 @@
 .nav-wrapper {
   font-family: 'Mountains of Christmas', cursive;
 }
+
+.userView a span {
+  color: black !important;
+}

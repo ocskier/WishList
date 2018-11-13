@@ -29,21 +29,21 @@ const Nav = (props) => {
 		)
   }
   const fullName =  props.user.firstName + " " + props.user.lastName;
-
+  
   return (
     <nav style={{height: "120px",padding: "25px 20px 0 20px", backgroundColor: 'red'}}>
       <div className="nav-wrapper" style={StyleSheet.header}>
           <SideNav trigger={<i className="material-icons left" style={{color:"white",marginLeft:40}}>menu</i>} options={{ closeOnClick: true }}>
-							<SideNavItem userView
+							<SideNavItem style={{fontWeight:"bold",fontFamily:"sans-serif",fontSize: "1.2rem"}} userView
 								user={{
 										background: urlBack,
 										image: props.user.imgUrl,
-										name: fullName,
-										email: props.user.email
+                    email: props.user.username,
+                    name: fullName 
                 }}
 							/>
-              <SideNavItem waves icon='home'><Link to="/" style={{fontSize: "2rem", textShadow: "2px 2px 5px #000000"}}>Home</Link></SideNavItem>
-              <SideNavItem waves icon='person'><Link to="/lists" style={{fontSize: "2rem", textShadow: "2px 2px #000000"}}>Lists</Link></SideNavItem>
+              <SideNavItem waves icon='home'><Link to="/" style={{fontWeight:"bold",fontFamily:"sans-serif",fontSize: "1.2rem"}}>Home</Link></SideNavItem>
+              <SideNavItem waves icon='person'><Link to="/lists" style={{fontWeight:"bold",fontFamily:"sans-serif",fontSize: "1.2rem"}}>Lists</Link></SideNavItem>
 					</SideNav>
           <p className="brand-logo center" style={{fontSize: "6rem", textShadow: "3px 3px 5px #000000"}}>{props.children}</p>
           <ul className="right" style={{display: "grid",lineHeight: "35px"}}>
