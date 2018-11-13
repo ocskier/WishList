@@ -119,7 +119,7 @@ class Lists extends Component {
     return (
       <Container style={{paddingTop:"6rem"}} fluid>
         <Row>
-          <Col size="m6">
+          <Col size="s12 m6" style={{flex:"none",paddingTop:20}}>
           
           {/* <!--/ profile-page-header --> */}
           {/* <!-- profile-page-content --> */}
@@ -128,7 +128,7 @@ class Lists extends Component {
             <div className="about-me">
             <Card className="about-me" title={this.props.user.username}>
               <div>
-                <img class="responsive-img" src={this.props.user.imgUrl}/>
+                <img className="responsive-img" style={{width:150,height:120}} src={this.props.user.imgUrl}/>
                 <p className="center">{this.props.user.aboutMe}</p>
               </div>
               <Collection>
@@ -195,7 +195,7 @@ class Lists extends Component {
             
           </Col>
 
-          <Col size="m6 s12">
+          <Col size="s12 m6" style={{flex:"none",paddingTop:20}}>
             
             <div className="list-gifts">
               <Jumbotron>

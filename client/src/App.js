@@ -26,7 +26,8 @@ class App extends Component {
     
 		this.state = {
 			loggedIn: false,
-			user: null
+			user: null,
+			register: false
     };
   }
   
@@ -64,7 +65,8 @@ class App extends Component {
 				this.setState({
 					loggedIn: false,
 					loginAttempt: false,
-					user: null
+					user: null,
+					register: false
 				});
 			}
 		});
@@ -89,6 +91,10 @@ class App extends Component {
 		 });
 	}
 
+	register = () => {
+		this.setState({register: true})
+	}
+
 	render() {
 		return (
 			<div className="App">
@@ -98,7 +104,7 @@ class App extends Component {
 
             <div className="main-view" style={{backgroundImage: `url(${image})`}}>
               <Switch>
-                <Route exact path="/" component={() => <Home user={this.state.user}/>} />
+                <Route exact path="/" component={() => <Home user={this.state.user} register={this.state.register}/>} />
                 <Route exact path="/gifts/:id" component={({match}) => <Gifts user={this.state.user} id={match.params.id} />} />
 								<Route exact path="/gifts" component={() => <Gifts user={this.state.user}/>} />
 								<Route exact path="/lists" component={() => <Lists user={this.state.user}/>} />
@@ -115,7 +121,20 @@ class App extends Component {
         { !this.state.loggedIn && (
 
           <div className="auth-wrapper">
-            <Route exact path="/" component={() => <LoginForm loginAttempt={this.state.loginAttempt} login={this.login}/>} />
+						 {!this.state.register ? 
+						 	<Route exact path="/" component={() => 
+							 <div>
+								 <nav style={{height: "120px",padding: "25px 20px 0 20px", backgroundColor: 'red'}}>
+									<div className="nav-wrapper" style={{fontFamily: '"Mountains of Christmas", cursive'}}>
+											<p className="brand-logo center" style={{fontSize: "6rem", textShadow: "3px 3px 5px #000000"}}>WishList</p>
+									</div>
+        				 </nav>
+								<Home changeRegister={this.register}/>
+							</div>
+							} />
+							:
+							<Route exact path="/" component={() => <LoginForm loginAttempt={this.state.loginAttempt} login={this.login}/>} />
+						 }
             <Route exact path="/gifts" component={() => <LoginForm login={this.login}/>} />
 						<Route exact path="/gifts/:id" component={() => <LoginForm login={this.login}/>} />
 						<Route exact path="/lists" component={() => <LoginForm login={this.login}/>} />

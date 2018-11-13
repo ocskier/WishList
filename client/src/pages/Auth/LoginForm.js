@@ -51,7 +51,7 @@ class LoginForm extends Component {
 			return (
 				<div className="login valign-wrapper" style={{backgroundImage: `url(${image})`}}>
 				<Container>
-					{this.props.loginAttempt && (<Alert bsStyle ="danger"> Incorrect Username or Password - please try again  </Alert>)}
+					{this.props.loginAttempt ? (<Alert bsStyle ="danger"> Incorrect Username or Password - please try again  </Alert>): null}
           <Row style={{display: "-webkit-box"}}>
             <Col size="m3"></Col>
             <Col size="m6">
