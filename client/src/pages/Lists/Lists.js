@@ -126,9 +126,9 @@ class Lists extends Component {
               {/* <!-- Profile About  --> */}
             
             <div className="about-me">
-            <Card className="about-me" title={this.state.user.username}>
-              <div>
-                <img className="responsive-img" style={{width:150,height:120}} src={this.state.user.imgUrl}/>
+            <Card className="about-me" title={this.state.username}>
+              <div style={{backgroundImage: `url(${urlBack2})`}}>
+                <img className="responsive-img circle" style={{padding:"10px 0 5px 5px",width:170,height:170}} src={this.state.user.imgUrl} alt="Profile Pic" />
                 <p className="center">{this.state.user.aboutMe}</p>
               </div>
               <Collection>
