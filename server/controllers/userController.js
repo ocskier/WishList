@@ -56,7 +56,7 @@ module.exports = {
         'lastName': lastName,
         'username': username,
         'password': password,
-        'imgUrl': "https://www.vectorstock.com/royalty-free-vectors/blank-user-avatar-vectors",
+        'imgUrl': "https://cdn2.vectorstock.com/i/thumb-large/52/46/avatar-user-icon-vector-21105246.jpg",
         'aboutMe': ""
       });
       newUser.save((err, savedUser) => {
