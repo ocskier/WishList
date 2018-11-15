@@ -130,7 +130,7 @@ class Lists extends Component {
             <div className="about-me">
             <Card className="about-me" title={this.props.user.username}>
               <div style={{backgroundImage: `url(${urlBack2})`}}>
-                <img className="responsive-img circle" style={{padding:"10px 0 5px 5px",width:170,height:170}} src={this.props.user.imgUrl}/>
+                <img className="responsive-img circle" style={{padding:"10px 0 5px 5px",width:170,height:170}} src={this.props.user.imgUrl} alt="Profile Pic" />
                 <p className="center">{this.props.user.aboutMe}</p>
               </div>
               <Collection>

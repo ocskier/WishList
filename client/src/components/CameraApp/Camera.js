@@ -1,7 +1,6 @@
 import React,{Component} from 'react';
 import Scanner from './Scanner';
 import Result from './Result';
-import {Input} from 'react-materialize';
 
 class Camera extends Component {
     state = {
