@@ -57,7 +57,7 @@ class User extends Component {
             <div className="about-me">
             <Card className="about-me" title={this.state.userLocal.username}>
               
-                <img class="responsive-img" src={this.state.userLocal.imgUrl}/>
+                <img class="responsive-img" src={this.state.userLocal.imgUrl} alt="Profile pic" />
                 <p className="center">{this.state.userLocal.aboutMe}</p>
               
                 <Collection>

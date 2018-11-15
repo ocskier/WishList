@@ -119,7 +119,7 @@ class GiftDetail extends Component {
                 </Col>
                 <Col size="s12 m6" style={{flex:"none"}}>
                   <Row>
-                    {
+                    { 
                       this.state.searchResults.map((searchResult,index) => (
                         <Col key={index} size="s12" style={{flex:"none"}}>
                           <MatCard style={{flexDirection:"initial"}} horizontal 

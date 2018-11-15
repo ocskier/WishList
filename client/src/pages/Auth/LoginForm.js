@@ -53,8 +53,8 @@ class LoginForm extends Component {
 				<Container>
 					{this.props.loginAttempt ? (<Alert bsStyle ="danger"> Incorrect Username or Password - please try again  </Alert>): null}
           <Row style={{display: "-webkit-box"}}>
-            <Col size="m3"></Col>
-            <Col size="m6">
+            <Col size="s1 m2 l3"></Col>
+            <Col size="s10 m8 l6">
               <Card title="Welcome to WishList">
                 <form style={{marginTop: 10}}>
                   <label htmlFor="username">Username: </label>
@@ -76,7 +76,7 @@ class LoginForm extends Component {
                 </form>
               </Card>
             </Col>
-            <Col size="m3"></Col>
+            <Col size="s1 m2 l3"></Col>
           </Row>
 				</Container>
 				</div>

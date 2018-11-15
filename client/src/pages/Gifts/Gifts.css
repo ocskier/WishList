@@ -35,3 +35,30 @@
     transform: rotateX(360deg);
   }
 }
+
+
+@media only screen and (max-width : 975px) {
+  .mycard {
+    width: 75% !important
+  }
+}
+
+@media only screen and (max-width : 756px) {
+  .mycard {
+    width: 85% !important;
+    font-size: 0.8rem;
+    flex: none;
+  }
+}
+
+@media only screen and (max-width : 576px) {
+  .gift-jumbo {
+    width:100%
+  }
+  .mycard {
+    width: 90% !important
+  }
+  .gift-jumbo span {
+    font-size: 44px
+  }
+}
