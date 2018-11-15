@@ -15,8 +15,7 @@ const urlBack2 = '/Images/home.jpg';
 
 class Lists extends Component {
   state = {
-    userlists: [],
-    sharedlists: [],
+    user: {sharedlists: [], wishlists: []},
     newlistname: "",
     newfirstName: this.props.user.firstName, 
     newlastName: this.props.user.lastName,
@@ -54,8 +53,7 @@ class Lists extends Component {
     .then(res => {
       console.log(res);
       this.setState({
-        userlists: res.data.wishlists,
-        sharedlists: res.data.sharedlists
+        user: res.data
       })
     }
     )
@@ -83,7 +81,7 @@ class Lists extends Component {
       imgUrl: this.state.newimgUrl, 
       aboutMe: this.state.newaboutMe
     })
-      .then(res => window.location.reload());
+      .then(this.prepareLists);
   }
 
   addList = (e) => {
@@ -98,7 +96,7 @@ class Lists extends Component {
         }, () => 
           API.getUser(this.props.user._id)
           .then(res =>
-            this.setState({ userlists: res.data.wishlists})
+            this.setState({ user: res.data})
           )
         )
     })
@@ -128,17 +126,17 @@ class Lists extends Component {
               {/* <!-- Profile About  --> */}
             
             <div className="about-me">
-            <Card className="about-me" title={this.props.user.username}>
-              <div style={{backgroundImage: `url(${urlBack2})`}}>
-                <img className="responsive-img circle" style={{padding:"10px 0 5px 5px",width:170,height:170}} src={this.props.user.imgUrl} alt="Profile Pic" />
-                <p className="center">{this.props.user.aboutMe}</p>
+            <Card className="about-me" title={this.state.user.username}>
+              <div>
+                <img className="responsive-img" style={{width:150,height:120}} src={this.state.user.imgUrl}/>
+                <p className="center">{this.state.user.aboutMe}</p>
               </div>
               <Collection>
                     <CollectionItem>
                       <div className="row">
                         <div className="col s5">
                           <i className="material-icons left">poll</i> Name: </div>
-                        <div className="col s7 right-align">{this.props.user.firstName + " " + this.props.user.lastName}</div>
+                        <div className="col s7 right-align">{this.state.user.firstName + " " + this.state.user.lastName}</div>
                       </div>
                     </CollectionItem>
                     <CollectionItem>
@@ -152,7 +150,7 @@ class Lists extends Component {
                     <div style={{width:"80%",margin:"0 auto"}}>
                       <List style={{boxShadow:"2px 4px 10px 2px #2b2828",margin:"5px 0"}}>
                         {
-                          this.state.userlists.map(list => (
+                          this.state.user.wishlists.map(list => (
                             <li className="collection-item" key={list._id} id={list._id}>
                               <i className="material-icons left">redeem</i>
                               <Link to={"/gifts/"+list._id}>
@@ -207,7 +205,7 @@ class Lists extends Component {
             <div className="gifts">
               <List>
                   {
-                    this.state.sharedlists.map(list=> (
+                    this.state.user.sharedlists.map(list=> (
                         <li style={{background:"mintcream",border: "1px solid green",margin:"2px 0"}} key={list._id} id={list._id}>
                           <i className="material-icons left">redeem</i>
                           <Link to={"/gifts/"+list._id}>
