@@ -71,8 +71,8 @@ class SignupForm extends Component {
       <div className="login valign-wrapper" style={{backgroundImage: `url(${image})`}}>
       <Container>
         <Row style={{display: "-webkit-box"}}>
-          <Col size="s12 m3"></Col>
-          <Col size="s12 m6">
+          <Col size="s1 m2 l3"></Col>
+          <Col size="s10 m8 l6">
             <Card title="Register for WishList!">
               <form style={{marginTop: 10}}>
                 <label htmlFor="username">First name: </label>
@@ -115,7 +115,7 @@ class SignupForm extends Component {
               </form>
             </Card>
           </Col>
-          <Col size="s12 m3"></Col>
+          <Col size="s1 m2 l3"></Col>
         </Row>
       </Container>
       </div>
