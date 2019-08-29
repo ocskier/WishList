@@ -11,6 +11,9 @@ import { List, ListItem } from "../../components/List";
 import Moment from 'react-moment';
 
 import './User.css';
+
+const urlBack3 = '/Images/home.jpg';
+
 class User extends Component {
   state = {
     userLocal: {wishlists:[]}
@@ -56,10 +59,10 @@ class User extends Component {
               {/* <!-- Profile About  --> */}
             <div className="about-me">
             <Card className="about-me" title={this.state.userLocal.username}>
-              
-                <img class="responsive-img" src={this.state.userLocal.imgUrl} alt="Profile pic" />
-                <p className="center">{this.state.userLocal.aboutMe}</p>
-              
+                <div style={{backgroundImage: `url(${urlBack3})`}}>
+                  <img class="responsive-img circle" src={this.state.userLocal.imgUrl} alt="Profile pic" />
+                  <p className="center">{this.state.userLocal.aboutMe}</p>
+                </div>
                 <Collection>
                   <CollectionItem>
                     <div className="row">

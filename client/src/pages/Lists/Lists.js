@@ -81,7 +81,10 @@ class Lists extends Component {
       imgUrl: this.state.newimgUrl, 
       aboutMe: this.state.newaboutMe
     })
-      .then(this.prepareLists);
+      .then(res => {
+        this.prepareLists();
+        this.props.updateNav();
+      });
   }
 
   addList = (e) => {

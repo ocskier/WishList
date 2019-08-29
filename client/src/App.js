@@ -74,6 +74,15 @@ class App extends Component {
 		});
 	}
 
+	updateNavUser = () => {
+		API.getUser(this.state.user._id)
+			.then(res =>
+				this.setState({
+				user: res.data})
+			)
+			.catch(err => console.log(err));
+	}
+
 	login = (username, password) => {
 		AUTH.login(username, password).then(response => {
 			console.log(response.data.user);
@@ -109,7 +118,7 @@ class App extends Component {
                 <Route exact path="/" component={() => <Home user={this.state.user} register={this.state.register}/>} />
                 <Route exact path="/gifts/:id" component={({match}) => <Gifts user={this.state.user} id={match.params.id} />} />
 								<Route exact path="/gifts" component={() => <Gifts user={this.state.user}/>} />
-								<Route exact path="/lists" component={() => <Lists user={this.state.user}/>} />
+								<Route exact path="/lists" component={() => <Lists user={this.state.user} updateNav={this.updateNavUser} />} />
 								<Route exact path="/search" component={() => <Search user={this.state.user}/>} />
 								<Route exact path="/giftdetail" component={() => <GiftDetail user={this.state.user}/>} />
 								<Route exact path="/giftdetail/:id" component={({match}) => <GiftDetail user={this.state.user} giftid = {match.params.id}/>} />
