@@ -4,7 +4,7 @@
   "description": "Full Stack React App with Authentication",
   "main": "server/server.js",
   "engines": {
-    "node": "8.11.1"
+    "node": "12.10.0"
   },
   "scripts": {
     "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
@@ -12,7 +12,7 @@
     "start:dev": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",
     "client": "cd client && npm run start",
     "seed": "node server/scripts/seedDB.js",
-    "install": "cd client && npm install",
+    "install": "cd client && yarn install",
     "build": "cd client && npm run build",
     "heroku-postbuild": "npm run build"
   },
