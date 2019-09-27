@@ -4,7 +4,7 @@
   "description": "Full Stack React App with Authentication",
   "main": "server/server.js",
   "engines": {
-    "node": "12.0.0"
+    "node": "12.10.0"
   },
   "scripts": {
     "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
