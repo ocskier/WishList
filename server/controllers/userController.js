@@ -28,14 +28,6 @@ module.exports = {
       .then(dbModel => res.json(dbModel.slice(0,10)))
       .catch(err => res.status(422).json(err));
   },
-  findById: function(req, res) {
-    db.User
-      .findById(req.params.id)
-      .populate('wishlists')
-      .populate('sharedlists')
-      .then(dbModel => res.json(dbModel))
-      .catch(err => res.status(422).json(err));
-  },
   update: function(req, res) {
     db.User
       .findOneAndUpdate({ _id: req.user._id }, req.body)
@@ -90,5 +82,14 @@ module.exports = {
 			delete cleanUser.password;
 		}
 		res.json({ user: cleanUser });
-	}
+  },
+  getUserLists: (req,res) => {
+    db.User
+      .findOne({ _id: req.user._id })
+      .select(["sharedlists","wishlists"])
+      .populate("sharedlists")
+      .populate("wishlists")
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  }
 };

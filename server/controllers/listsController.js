@@ -13,7 +13,7 @@ module.exports = {
     db.Wishlist
       .findById({_id: req.params.id})
       .populate('gifts')
-      .populate('user')
+      .populate('user',{'firstName':1,'imgUrl':1})
       .then(dbModel => {
         res.json(dbModel);
         console.log(dbModel)

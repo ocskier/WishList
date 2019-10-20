@@ -131,7 +131,7 @@ class Searches extends Component {
                       <br/>
                       
                       <br></br>
-                      <a target="_blank" href={search.url}>{search.title} </a><br/>
+                      <a href={search.url}>{search.title} </a><br/>
                       <p align="left" className="p"> {search.description} </p>
                     
                       <br/>
